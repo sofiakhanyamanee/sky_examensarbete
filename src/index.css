@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  text-align: center;
+  background-color: white;
+  /* background-image: url("./components/startpage.png"); */
+
+}
+
+a {
+  color: teal;
+  margin: 10px;
+}
+
+
