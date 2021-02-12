@@ -4,21 +4,69 @@ import styled from 'styled-components'
 
 export const WrapperStartPage = styled.div`
 display: flex;
-flex-direction: row;
 align-items: center;
-justify-content:center;
-background-color: whitesmoke;
+justify-content:flex-end;
+// background-color: whitesmoke;
 width: 100vw;
 `
 
+export const LogoHeading = styled.h1`
+padding: 0px 35px;
+font-size: 30px;
+`
+
 export const NavBar = styled.nav`
+position: absolute;
+top: 0;
 display: flex;
 flex-direction: row;
+margin: 0px auto;
 align-items: center;
 justify-content: space-between;
-height: 10vh;
+height: 15vh;
+width: 100vw;
 // background-color: #CDE4E2;
-padding: 0px 50px;
+// padding: 0px 50px;
+`
+
+export const ShowLoginBtn = styled.button`
+color: white;
+background-color: black;
+border-radius: 8pt;
+border: none;
+padding: 10px 15px;
+margin: 0px 35px;
+cursor: pointer;
+font-family: 'Poppins', sans-serif;
+
+&: hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+&:focus {
+  outline: none;
+}
+`
+
+export const ShowSignUpBtn = styled.button`
+color: black;
+background-color: #CDE4E2;
+border: none;
+border-radius: 8pt;
+padding: 10px 15px;
+cursor: pointer;
+font-family: 'Poppins', sans-serif;
+
+&: hover {
+  background: black;
+  color: #CDE4E2;
+}
+
+&:focus {
+  outline: none;
+}
 `
 
 
@@ -30,12 +78,15 @@ padding: 0px 50px;
 export const Wrapper = styled.div`
 width: 40vw;
 height: 80vh;
-// margin: 0px auto;
+margin-right: 100px;
+margin-top: 100px;
 display: flex; 
 flex-direction: column;
 align-items: center;
 justify-content: center;
 font-family: 'Poppins', sans-serif;
+background: white;
+border-radius: 24pt;
 `
 
 export const Heading = styled.h2`
@@ -52,7 +103,7 @@ width: 40vw;
 export const BackBtn = styled.button`
 position: absolute;
 top: 30px;
-left: 30px;
+right: 30px;
 color: white;
 background-color: black;
 border: none;
@@ -65,6 +116,10 @@ font-family: 'Poppins', sans-serif;
   background: whitesmoke;
   color: black;
   border: 1px solid black;
+}
+
+&:focus {
+  outline: none;
 }
 `
 
@@ -118,15 +173,15 @@ align-items: center;
 
 export const WrapperDashboard = styled.div`
 width: 100vw;
-height: 100vh;
+padding-top: 50px;
 margin: 0px auto;
 font-family: 'Poppins', sans-serif;
 `
 
 export const SignOutBtn = styled.button`
 position: absolute;
-top: 30px;
-right: 30px;
+top: 50px;
+right: 50px;
 color: white;
 background-color: black;
 border: none;
@@ -145,8 +200,8 @@ font-family: 'Poppins', sans-serif;
 export const UserInfo = styled.div`
 // background:whitesmoke;
 position: absolute;
-top: 30px;
-left: 30px;
+top: 50px;
+left: 50px;
 display: flex;
 flex-direction: column;
 justify-content: center;

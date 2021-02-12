@@ -8,7 +8,7 @@ export default function useAuth() {
   const getUserFromDB = async userID => {
     const db = await database;
     return db
-      .collection("users")
+      .collection("new_users")
       .doc(userID)
       .get()
       .then(user => {
@@ -19,7 +19,7 @@ export default function useAuth() {
   const saveUserToDB = async (user, name) => {
     const db = await database;
     return db
-      .collection("users")
+      .collection("new_users")
       .doc(user.uid.toString())
       .set({
         id: user.uid.toString(),

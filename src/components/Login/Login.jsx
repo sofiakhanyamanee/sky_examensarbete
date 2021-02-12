@@ -1,10 +1,10 @@
 import React, {useContext} from "react";
-import { Context } from '../../store/Store';
+// import { Context } from '../../store/Store';
 import useAuth from '../../store/actions/auth';
-import { Wrapper , InputField} from '../StylingComponents'
+import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
 
 export default function Login() {
-    const [state] = useContext(Context);
+    // const [state] = useContext(Context);
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const { signin } = useAuth();
@@ -19,11 +19,11 @@ export default function Login() {
 
   return (
     <Wrapper>
-      <h3>uid: {state.currentUser ? (state.currentUser.id ? state.currentUser.id : 0) : ''}</h3>
+      {/* <h3>uid: {state.currentUser ? (state.currentUser.id ? state.currentUser.id : 0) : ''}</h3>
         <h3>name: {state.currentUser ? (state.currentUser.name ? state.currentUser.name : '') : ''}</h3>
         <h3>email: {state.currentUser ? (state.currentUser.email ? state.currentUser.email : '') : ''}</h3>
-        
-        <h3>Login</h3>
+         */}
+        <Heading>Logga in</Heading>
         <form>
           <div className="input-group">
             <label>Email</label>
@@ -36,7 +36,7 @@ export default function Login() {
             />
           </div>
           <div className="input-group">
-            <label>Password</label>
+            <label>Lösenord</label>
             <br />
             <InputField
               type="password"
@@ -45,9 +45,9 @@ export default function Login() {
               onChange={event => setPassword(event.target.value)}
             />
           </div>
-          <button type="submit" onClick={handleSubmit}>
-            Login
-          </button>
+          <Btn type="submit" onClick={handleSubmit}>
+            Logga in
+          </Btn>
         </form>
     </Wrapper>
   );

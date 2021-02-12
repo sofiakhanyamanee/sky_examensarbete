@@ -1,6 +1,6 @@
 import React from 'react'
 import useAuth from '../../store/actions/auth';
-import { Wrapper , InputField} from '../StylingComponents'
+import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
 
 export default function SignUp() {
     const [name, setName] = React.useState("");
@@ -15,10 +15,10 @@ export default function SignUp() {
   
     return (
       <Wrapper>
-        <h3>Signup</h3>
+        <Heading>Skapa konto</Heading>
         <form>
           <div className="input-group">
-            <label>Name</label>
+            <label>Namn</label>
             <br />
             <InputField
               type="text"
@@ -38,7 +38,7 @@ export default function SignUp() {
             />
           </div>
           <div className="input-group">
-            <label>Password</label>
+            <label>Lösenord</label>
             <br />
             <InputField
               type="password"
@@ -46,12 +46,12 @@ export default function SignUp() {
               onChange={event => setPassword(event.target.value)}
             />
           </div>
-          <button
+          <Btn
             type="submit"
             onClick={e => handleSignUp(e, email, password, name)}
           >
-            Sign Up
-          </button>
+            Skapa konto
+          </Btn>
         </form>
       </Wrapper>
     );

@@ -4,7 +4,7 @@ import {Context} from '../store/Store';
 import useAuth from './actions/auth';
 
 const useSession = (props) => {
-  const [ ,dispatch] = useContext(Context);
+  const [ , dispatch] = useContext(Context);
   const { getUserFromDB } = useAuth();
 
   useEffect(() => {

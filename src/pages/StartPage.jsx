@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Login from "../components/Login/Login";
 import SignUp from "../components/Login/SignUp";
-import { WrapperStartPage } from "../components/StylingComponents";
-import useAuth from "../store/actions/auth";
+import { WrapperStartPage, LogoHeading, NavBar, ShowLoginBtn, ShowSignUpBtn } from "../components/StylingComponents";
 
 export default function StartPage() {
-  const { signout } = useAuth();
+  let [toggleView, setToggleView] = useState(false)
 
-  function handleSignOut(e) {
-    signout();
+
+	function showView(){
+
+    if(toggleView === false) {
+      return (<div><Login /></div> )        
+    }
+    
+    if (toggleView === true) {
+      return (<div><SignUp /> </div>)
+    
+    }
   }
-
+  
   return (
-    <>
       <WrapperStartPage>
-        <SignUp />
-        <Login />
+        <NavBar>
+          <LogoHeading>Startsida</LogoHeading>
+          <div>
+          <ShowSignUpBtn  onClick={()=>setToggleView(true)}>Skapa konto</ShowSignUpBtn>
+          <ShowLoginBtn  onClick={()=>setToggleView(false)}>Logga in</ShowLoginBtn>
+          </div>
+          
+        </NavBar>
+        {showView()}
       </WrapperStartPage>
-      <button onClick={() => handleSignOut()}>Logout</button>
-    </>
   );
 }
