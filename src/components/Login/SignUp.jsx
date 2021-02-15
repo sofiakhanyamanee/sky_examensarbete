@@ -3,20 +3,31 @@ import useAuth from '../../store/actions/auth';
 import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
 
 export default function SignUp() {
+    const [brf, setBrf] = React.useState("");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const { signup } = useAuth();
   
-    function handleSignUp(e, email, password, username) {
+    function handleSignUp(e, email, password, username, brf) {
         e.preventDefault();
-        signup(email, password, username);
+        signup(email, password, username, brf);
     }
   
     return (
       <Wrapper>
-        <Heading>Skapa konto</Heading>
+        <Heading>Skapa boende konto</Heading>
         <form>
+        <div className="input-group">
+            <label>Brf</label>
+            <br />
+            <InputField
+              type="text"
+              name="brf"
+              autoComplete="brf"
+              onChange={event => setBrf(event.target.value)}
+            />
+          </div>
           <div className="input-group">
             <label>Namn</label>
             <br />
@@ -48,7 +59,7 @@ export default function SignUp() {
           </div>
           <Btn
             type="submit"
-            onClick={e => handleSignUp(e, email, password, name)}
+            onClick={e => handleSignUp(e, email, password, name, brf)}
           >
             Skapa konto
           </Btn>

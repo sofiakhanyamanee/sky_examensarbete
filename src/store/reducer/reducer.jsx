@@ -17,10 +17,12 @@ const Reducer = (state, action) => {
         user = state.currentUser;
         user.email = action.email;
         user.username = action.userName;
+        user.brf = action.brf;
       } else {
         user = {
           email: action.email,
           username: action.userName,
+          brf: action.brf,
         };
       }
 

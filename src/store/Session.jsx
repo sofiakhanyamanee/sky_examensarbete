@@ -11,7 +11,7 @@ const useSession = (props) => {
     const unsubscribe = auth.onAuthStateChanged(async user => {
       console.log(user);
       if (user) {
-        console.log("loggedin");
+        console.log("LOGGED IN");
         console.log(user);
         let dbData = await getUserFromDB(user.uid);
         console.log(dbData);
@@ -31,7 +31,7 @@ const useSession = (props) => {
         }
 
       } else {
-        console.log("not logged in");
+        console.log("SIGNED OUT");
         dispatch({
             type: 'SIGNED_OUT',
             isLoading: false,

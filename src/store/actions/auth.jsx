@@ -16,7 +16,7 @@ export default function useAuth() {
       });
   };
 
-  const saveUserToDB = async (user, name) => {
+  const saveUserToDB = async ( user, name, brf) => {
     const db = await database;
     return db
       .collection("new_users")
@@ -24,6 +24,7 @@ export default function useAuth() {
       .set({
         id: user.uid.toString(),
         name,
+        brf,
         email: user.email
       })
   };
@@ -41,16 +42,17 @@ export default function useAuth() {
         });
   };
 
-  const signup = (email, password, userName) => {
+  const signup = (email, password, userName, brf) => {
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then(response => {
         // We want to save the user to our own collection with custom attributes for us
-        saveUserToDB(response.user, userName);
+        saveUserToDB(response.user, userName, brf);
         dispatch({
           type: 'SIGNED_UP_SUCCESS',
           email,
           userName,
+          brf,
         });
         return response.user;
       });

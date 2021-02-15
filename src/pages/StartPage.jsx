@@ -24,7 +24,7 @@ export default function StartPage() {
         <NavBar>
           <LogoHeading>Startsida</LogoHeading>
           <div>
-          <ShowSignUpBtn  onClick={()=>setToggleView(true)}>Skapa konto</ShowSignUpBtn>
+          <ShowSignUpBtn  onClick={()=>setToggleView(true)}>Skapa boende</ShowSignUpBtn>
           <ShowLoginBtn  onClick={()=>setToggleView(false)}>Logga in</ShowLoginBtn>
           </div>
           
