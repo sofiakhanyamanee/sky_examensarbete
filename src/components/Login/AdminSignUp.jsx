@@ -8,7 +8,7 @@ export default function SignUp() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const { signup } = useAuth();
-    const role = 'user'
+    const role = 'admin'
   
     function handleSignUp(e, email, password, username, brf, role) {
         e.preventDefault();
@@ -17,7 +17,7 @@ export default function SignUp() {
   
     return (
       <Wrapper>
-        <Heading>Skapa boende konto</Heading>
+        <Heading>Skapa styrelse konto</Heading>
         <form>
         <div className="input-group">
             <label>Brf</label>

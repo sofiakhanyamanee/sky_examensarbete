@@ -4,14 +4,14 @@ import {Context} from '../store/Store';
 import useAuth from './actions/auth';
 
 const useSession = (props) => {
-  const [ , dispatch] = useContext(Context);
-  const { getUserFromDB } = useAuth();
+  const [ state, dispatch] = useContext(Context);
+  const { getUserFromDB, getAdminFromDB } = useAuth();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async user => {
       console.log(user);
       if (user) {
-        console.log("LOGGED IN");
+        console.log("loggedin");
         console.log(user);
         let dbData = await getUserFromDB(user.uid);
         console.log(dbData);
@@ -31,7 +31,7 @@ const useSession = (props) => {
         }
 
       } else {
-        console.log("SIGNED OUT");
+        console.log("not logged in");
         dispatch({
             type: 'SIGNED_OUT',
             isLoading: false,

@@ -7,6 +7,7 @@ const initialState = {
         email: sada@dsda.com,
         name: affe,
         id: 2131231,
+        role: admin eller user
     }
     */
   currentUser: null,

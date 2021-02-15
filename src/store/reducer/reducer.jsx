@@ -18,11 +18,13 @@ const Reducer = (state, action) => {
         user.email = action.email;
         user.username = action.userName;
         user.brf = action.brf;
+        user.role = action.role;
       } else {
         user = {
           email: action.email,
           username: action.userName,
           brf: action.brf,
+          role: action.role
         };
       }
 
@@ -41,12 +43,60 @@ const Reducer = (state, action) => {
           isLoggedIn: action.isLoggedIn,
           currentUser: action.dbData,
           isLoading: action.isLoading,
+          // role: action.role
         };
       } else {
         return {
           ...state,
           isLoggedIn: action.isLoggedIn,
           isLoading: action.isLoading,
+          // role: action.role
+        };
+      }
+    }
+    case "ADMIN_SIGNED_UP_SUCCESS": {
+      console.log("signed_up_success");
+      console.log(action);
+      console.log(state.currentUser);
+      let user;
+      if (state.currentUser != null) {
+        user = state.currentUser;
+        user.email = action.email;
+        user.username = action.userName;
+        user.brf = action.brf;
+        user.role = 'admin';
+      } else {
+        user = {
+          email: action.email,
+          username: action.userName,
+          brf: action.brf,
+          role: 'admin',
+        };
+      }
+
+      return {
+        ...state,
+        currentUser: user,
+      };
+    }
+    case "ADMIN_LOGGED_IN": {
+      console.log("logged_in");
+      console.log(action);
+      console.log(state.currentUser);
+      if (action.dbData != null) {
+        return {
+          ...state,
+          isLoggedIn: action.isLoggedIn,
+          currentUser: action.dbData,
+          isLoading: action.isLoading,
+          role: 'admin'
+        };
+      } else {
+        return {
+          ...state,
+          isLoggedIn: action.isLoggedIn,
+          isLoading: action.isLoading,
+          role: 'admin',
         };
       }
     }

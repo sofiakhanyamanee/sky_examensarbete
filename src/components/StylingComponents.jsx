@@ -69,6 +69,25 @@ font-family: 'Poppins', sans-serif;
 }
 `
 
+export const ShowAdminSignUpBtn = styled.button`
+color: black;
+border: none;
+// border: 1px solid #CDE4E2;
+border-radius: 8pt;
+padding: 10px 15px;
+margin: 0px 35px;
+cursor: pointer;
+font-family: 'Poppins', sans-serif;
+
+&: hover {
+  background: black;
+  color: #CDE4E2;
+}
+
+&:focus {
+  outline: none;
+}
+`
 
 
 // *********** Generell styling SIGNUP/LOGIN *********** //
