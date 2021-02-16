@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import { database } from '../../firebase'
 import useAuth from "../../store/actions/auth";
 import { Context } from '../../store/Store';
+import MemberList from "../Admin/MemberList";
+import Members from "../Admin/Members";
 import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
   
   export default function AdminDashboard() {
@@ -9,11 +12,23 @@ import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
   const [userList, setUserList] = useState([]);
   
   useEffect(() => {
-    console.log("Fetch all docs")
     getAllUserFromDB()
     .then(users => {
       setUserList(users);      
     });
+  }, [])
+
+
+  useEffect(() => {
+
+    const unsubscribe = database.collection('new_users')
+    .onSnapshot((snap) => {
+      const data = snap.docs.map(doc => doc.data());
+      console.log(data)
+          setUserList(data);
+    });
+
+    return () => unsubscribe();
   }, [])
 
   
@@ -25,13 +40,13 @@ import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
     <WrapperDashboard>
        {state.currentUser.role === 'admin' ? (<h1>Adminsida</h1>) : (<h1>Ingen träff</h1>)}
         {userList && userList.map((user, index) => {
-          console.log("userlist:", userList)
          return (
           <div key={index}>
-            user: {user.name}
-          </div>
+            <Members user={user} />
+        </div>
         )})}
        <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
+        <MemberList/>
     </WrapperDashboard>
   )
 }

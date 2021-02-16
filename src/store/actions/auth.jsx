@@ -1,5 +1,5 @@
 import { auth, database } from "../../firebase";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Context } from "../Store";
 
 export default function useAuth() {
@@ -33,6 +33,28 @@ export default function useAuth() {
       });
   };
 
+  const getAllUserFromDB_users = async () => {
+    const db = await database;
+    return db
+      .collection("users")
+      .get()
+      .then((snapshot) => {
+        let userList = [];
+
+        snapshot.docs.forEach((doc) => {
+          userList.push(doc.data());
+        });
+
+        return userList;
+      });
+  };
+
+  // const getAllUsersSnapShot = async () => {
+  //   const db = await database;
+  //   return db
+  //   .collection("new_users");
+  // }
+
   const getNewUserFromDB = async (userID) => {
     const db = await database;
     return db
@@ -44,22 +66,39 @@ export default function useAuth() {
       });
   };
 
-  const acceptUserToDB = async (userID) => {
-    return await getNewUserFromDB(userID).then(async (resp) => {
-      return await moveNewUserToUser(resp.id);
-    });
-  };
-
+  
   const moveNewUserToUser = async (user) => {
     const db = await database;
-    return db.collection("users").doc(user.uid.toString()).set({
-      id: user.uid.toString(),
+    // console.log(user)
+    db.collection("users").doc(user.id).set({
+      id: user.id,
       name: user.name,
       brf: user.brf,
       email: user.email,
       role: user.role,
     });
   };
+
+  const removeNewUser = async (user) => {
+    const db = await database;
+    // console.log(user)
+    db.collection("new_users").doc(user.id).delete().then(() => {
+      console.log("deleted user")
+    })
+  };
+  
+  const acceptUserToDB = async (userID) => {
+    await getNewUserFromDB(userID).then(async (resp) => {
+      await moveNewUserToUser(resp);
+      await removeNewUser(resp)
+      // console.log(resp)
+    });
+
+    return await getAllUserFromDB().then((resp) => {
+      return resp;
+    });
+  };
+
 
   const saveUserToDB = async (user, name, brf) => {
     const db = await database;
@@ -132,5 +171,8 @@ export default function useAuth() {
     getUserFromDB,
     state,
     getAllUserFromDB,
+    acceptUserToDB,
+    getAllUserFromDB_users
+    // getAllUsersSnapShot
   };
 }

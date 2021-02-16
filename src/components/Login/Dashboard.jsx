@@ -8,7 +8,7 @@ export default function Dashboard() {
   // const { signout } = useAuth();
   const [state] = useContext(Context);
 
-  console.log("state" , state)
+  // console.log("state" , state)
   console.log("role:" , state.currentUser.role)
   // function handleLogOut() {
   //   signout();
@@ -17,7 +17,7 @@ export default function Dashboard() {
   return (
     <WrapperDashboard>
       {state.currentUser.role === 'admin' ? <AdminDashboard/> : 
-        state.currentUser.role === 'users' ? <UserDashboard/> : <div>User not valited yet</div>}
+        state.currentUser.role === 'user' ? <UserDashboard/> : <div>User not valited yet</div>}
       {/* <UserInfo>
         <ProfilePicture></ProfilePicture>
       <h3>Hej {state.currentUser.name}</h3>
