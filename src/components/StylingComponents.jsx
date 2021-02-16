@@ -31,7 +31,7 @@ width: 100vw;
 
 export const ShowLoginBtn = styled.button`
 color: white;
-background-color: black;
+background-color: #33b5aa;
 border-radius: 8pt;
 border: none;
 padding: 10px 15px;
@@ -40,9 +40,8 @@ cursor: pointer;
 font-family: 'Poppins', sans-serif;
 
 &: hover {
-  background: white;
-  color: black;
-  border: 1px solid black;
+  background: black;
+  color: white;
 }
 
 &:focus {
@@ -182,6 +181,12 @@ export const FlexRow = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
+`
+
+export const ErrorMsg = styled.div`
+display: block;
+color: #CDE4E2;
+font-size: 12px;
 `
 
 

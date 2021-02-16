@@ -10,6 +10,7 @@ import {
   ShowSignUpBtn,
   ShowAdminSignUpBtn
 } from "../components/StylingComponents";
+import InputSearchBrf from "../components/InputSearchBrf";
 // import useAuth from '../store/actions/auth'
 // import { Context } from '../store/Store';
 
@@ -72,6 +73,7 @@ export default function StartPage() {
         </div>
       </NavBar>
       {showView()}
+      <InputSearchBrf/>
     </WrapperStartPage>
   );
 }

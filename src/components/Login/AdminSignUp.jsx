@@ -2,12 +2,15 @@ import React from 'react'
 import useAuth from '../../store/actions/auth';
 import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
 
+ 
+
 export default function SignUp() {
     const [brf, setBrf] = React.useState("");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const { signup } = useAuth();
+
     const role = 'admin'
   
     function handleSignUp(e, email, password, username, brf, role) {
@@ -26,7 +29,7 @@ export default function SignUp() {
               type="text"
               name="brf"
               autoComplete="brf"
-              onChange={event => setBrf(event.target.value)}
+              onChange={event => setBrf(event.target.value.toLowerCase())}
             />
           </div>
           <div className="input-group">
