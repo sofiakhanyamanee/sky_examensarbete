@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import useAuth from "../../store/actions/auth";
 import { Context } from '../../store/Store';
-import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
+import { WrapperDashboard, SignOutBtn, UserInfo, ProfilePicture, } from "../StylingComponents";
+import MemberList from '../User/MemberList'
   
   export default function UserDashboard() {
   const [state] = useContext(Context);
@@ -13,8 +14,12 @@ import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
   }
   return (
     <WrapperDashboard>
-       {/* {state.currentUser.role === 'admin' ? (<h1>Boende inloggad</h1>) : (<h1>Ingen träff</h1>)} */}
+      <UserInfo>
+        <ProfilePicture></ProfilePicture>
+        <h3>{state.currentUser.name}'s dashboard</h3>
+      </UserInfo>
        <h1>Boendesida</h1>
+       <MemberList/>
        <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
     </WrapperDashboard>
   )
