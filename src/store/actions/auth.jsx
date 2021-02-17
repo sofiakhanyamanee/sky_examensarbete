@@ -33,14 +33,15 @@ export default function useAuth() {
       });
   };
 
-  const getAllUserFromDB_users = async () => {
+  const getAllUserFromDB_users = async (currentBrf) => {
+    // db.collection("stories").where("author", "==", user.uid).get()
     const db = await database;
     return db
       .collection("users")
+      .where("brf", "==", currentBrf)
       .get()
       .then((snapshot) => {
         let userList = [];
-
         snapshot.docs.forEach((doc) => {
           userList.push(doc.data());
         });
