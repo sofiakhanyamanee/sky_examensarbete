@@ -29,7 +29,7 @@ export default function MemberList() {
 
   return (
     <div>
-      <h1>Godkända boenden</h1>
+      <h4>Medlemmar</h4>
       {members && members.map((member, index) => {
         // console.log("members", members)
          return (

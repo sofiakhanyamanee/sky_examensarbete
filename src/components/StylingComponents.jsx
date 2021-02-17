@@ -162,10 +162,15 @@ padding: 12px 12px;
 font-size: 16px;
 margin: 18px 0;
 font-family: 'Poppins', sans-serif;
+cursor: pointer;
 
 &: hover {
   background-color: #2faaa6;
   color: white;
+}
+
+&:focus {
+  outline: none;
 }
 `
 
@@ -185,7 +190,8 @@ align-items: center;
 
 export const ErrorMsg = styled.div`
 display: block;
-color: #CDE4E2;
+color: #2faaa6;
+padding: 5px 0px;
 font-size: 12px;
 `
 

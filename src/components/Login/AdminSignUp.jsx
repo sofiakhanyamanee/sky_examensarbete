@@ -1,7 +1,6 @@
 import React from 'react'
 import useAuth from '../../store/actions/auth';
 import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
-
  
 
 export default function SignUp() {
@@ -9,13 +8,13 @@ export default function SignUp() {
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const { signup } = useAuth();
-
+    const { signup, addToBrfCollection } = useAuth();
     const role = 'admin'
   
-    function handleSignUp(e, email, password, username, brf, role) {
+    async function handleSignUp(e, email, password, username, brf, role) {
         e.preventDefault();
-        signup(email, password, username, brf, role);
+        await signup(email, password, username, brf, role);
+        await addToBrfCollection(email, username, brf, role)
     }
   
     return (

@@ -49,11 +49,6 @@ export default function useAuth() {
       });
   };
 
-  // const getAllUsersSnapShot = async () => {
-  //   const db = await database;
-  //   return db
-  //   .collection("new_users");
-  // }
 
   const getNewUserFromDB = async (userID) => {
     const db = await database;
@@ -119,8 +114,19 @@ export default function useAuth() {
       brf,
       email: user.email,
       role: "admin",
-    });
+    })
   };
+
+  const addToBrfCollection = async (email, userName, brf, role) => {
+    const db = await database;
+    return db.collection("brf").doc(brf).set({
+      email,
+      userName,
+      brf,
+      role
+    })
+  };
+
 
   const signin = (email, password, role) => {
     return auth
@@ -172,7 +178,8 @@ export default function useAuth() {
     state,
     getAllUserFromDB,
     acceptUserToDB,
-    getAllUserFromDB_users
+    getAllUserFromDB_users,
+    addToBrfCollection
     // getAllUsersSnapShot
   };
 }

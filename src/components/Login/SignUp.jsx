@@ -21,7 +21,7 @@ export default function SignUp() {
     if (isInArray === true) {
       signup(email, password, username, brf, role);
     } else {
-      setErrorMsg("Brf finns inte");
+      setErrorMsg("Brf:en du angav är tyvärr inte registrerad");
     }
   }
 
