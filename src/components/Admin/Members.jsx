@@ -1,29 +1,33 @@
 import React from 'react'
 import useAuth from '../../store/actions/auth'
+import { WrapperMembersComp, MemberBox, AcceptBtn, RejectBtn } from ".././StylingComponents";
 
 export default function Members({ user }) {
-  const { acceptUserToDB } = useAuth();
- 
+  const { acceptUserToDB, removeNewUser } = useAuth();
+  
   const state = {
     user
   }
+  // const currentBrf = state.user.brf
 
   function handleAccept() {
-    acceptUserToDB(state.user.id).then((resp) => {
-      // setMemberList(resp);
-      console.log("accept")
-      // console.log("resp", resp)
-    })
+    acceptUserToDB(state.user.id);
   }
 
+  function handleReject() {
+    console.log("remove")
+    console.log(state.user.id)
+    removeNewUser(state.user);
+  }
 
   
   return (
-    <div>
+    <WrapperMembersComp>
+    <MemberBox>
       <p>{state.user.name}</p>
-      <p>{state.user.id}</p>
-      <button onClick={handleAccept}>Godkänn</button>
-    </div>
-
+      <AcceptBtn onClick={handleAccept}>Godkänn</AcceptBtn>
+      <RejectBtn onClick={handleReject}>Neka</RejectBtn>
+    </MemberBox>
+</WrapperMembersComp>
   )
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import useAuth from '../../store/actions/auth'
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
+import { Box } from ".././StylingComponents";
 
 export default function MemberList() {
   const { getAllUserFromDB_users } = useAuth();
@@ -33,7 +34,7 @@ export default function MemberList() {
   }, [])
 
   return (
-    <div>
+    <Box>
       <h4>Medlemmar</h4>
       {members && members.map((member, index) => {
         console.log("members", members)
@@ -43,6 +44,6 @@ export default function MemberList() {
            </div>
         )}
       )}
-    </div>
+    </Box>
   )
 }

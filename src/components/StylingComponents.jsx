@@ -245,3 +245,74 @@ margin-bottom: 10px;
 border-radius: 50%;
 background: #89b0ae;
 `
+
+export const Box = styled.div`
+//  background:whitesmoke;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+//  align-items: center;
+ padding: 60px 0;
+`
+
+export const AdminHeading = styled.h1`
+margin-bottom: 30px;
+`
+
+
+// *********** DASHBOARD-ADMIN-MEMBERS *********** //
+
+export const WrapperMembersComp = styled.div`
+display: flex;
+justify-content: center;
+`
+
+
+
+
+export const MemberBox = styled.div`
+display: flex;
+align-items: center;
+margin: 10px 0 ;
+`
+export const AcceptBtn = styled.button`
+color: black;
+background-color: #CDE4E2;
+border: none;
+border-radius: 8pt;
+padding: 5px 15px;
+cursor: pointer;
+font-family: 'Poppins', sans-serif;
+margin-left: 100px;
+font-size: 12px;
+
+&: hover {
+  background: #33b5aa;
+  color: white;
+}
+
+&:focus {
+  outline: none;
+}
+`
+
+export const RejectBtn = styled.button`
+color: black;
+background-color: whitesmoke;
+border: none;
+border-radius: 8pt;
+padding: 5px 15px;
+cursor: pointer;
+font-family: 'Poppins', sans-serif;
+margin-left: 15px;
+font-size: 12px;
+
+&: hover {
+  color: whitesmoke;
+  background-color: black;
+}
+
+&:focus {
+  outline: none;
+}
+`

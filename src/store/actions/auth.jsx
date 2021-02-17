@@ -50,6 +50,23 @@ export default function useAuth() {
       });
   };
 
+  const getAllNewUserFromDB_users = async (currentBrf) => {
+    // db.collection("stories").where("author", "==", user.uid).get()
+    const db = await database;
+    return db
+      .collection("new_users")
+      .where("brf", "==", currentBrf)
+      .get()
+      .then((snapshot) => {
+        let userList = [];
+        snapshot.docs.forEach((doc) => {
+          userList.push(doc.data());
+        });
+
+        return userList;
+      });
+  };
+
 
   const getNewUserFromDB = async (userID) => {
     const db = await database;
@@ -73,6 +90,15 @@ export default function useAuth() {
       email: user.email,
       role: user.role,
     });
+
+    db.collection('brf').doc(user.brf).collection('members').doc(user.id).set({
+      id: user.id,
+      name: user.name,
+      brf: user.brf,
+      email: user.email,
+      role: user.role,
+    })
+
   };
 
   const removeNewUser = async (user) => {
@@ -87,7 +113,6 @@ export default function useAuth() {
     await getNewUserFromDB(userID).then(async (resp) => {
       await moveNewUserToUser(resp);
       await removeNewUser(resp)
-      // console.log(resp)
     });
 
     return await getAllUserFromDB().then((resp) => {
@@ -180,7 +205,10 @@ export default function useAuth() {
     getAllUserFromDB,
     acceptUserToDB,
     getAllUserFromDB_users,
-    addToBrfCollection
+    addToBrfCollection,
+    getAllNewUserFromDB_users,
+    getNewUserFromDB,
+    removeNewUser
     // getAllUsersSnapShot
   };
 }

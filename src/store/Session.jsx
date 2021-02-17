@@ -5,7 +5,7 @@ import useAuth from './actions/auth';
 
 const useSession = (props) => {
   const [ state, dispatch] = useContext(Context);
-  const { getUserFromDB } = useAuth();
+  const { getUserFromDB, getNewUserFromDB } = useAuth();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async user => {
@@ -23,11 +23,18 @@ const useSession = (props) => {
             isLoading: false,
           })
         } else {
-          dispatch({
-            type: 'LOGGED_IN',
-            isLoggedIn: true,
-            isLoading: false,
-          })
+          dbData = await getNewUserFromDB(user.uid);
+          console.log("new_user")
+          console.log(dbData)
+          if (dbData != null) {
+            console.log("skcickar logged in")
+            dispatch({
+              type: 'LOGGED_IN',
+              dbData,
+              isLoggedIn: true,
+              isLoading: false,
+            })
+          }
         }
 
       } else {

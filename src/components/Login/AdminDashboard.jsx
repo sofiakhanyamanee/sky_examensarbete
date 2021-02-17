@@ -4,15 +4,15 @@ import useAuth from "../../store/actions/auth";
 import { Context } from '../../store/Store';
 import MemberList from "../Admin/MemberList";
 import Members from "../Admin/Members";
-import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
+import { WrapperDashboard, SignOutBtn, UserInfo, ProfilePicture, AdminHeading } from "../StylingComponents";
   
   export default function AdminDashboard() {
   const [state] = useContext(Context);
-  const { signout, getAllUserFromDB  } = useAuth();
+  const { signout, getAllNewUserFromDB_users  } = useAuth();
   const [userList, setUserList] = useState([]);
   
   useEffect(() => {
-    getAllUserFromDB()
+    getAllNewUserFromDB_users(state.currentUser.brf)
     .then(users => {
       setUserList(users);      
     });
@@ -22,6 +22,7 @@ import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
   useEffect(() => {
 
     const unsubscribe = database.collection('new_users')
+    .where("brf", "==", state.currentUser.brf)
     .onSnapshot((snap) => {
       const data = snap.docs.map(doc => doc.data());
       console.log(data)
@@ -38,7 +39,11 @@ import { WrapperDashboard, SignOutBtn} from "../StylingComponents";
   
   return (
     <WrapperDashboard>
-       {state.currentUser.role === 'admin' ? (<h1>Adminsida</h1>) : (<h1>Ingen träff</h1>)}
+      <UserInfo>
+        <ProfilePicture></ProfilePicture>
+        <h3>{state.currentUser.name}'s dashboard</h3>
+      </UserInfo>
+       {state.currentUser.role === 'admin' ? (<AdminHeading>Admin</AdminHeading>) : (<h1>Ingen träff</h1>)}
         {userList && userList.map((user, index) => {
          return (
           <div key={index}>
