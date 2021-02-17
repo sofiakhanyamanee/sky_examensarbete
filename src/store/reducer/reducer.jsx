@@ -16,13 +16,13 @@ const Reducer = (state, action) => {
       if (state.currentUser != null) {
         user = state.currentUser;
         user.email = action.email;
-        user.username = action.userName;
+        user.name = action.userName;
         user.brf = action.brf;
         user.role = action.role;
       } else {
         user = {
           email: action.email,
-          username: action.userName,
+          name: action.userName,
           brf: action.brf,
           role: action.role
         };

@@ -25,7 +25,7 @@ import { WrapperDashboard, SignOutBtn, UserInfo, ProfilePicture, AdminHeading } 
     .where("brf", "==", state.currentUser.brf)
     .onSnapshot((snap) => {
       const data = snap.docs.map(doc => doc.data());
-      console.log(data)
+      // console.log(data)
           setUserList(data);
     });
 

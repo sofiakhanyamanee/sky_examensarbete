@@ -16,6 +16,8 @@ const useSession = (props) => {
         let dbData = await getUserFromDB(user.uid);
         // console.log(dbData);
         if (dbData != null) {
+          // console.log("user found")
+          console.log(dbData)
           dispatch({
             type: 'LOGGED_IN',
             dbData,
@@ -23,14 +25,21 @@ const useSession = (props) => {
             isLoading: false,
           })
         } else {
+          // console.log("user not in new_user")
           dbData = await getNewUserFromDB(user.uid);
-          console.log("new_user")
-          console.log(dbData)
+          // console.log("new_user")
+          // console.log(dbData)
           if (dbData != null) {
-            console.log("skcickar logged in")
+            // console.log("skickar logged in")
             dispatch({
               type: 'LOGGED_IN',
               dbData,
+              isLoggedIn: true,
+              isLoading: false,
+            })
+          } else {
+            dispatch({
+              type: 'LOGGED_IN',
               isLoggedIn: true,
               isLoading: false,
             })

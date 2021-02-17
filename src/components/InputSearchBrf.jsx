@@ -29,7 +29,7 @@ export default function InputSearchBrf() {
     
   return (
     <>
-    {console.log("BRF_LISTA: ", brfList)}
+    {/* {console.log("BRF_LISTA: ", brfList)} */}
     {/* {console.log("från return:" , brfList)}
     {brfList && brfList.map((brf, index) => {
       return (

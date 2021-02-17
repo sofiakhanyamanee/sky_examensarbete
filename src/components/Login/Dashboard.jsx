@@ -9,15 +9,15 @@ export default function Dashboard() {
   const [state] = useContext(Context);
   const [isVerified, setIsVerfied] = useState(false);
 
-  // console.log("state" , state)
-  console.log("role:" , state.currentUser.role)
+  console.log("state" , state)
+  // console.log("role:" , state.currentUser.role)
   function handleLogOut() {
     signout();
   }
 
   useEffect(() => {
     getUserFromDB(state.currentUser.id).then((user) => {
-      console.log("user")
+      // console.log("user")
       console.log(user)
       if (user != null) {
         console.log("isverfired")
