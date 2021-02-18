@@ -2,15 +2,18 @@ import React, { useState, useEffect, useContext } from 'react'
 import useAuth from '../../store/actions/auth'
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
-import { Box } from ".././StylingComponents";
+import { Box, RejectBtn } from ".././StylingComponents";
 
 export default function MemberList() {
-  const { getAllUserFromDB_users } = useAuth();
+  const { getAllUserFromDB_users, removeUser } = useAuth();
   const [members, setMemberList] = useState([]);
   const [state] = useContext(Context);
+  
 
   const currentBrf = state.currentUser.brf;
 
+  
+  
   useEffect(() => {
     getAllUserFromDB_users(currentBrf)
     .then(users => {
@@ -19,9 +22,9 @@ export default function MemberList() {
     });
   }, [])
   
-
+  
   useEffect(() => {
-
+    
     const unsubscribe = database.collection('users') //raden nedan
     .where("brf", "==", currentBrf)
     .onSnapshot((snap) => {
@@ -29,18 +32,26 @@ export default function MemberList() {
       // console.log("snapshot", data)
       setMemberList(data);
     });
-
+    
     return () => unsubscribe();
   }, [])
+  
+  
+  function handleReject(member) {
+    console.log("remove", member.id)
+    removeUser(member);
+  }
+
 
   return (
     <Box>
       <h4>Medlemmar</h4>
       {members && members.map((member, index) => {
-        // console.log("members", members)
          return (
            <div key={index}>
              <p>{member.name}</p>
+             <p>{member.id}</p>
+             <RejectBtn onClick={() => handleReject(member)}>Ta bort medlem</RejectBtn>
            </div>
         )}
       )}

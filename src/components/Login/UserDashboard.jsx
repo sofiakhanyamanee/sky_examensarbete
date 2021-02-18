@@ -14,7 +14,7 @@ import MemberList from '../User/MemberList'
   }
   return (
     <WrapperDashboard>
-      <UserInfo>
+       <UserInfo>
         <ProfilePicture></ProfilePicture>
         <h3>{state.currentUser.name}'s dashboard</h3>
       </UserInfo>

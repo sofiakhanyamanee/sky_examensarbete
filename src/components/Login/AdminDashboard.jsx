@@ -50,8 +50,8 @@ import { WrapperDashboard, SignOutBtn, UserInfo, ProfilePicture, AdminHeading } 
             <Members user={user} />
         </div>
         )})}
-       <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
         <MemberList/>
+       <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
     </WrapperDashboard>
   )
 }

@@ -109,6 +109,17 @@ export default function useAuth() {
     })
   };
   
+  const removeUser = async (user) => {
+    const db = await database;
+    // console.log(user)
+    db.collection("users").doc(user.id).delete().then(() => {
+      console.log("deleted user from users")
+      db.collection("brf").doc(user.brf).collection('members').doc(user.id).delete()
+      console.log("deleted user from brf members")
+    })
+  };
+  
+
   const acceptUserToDB = async (userID) => {
     await getNewUserFromDB(userID).then(async (resp) => {
       await moveNewUserToUser(resp);
@@ -208,7 +219,8 @@ export default function useAuth() {
     addToBrfCollection,
     getAllNewUserFromDB_users,
     getNewUserFromDB,
-    removeNewUser
+    removeNewUser,
+    removeUser
     // getAllUsersSnapShot
   };
 }
