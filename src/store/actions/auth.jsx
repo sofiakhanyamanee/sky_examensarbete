@@ -4,8 +4,8 @@ import { Context } from "../Store";
 
 export default function useAuth() {
   const [state, dispatch] = useContext(Context);
-  // const [userList, setUserList] = useState([]);
 
+  // Hämta en specifik user från collection "users"
   const getUserFromDB = async (userID) => {
     const db = await database;
     return db
@@ -17,6 +17,7 @@ export default function useAuth() {
       });
   };
 
+  // Hämta alla users från collection "new_users"
   const getAllUserFromDB = async () => {
     const db = await database;
     return db
@@ -33,8 +34,8 @@ export default function useAuth() {
       });
   };
 
+  // Hämta alla users från collection "users"
   const getAllUserFromDB_users = async (currentBrf) => {
-    // db.collection("stories").where("author", "==", user.uid).get()
     const db = await database;
     return db
       .collection("users")
@@ -50,8 +51,8 @@ export default function useAuth() {
       });
   };
 
+  // Hämta alla users med specifik BRF från collection "new_users"
   const getAllNewUserFromDB_users = async (currentBrf) => {
-    // db.collection("stories").where("author", "==", user.uid).get()
     const db = await database;
     return db
       .collection("new_users")
@@ -67,7 +68,7 @@ export default function useAuth() {
       });
   };
 
-
+  // Hämta specifik user från collection "new_users"
   const getNewUserFromDB = async (userID) => {
     const db = await database;
     return db
@@ -80,9 +81,10 @@ export default function useAuth() {
   };
 
   
+  // Flytta/sätta en user från collection "new_users" till "users"
+  // Samt lägga till usern till rätt BRF collection
   const moveNewUserToUser = async (user) => {
     const db = await database;
-    // console.log(user)
     db.collection("users").doc(user.id).set({
       id: user.id,
       name: user.name,
@@ -101,6 +103,7 @@ export default function useAuth() {
 
   };
 
+  // Neka specifik user från collection "new_users"
   const removeNewUser = async (user) => {
     const db = await database;
     // console.log(user)
@@ -109,9 +112,11 @@ export default function useAuth() {
     })
   };
   
+
+  // Radera specifik user från collection "users"
+  // samt från collection "brf"
   const removeUser = async (user) => {
     const db = await database;
-    // console.log(user)
     db.collection("users").doc(user.id).delete().then(() => {
       console.log("deleted user from users")
       db.collection("brf").doc(user.brf).collection('members').doc(user.id).delete()
@@ -119,7 +124,10 @@ export default function useAuth() {
     })
   };
   
-
+  // Hämtar nya users
+  // Godkänna en ny user 
+  // Flytta den till collection users
+  // Neka samt radera ny user 
   const acceptUserToDB = async (userID) => {
     await getNewUserFromDB(userID).then(async (resp) => {
       await moveNewUserToUser(resp);
@@ -132,6 +140,7 @@ export default function useAuth() {
   };
 
 
+  // Spara en ny boende till collection "new_users"
   const saveUserToDB = async (user, name, brf) => {
     const db = await database;
     return db.collection("new_users").doc(user.uid.toString()).set({
@@ -143,6 +152,7 @@ export default function useAuth() {
     });
   };
 
+  // Spara en ny admin till collection "users"
   const saveAdminToDB = async (user, name, brf) => {
     const db = await database;
     return db.collection("users").doc(user.uid.toString()).set({
@@ -154,6 +164,7 @@ export default function useAuth() {
     })
   };
 
+  // Lägg till boende till tillhörande brf 
   const addToBrfCollection = async (email, userName, brf, role) => {
     const db = await database;
     return db.collection("brf").doc(brf).set({
@@ -164,7 +175,7 @@ export default function useAuth() {
     })
   };
 
-
+  // Logga in funktion - dispatchar från reducer
   const signin = (email, password, role) => {
     return auth
       .signInWithEmailAndPassword(email, password)
@@ -179,12 +190,12 @@ export default function useAuth() {
       });
   };
 
+  // Registrera admin/boende funktion - dispatchar från reducer
+  // Kollar om användaren har role = admin/boende
   const signup = (email, password, userName, brf, role) => {
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
-        // We want to save the user to our own collection with custom attributes for us
-
         if (role === "user") {
           saveUserToDB(response.user, userName, brf);
         } else if (role === "admin") {
@@ -203,6 +214,7 @@ export default function useAuth() {
       });
   };
 
+  // Logga ut funktion
   const signout = () => {
     return auth.signOut();
   };
@@ -221,6 +233,5 @@ export default function useAuth() {
     getNewUserFromDB,
     removeNewUser,
     removeUser
-    // getAllUsersSnapShot
   };
 }

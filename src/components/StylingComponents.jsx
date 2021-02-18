@@ -265,16 +265,27 @@ margin-bottom: 30px;
 export const WrapperMembersComp = styled.div`
 display: flex;
 justify-content: center;
+flex-direction: column;
+align-items: center;
 `
 
-
-
-
-export const MemberBox = styled.div`
+export const NewMembersBox = styled.div`
 display: flex;
 align-items: center;
+justify-content: space-between;
 margin: 10px 0 ;
+width: 300px;
 `
+
+export const MemberListBox = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin: 10px 0 ;
+width: 200px;
+`
+
+
 export const AcceptBtn = styled.button`
 color: black;
 background-color: #CDE4E2;
@@ -283,7 +294,7 @@ border-radius: 8pt;
 padding: 5px 15px;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
-margin-left: 100px;
+// margin-left: 100px;
 font-size: 12px;
 
 &: hover {
@@ -305,6 +316,27 @@ padding: 5px 15px;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
 margin-left: 15px;
+font-size: 12px;
+
+&: hover {
+  color: whitesmoke;
+  background-color: black;
+}
+
+&:focus {
+  outline: none;
+}
+`
+
+export const DeleteBtn = styled.button`
+color: black;
+background-color: whitesmoke;
+border: none;
+border-radius: 8pt;
+padding: 5px 15px;
+cursor: pointer;
+font-family: 'Poppins', sans-serif;
+margin-left: 50px;
 font-size: 12px;
 
 &: hover {
