@@ -204,8 +204,9 @@ font-size: 12px;
 export const WrapperDashboard = styled.div`
 width: 100vw;
 padding-top: 50px;
-margin: 0px auto;
+// margin: 0px auto;
 font-family: 'Poppins', sans-serif;
+// background: whitesmoke;
 `
 
 export const SignOutBtn = styled.button`
@@ -213,7 +214,7 @@ position: absolute;
 top: 50px;
 right: 50px;
 color: white;
-background-color: black;
+background-color: #161616;
 border: none;
 border-radius: 8pt;
 padding: 10px 15px;
@@ -222,16 +223,17 @@ font-family: 'Poppins', sans-serif;
 
 &: hover {
   background: whitesmoke;
-  color: black;
-  border: 1px solid black;
+  color: #161616;
+  border: 1px solid #161616;
 }
 `
 
 export const UserInfo = styled.div`
-// background:whitesmoke;
+background: transparent;
+width: 20vw;
+height: 20vh;
 position: absolute;
-top: 50px;
-left: 50px;
+top: 0;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -239,11 +241,15 @@ align-items: center;
 `
 
 export const ProfilePicture = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 width: 100px;
 height: 100px;
 margin-bottom: 10px;
 border-radius: 50%;
-background: #89b0ae;
+background: #33B5AA;
+color: whitesmoke;
 `
 
 export const Box = styled.div`
@@ -257,6 +263,9 @@ export const Box = styled.div`
 
 export const AdminHeading = styled.h1`
 margin-bottom: 30px;
+margin-left: 20vw;
+width: 80vw;
+text-align: center;
 `
 
 
@@ -267,6 +276,7 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
+margin-left: 20vw;
 `
 
 export const NewMembersBox = styled.div`
@@ -287,7 +297,7 @@ width: 200px;
 
 
 export const AcceptBtn = styled.button`
-color: black;
+color: #161616;
 background-color: #CDE4E2;
 border: none;
 border-radius: 8pt;
@@ -308,7 +318,7 @@ font-size: 12px;
 `
 
 export const RejectBtn = styled.button`
-color: black;
+color: #161616;
 background-color: whitesmoke;
 border: none;
 border-radius: 8pt;
@@ -320,7 +330,7 @@ font-size: 12px;
 
 &: hover {
   color: whitesmoke;
-  background-color: black;
+  background-color: #161616;
 }
 
 &:focus {
@@ -329,7 +339,7 @@ font-size: 12px;
 `
 
 export const DeleteBtn = styled.button`
-color: black;
+color: #161616;
 background-color: whitesmoke;
 border: none;
 border-radius: 8pt;
@@ -341,7 +351,7 @@ font-size: 12px;
 
 &: hover {
   color: whitesmoke;
-  background-color: black;
+  background-color: #161616;
 }
 
 &:focus {
