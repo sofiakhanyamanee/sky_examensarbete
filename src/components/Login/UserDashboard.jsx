@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import useAuth from "../../store/actions/auth";
 import { Context } from '../../store/Store';
-import { WrapperDashboard, SignOutBtn, UserInfo, ProfilePicture, } from "../StylingComponents";
-import MemberList from '../User/MemberList'
+import { WrapperDashboard, SignOutBtn, UserInfo, ProfilePicture, UserHeading} from "../StylingComponents";
+import RenderComp from "../User/RenderComp";
   
   export default function UserDashboard() {
   const [state] = useContext(Context);
@@ -14,13 +14,12 @@ import MemberList from '../User/MemberList'
   }
   return (
     <WrapperDashboard>
-       <UserInfo>
-        <ProfilePicture></ProfilePicture>
-        <h3>{state.currentUser.name}'s dashboard</h3>
-      </UserInfo>
-       <h1>Boendesida</h1>
-       <MemberList/>
+       <UserHeading>Boende</UserHeading>
        <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
+       <RenderComp/>
+       <UserInfo>
+        <ProfilePicture>{state.currentUser.name}</ProfilePicture>
+      </UserInfo>
     </WrapperDashboard>
   )
 }

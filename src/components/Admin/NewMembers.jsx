@@ -35,7 +35,6 @@ export default function NewMembers() {
   }
 
   function handleReject(user) {
-    console.log("Reject member:", state.user.id)
     removeNewUser(user);
   }
 

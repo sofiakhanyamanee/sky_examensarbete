@@ -38,7 +38,6 @@ export default function MemberList() {
   return (
     <WrapperMembersComp>
     <Box>
-      <h4>Medlemmar</h4>
       {members && members.map((member, index) => {
          return (
            <MemberListBox key={index}>

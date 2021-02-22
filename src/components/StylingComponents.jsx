@@ -231,7 +231,7 @@ font-family: 'Poppins', sans-serif;
 export const UserInfo = styled.div`
 background: transparent;
 width: 20vw;
-height: 20vh;
+height: 30vh;
 position: absolute;
 top: 0;
 display: flex;
@@ -325,7 +325,7 @@ border-radius: 8pt;
 padding: 5px 15px;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
-margin-left: 15px;
+margin-left: 5px;
 font-size: 12px;
 
 &: hover {
@@ -357,4 +357,14 @@ font-size: 12px;
 &:focus {
   outline: none;
 }
+`
+
+// *********** DASHBOARD-USER *********** //
+
+
+export const UserHeading = styled.h1`
+margin-bottom: 30px;
+margin-left: 20vw;
+width: 80vw;
+text-align: center;
 `

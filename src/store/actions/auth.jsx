@@ -175,6 +175,50 @@ export default function useAuth() {
     })
   };
 
+  // Lägg till post i collection
+  const addPostToDb = async (id, userName, brf, post, timeStamp) => {
+    const db = await database;
+     db.collection("posts").add({
+      id,
+      userName,
+      brf, 
+      post,
+      timeStamp
+    }).then((doc) => {
+      db.collection("posts").doc(doc.id).update({
+        docId: doc.id,
+      });
+    })
+  };
+
+  // Hämta alla posts från rätt brf 
+  const getAllPostsFromBrf = async (currentBrf) => {
+    const db = await database;
+    return db
+      .collection("posts")
+      .where("brf", "==", currentBrf)
+      .orderBy("timeStamp", "desc")
+      .get()
+      .then((snapshot) => {
+        let postList = [];
+        snapshot.docs.forEach((doc) => {
+          postList.push(doc.data());
+        });
+
+        return postList;
+      });
+  };
+
+  // Radera posts från admin dashboard
+  const removePostAdmin = async (docId) => {
+    const db = await database;
+    db.collection("posts").doc(docId).delete().then(() => {
+      console.log("postid from auth", docId.id)
+    })
+  };
+
+  
+
   // Logga in funktion - dispatchar från reducer
   const signin = (email, password, role) => {
     return auth
@@ -232,6 +276,9 @@ export default function useAuth() {
     getAllNewUserFromDB_users,
     getNewUserFromDB,
     removeNewUser,
-    removeUser
+    removeUser,
+    addPostToDb,
+    getAllPostsFromBrf,
+    removePostAdmin
   };
 }

@@ -8,7 +8,7 @@ export default function FeedView() {
   const [state] = useContext(Context);
   const [post, setPost] = useState("");
   const [postCollection, setPostsCollection] = useState([]);
-  const { addPostToDb, getAllPostsFromBrf, removePostAdmin } = useAuth();
+  const { addPostToDb, getAllPostsFromBrf } = useAuth();
 
   useEffect(() => {
     getAllPostsFromBrf(state.currentUser.brf)
@@ -35,10 +35,6 @@ export default function FeedView() {
     await addPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post, new Date());
 }
 
-   function removePost (post){
-     console.log("radera post:", post.docId)
-    removePostAdmin(post.docId)
-   }
 
   return (
     <WrapperFeedview>
@@ -47,17 +43,16 @@ export default function FeedView() {
       <PostBtn onClick={handlePost}>Posta</PostBtn>
       </InputBtnBox>
 
-      {postCollection && postCollection.map((post, index) => {
+      {postCollection && postCollection.reverse().map((post, index) => {
          return (
-          <PostContainer key={index}>
-          <PostedBy>{post.userName}</PostedBy>
-          <PostedAt>
-          <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
-          <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
-          </PostedAt>
-          <p>{post.post}</p>
-         <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
-        </PostContainer>
+           <PostContainer key={index}>
+             <h4>{post.userName}</h4>
+             <PostedAt>
+             <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
+             <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
+             </PostedAt>
+             <p>{post.post}</p>
+           </PostContainer>
         )}
       )}
     </WrapperFeedview>
@@ -124,6 +119,7 @@ text-align: left;
 border: 1px solid lightgrey;
 border-radius: 8pt;
 `
+
 export const PostedAt = styled.div`
 display: flex;
 font-size: 12px;
@@ -132,37 +128,10 @@ margin-bottom: 10px;
 margin-top: 5px;
 `
 
-export const PostedBy = styled.h4`
-color: #555b6e;
-font-weight: 500;
-`
-
 export const Datestamp = styled.p`
 
 `
 
 export const Timestamp = styled.p`
 margin-left: 10px;
-`
-
-export const RemovePostBtn = styled.button`
-color: white;
-background-color: #e38f8c;
-border: none;
-border-radius: 8pt;
-width: 10vw;
-padding: 5px 7px;
-font-size: 12px;
-font-family: 'Poppins', sans-serif;
-margin-top: 15px;
-cursor: pointer;
-
-&: hover {
-  background-color: #f3cfce;
-  color: black;
-}
-
-&:focus {
-  outline: none;
-}
 `
