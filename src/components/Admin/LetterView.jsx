@@ -6,35 +6,40 @@ import { Context } from '../../store/Store'
 
 export default function LetterView() {
   const [state] = useContext(Context);
-  const { addAdminPostToDb, getAllAdminPostsFromCurrentBrf } = useAuth();
+  const { addAdminPostToDb, getAllAdminPostsFromCurrentBrf,removeAdminLetter } = useAuth();
   const [adminPost, setAdminPost] = useState("");
   const [adminPostCollection, setAdminPostsCollection] = useState([]);
-
+  const currentBrf = state.currentUser.brf
     // hämta alla posts
     useEffect(() => {
       getAllAdminPostsFromCurrentBrf(state.currentUser.brf)
       .then(posts => {
-        console.log("fr useff", posts)
         setAdminPostsCollection(posts);    
       });
     }, [])
 
-    useEffect(() => {
-      const unsubscribe = database.collection('adminPosts')
-      .where("brf", "==", state.currentUser.brf)
-      .orderBy("timeStamp", "desc")
-      .onSnapshot((snap) => {
-        const data = snap.docs.map(doc => doc.data());
-        setAdminPostsCollection(data);
-      });
+    // useEffect(() => {
+    //   const unsubscribe = database.collection('adminPosts')
+    //   .where("brf", "==", state.currentUser.brf)
+    //   .orderBy("timeStamp", "desc")
+    //   .onSnapshot((snap) => {
+    //     const data = snap.docs.map(doc => doc.data());
+    //     console.log("data", data)
+    //     setAdminPostsCollection(data);
+    //   });
     
-      return () => unsubscribe();
-    }, [])
+    //   return () => unsubscribe();
+    // }, [])
 
 
   async function handleAdminPost(e) {
     e.preventDefault();
    await addAdminPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
+  }
+
+  function removePost(post){
+    console.log("radera post:", post.docId)
+    removeAdminLetter(post.brf, post.docId)
   }
 
 
@@ -47,9 +52,10 @@ export default function LetterView() {
 
       {adminPostCollection && adminPostCollection.map((post, index) => {
          return (
-           <div key={index}>
-             <p>{post.adminpost}</p>
-           </div>
+           <PostContainer key={index}>
+             <Post>{post.adminpost}</Post>
+             <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
+           </PostContainer>
          )}
       )}
     </WrapperMemberView>
@@ -101,6 +107,43 @@ cursor: pointer;
 &: hover {
   background-color: #2faaa6;
   color: white;
+}
+
+&:focus {
+  outline: none;
+}
+`
+
+export const PostContainer = styled.div`
+background: whitesmoke;
+width: 70%;
+margin: 10px 0;
+padding: 15px;
+display: flex;
+flex-direction: column;
+`
+
+export const Post = styled.p`
+font-size: 12px;
+text-align: left;
+`
+
+
+export const RemovePostBtn = styled.button`
+color: white;
+background-color: #e38f8c;
+border: none;
+border-radius: 8pt;
+width: 10vw;
+padding: 5px 7px;
+font-size: 12px;
+font-family: 'Poppins', sans-serif;
+cursor: pointer;
+margin-top: 20px;
+
+&: hover {
+  background-color: #f3cfce;
+  color: black;
 }
 
 &:focus {

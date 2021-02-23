@@ -201,6 +201,10 @@ export default function useAuth() {
         adminpost,
         timeStamp,
         role
+      }).then((doc) => {
+        db.collection("admin_posts").doc(brf).collection("posts").doc(doc.id).update({
+          docId: doc.id,
+        });
       })
     };
 
@@ -288,6 +292,12 @@ export default function useAuth() {
     })
   };
 
+    // Radera styrelsebrev från admin dashboard
+    const removeAdminLetter = async (brf, docId) => {
+      const db = await database;
+      db.collection("admin_posts").doc(brf).collection("posts").doc(docId).delete()
+    };
+
   
 
   // Logga in funktion - dispatchar från reducer
@@ -354,6 +364,7 @@ export default function useAuth() {
     addCommentToPost,
     getAllCommentsFromPost,
     addAdminPostToDb,
-    getAllAdminPostsFromCurrentBrf
+    getAllAdminPostsFromCurrentBrf,
+    removeAdminLetter
   };
 }

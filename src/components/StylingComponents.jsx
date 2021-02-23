@@ -292,7 +292,7 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 margin: 10px 0 ;
-width: 200px;
+width: 100%;
 `
 
 
