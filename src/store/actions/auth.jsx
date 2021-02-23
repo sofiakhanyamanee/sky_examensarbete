@@ -191,6 +191,40 @@ export default function useAuth() {
     })
   };
 
+    // Lägg till adminpost i collection
+    const addAdminPostToDb = async (id, userName, brf, adminpost, timeStamp, role) => {
+      const db = await database;
+       db.collection("admin_posts").doc(brf).collection("posts").add({
+        id,
+        userName,
+        brf, 
+        adminpost,
+        timeStamp,
+        role
+      })
+    };
+
+      // Hämta alla admin posts från current brf 
+    const getAllAdminPostsFromCurrentBrf = async (currentBrf) => {
+      const db = await database;
+      return db
+        .collection("admin_posts")
+        .doc(currentBrf)
+        .collection("posts")
+        .orderBy("timeStamp", "desc")
+        .get()
+        .then((snapshot) => {
+          let adminPostList = [];
+          snapshot.docs.forEach((doc) => {
+            adminPostList.push(doc.data());
+          });
+          console.log("adminpostlist", adminPostList)
+          return adminPostList;
+        });
+    };
+
+
+
   // Hämta alla posts från rätt brf 
   const getAllPostsFromBrf = async (currentBrf) => {
     const db = await database;
@@ -204,7 +238,6 @@ export default function useAuth() {
         snapshot.docs.forEach((doc) => {
           postList.push(doc.data());
         });
-
         return postList;
       });
   };
@@ -319,6 +352,8 @@ export default function useAuth() {
     getAllPostsFromBrf,
     removePostAdmin,
     addCommentToPost,
-    getAllCommentsFromPost
+    getAllCommentsFromPost,
+    addAdminPostToDb,
+    getAllAdminPostsFromCurrentBrf
   };
 }

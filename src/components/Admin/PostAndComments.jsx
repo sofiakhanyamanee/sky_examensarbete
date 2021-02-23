@@ -37,7 +37,7 @@ export default function PostAndComments({post}) {
 
   
   return (
-      <PostContainer post={post}>
+      <PostContainer>
         <PostedBy>{post.userName}</PostedBy>
         <PostedAt>
         <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
@@ -46,9 +46,12 @@ export default function PostAndComments({post}) {
         <p>{post.post}</p>
 
         <InputField name="comment" onChange={e => setComment(e.target.value)} placeholder="Kommentera inlägg"/>
-        <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
-        <CommentBtn onClick={() => handleComments(post)}>Kommentera</CommentBtn>
-        <button onClick={() => getComments(post)}>Visa kommentarer</button>
+
+        <BtnBox>
+          <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
+          <CommentBtn onClick={() => handleComments(post)}>Kommentera</CommentBtn>
+          <ShowCommentsBtn onClick={() => getComments(post)}>Visa kommentarer</ShowCommentsBtn>
+        </BtnBox>
 
         {commentCollection && commentCollection.map((comment, index) => {
         console.log("commentCollection", commentCollection)
@@ -152,7 +155,6 @@ width: 10vw;
 padding: 5px 7px;
 font-size: 12px;
 font-family: 'Poppins', sans-serif;
-margin-top: 15px;
 cursor: pointer;
 
 &: hover {
@@ -166,23 +168,42 @@ cursor: pointer;
 `
 
 export const CommentBtn = styled.button`
-color: white;
-background-color: #a7dfd6;
+color: black;
+background-color: #CDE4E2;
 border: none;
 border-radius: 8pt;
 width: 10vw;
 padding: 5px 7px;
 font-size: 12px;
 font-family: 'Poppins', sans-serif;
-margin-top: 15px;
 cursor: pointer;
 
 &: hover {
-  background-color: #b9eada;
-  color: black;
+  background-color: #CDE4E2;
+  color: gray;
 }
 
 &:focus {
   outline: none;
 }
+`
+
+export const ShowCommentsBtn = styled.button`
+border: none;
+background: transparent;
+cursor: pointer;
+font-size: 14px;
+color: grey;
+
+&:hover{
+  color: lightgrey;
+}
+`
+
+export const BtnBox = styled.div`
+display: flex;
+width: 100%;
+justify-content: space-between;
+align-items: center; 
+margin-top: 20px;
 `
