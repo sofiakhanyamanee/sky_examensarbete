@@ -1,63 +1,66 @@
 import React, {useState, useContext, useEffect} from 'react'
 import useAuth from '../../store/actions/auth';
-import { database } from '../../firebase'
-import { Context } from '../../store/Store'
 import styled from 'styled-components'
-import PostAndComments from './PostAndComments';
+import { Context } from '../../store/Store'
 
-export default function FeedView() {
+export default function PostAndComments({post}) {
   const [state] = useContext(Context);
-  const [post, setPost] = useState("");
-  const [postCollection, setPostsCollection] = useState([]);
-  const { addPostToDb, getAllPostsFromBrf } = useAuth();
+  const {removePostAdmin,  addCommentToPost, getAllCommentsFromPost } = useAuth();
+  // const [showCommentField, setShowCommentField] = useState(false);
+  const [comment, setComment] = useState("");
+  const [commentCollection, setCommentsCollection] = useState([]);
 
-  // hämta alla posts
-  useEffect(() => {
-    getAllPostsFromBrf(state.currentUser.brf)
-    .then(posts => {
-      setPostsCollection(posts);    
+
+
+  async function getComments(post){
+    getAllCommentsFromPost(post.docId).then(comments => {
+      console.log("comments", comments)
+      setCommentsCollection(comments)
     });
+  }
+
+  useEffect(() => {
+    getAllCommentsFromPost()
   }, [])
 
 
-
-  useEffect(() => {
-    const unsubscribe = database.collection('posts')
-    .where("brf", "==", state.currentUser.brf)
-    .orderBy("timeStamp", "desc")
-    .onSnapshot((snap) => {
-      const data = snap.docs.map(doc => doc.data());
-      setPostsCollection(data);
-    });
-    
-    return () => unsubscribe();
-  }, [])
+  function removePost (post){
+    console.log("radera post:", post.docId)
+   removePostAdmin(post.docId)
+  }
 
 
-   async function handlePost(e) {
-     e.preventDefault();
-    await addPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post, new Date());
-}
+  async function handleComments(post){
+   console.log("kommentera denna post:", post.docId)
+    await addCommentToPost(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post.docId, comment, new Date())
+ }
 
-
+  
   return (
-    <WrapperFeedview>
-      <InputBtnBox>
-      <InputField name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv ett inlägg"/>
-      <PostBtn onClick={handlePost}>Posta</PostBtn>
-      </InputBtnBox>
+      <PostContainer post={post}>
+        <PostedBy>{post.userName}</PostedBy>
+        <PostedAt>
+        <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
+        <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
+        </PostedAt>
+        <p>{post.post}</p>
 
-      {postCollection && postCollection.map((post, index) => {
-         return (
-           <div index={index}>
-             <PostAndComments post={post}/>
-           </div>
-         )}
-      )}
-         
-    </WrapperFeedview>
-  )
-}
+        <InputField name="comment" onChange={e => setComment(e.target.value)} placeholder="Kommentera inlägg"/>
+        <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
+        <CommentBtn onClick={() => handleComments(post)}>Kommentera</CommentBtn>
+        <button onClick={() => getComments(post)}>Visa kommentarer</button>
+
+        {commentCollection && commentCollection.map((comment, index) => {
+        console.log("commentCollection", commentCollection)
+        return(
+          <div key={index}>
+            <p>{comment.comment}</p>
+          </div> 
+          )
+        })}
+    </PostContainer>
+  ) 
+} 
 
 
 export const WrapperFeedview = styled.div`

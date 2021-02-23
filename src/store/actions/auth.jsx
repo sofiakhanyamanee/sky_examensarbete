@@ -209,6 +209,44 @@ export default function useAuth() {
       });
   };
 
+
+  // Lägg till kommentar på en post
+  const addCommentToPost = async (id, userName, brf, docId, comment, timeStamp) => {
+    const db = await database;
+     db.collection("posts").doc(docId).collection("comments").add({
+      id,
+      userName,
+      brf, 
+      comment,
+      timeStamp
+    }).then((doc) => {
+      console.log("från auth:", doc)
+      // db.collection("posts").doc(doc.id).update({
+      //   docId: doc.id,
+    })
+  };
+
+    // Hämta alla kommentarer från rätt post 
+    const getAllCommentsFromPost = async (postDocId) => {
+      const db = await database;
+      return db
+        .collection("posts")
+        .doc(postDocId)
+        .collection("comments")
+        .orderBy("timeStamp", "desc")
+        .get()
+        .then((snapshot) => {
+          let commentList = [];
+          snapshot.docs.forEach((doc) => {
+            commentList.push(doc.data());
+          });
+
+          console.log("commentlist fr auth", commentList)
+          return commentList;
+        });
+    };
+
+    
   // Radera posts från admin dashboard
   const removePostAdmin = async (docId) => {
     const db = await database;
@@ -279,6 +317,8 @@ export default function useAuth() {
     removeUser,
     addPostToDb,
     getAllPostsFromBrf,
-    removePostAdmin
+    removePostAdmin,
+    addCommentToPost,
+    getAllCommentsFromPost
   };
 }
