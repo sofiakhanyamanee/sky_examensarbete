@@ -257,7 +257,7 @@ export default function useAuth() {
       comment,
       timeStamp
     }).then((doc) => {
-      console.log("från auth:", doc)
+      // console.log("från auth:", doc)
       // db.collection("posts").doc(doc.id).update({
       //   docId: doc.id,
     })

@@ -9,7 +9,8 @@ export default function LetterView() {
   const { addAdminPostToDb, getAllAdminPostsFromCurrentBrf,removeAdminLetter } = useAuth();
   const [adminPost, setAdminPost] = useState("");
   const [adminPostCollection, setAdminPostsCollection] = useState([]);
-  const currentBrf = state.currentUser.brf
+
+
     // hämta alla posts
     useEffect(() => {
       getAllAdminPostsFromCurrentBrf(state.currentUser.brf)
@@ -18,18 +19,21 @@ export default function LetterView() {
       });
     }, [])
 
-    // useEffect(() => {
-    //   const unsubscribe = database.collection('adminPosts')
-    //   .where("brf", "==", state.currentUser.brf)
-    //   .orderBy("timeStamp", "desc")
-    //   .onSnapshot((snap) => {
-    //     const data = snap.docs.map(doc => doc.data());
-    //     console.log("data", data)
-    //     setAdminPostsCollection(data);
-    //   });
+    useEffect(() => {
+      const unsubscribe = database
+      .collection("admin_posts")
+      .doc(state.currentUser.brf)
+      .collection("posts")
+      .orderBy("timeStamp", "desc")
+      .onSnapshot((snap) => {
+        const data = snap.docs.map(doc => doc.data());
+        console.log("data", data)
+        setAdminPostsCollection(data)
+      });
     
-    //   return () => unsubscribe();
-    // }, [])
+      return () => unsubscribe();
+    }, [])
+
 
 
   async function handleAdminPost(e) {
@@ -53,6 +57,10 @@ export default function LetterView() {
       {adminPostCollection && adminPostCollection.map((post, index) => {
          return (
            <PostContainer key={index}>
+             <PostedAt>
+               <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
+               <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
+             </PostedAt>
              <Post>{post.adminpost}</Post>
              <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
            </PostContainer>
@@ -149,4 +157,20 @@ margin-top: 20px;
 &:focus {
   outline: none;
 }
+`
+
+export const PostedAt = styled.div`
+display: flex;
+font-size: 12px;
+color: grey;
+margin-bottom: 10px;
+margin-top: 5px;
+`
+
+export const Datestamp = styled.p`
+
+`
+
+export const Timestamp = styled.p`
+margin-left: 5px;
 `

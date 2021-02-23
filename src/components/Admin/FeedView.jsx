@@ -11,7 +11,7 @@ export default function FeedView() {
   const [postCollection, setPostsCollection] = useState([]);
   const { addPostToDb, getAllPostsFromBrf } = useAuth();
 
-  // hämta alla posts
+  // hämta posts från current brf
   useEffect(() => {
     getAllPostsFromBrf(state.currentUser.brf)
     .then(posts => {
@@ -20,7 +20,7 @@ export default function FeedView() {
   }, [])
 
 
-  // hämta posts från current brf
+  // hämta uppdaterad post
   useEffect(() => {
     const unsubscribe = database.collection('posts')
     .where("brf", "==", state.currentUser.brf)

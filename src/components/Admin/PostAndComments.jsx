@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
+import { database } from '../../firebase'
 import useAuth from '../../store/actions/auth';
 import styled from 'styled-components'
 import { Context } from '../../store/Store'
@@ -14,24 +15,33 @@ export default function PostAndComments({post}) {
 
   async function getComments(post){
     getAllCommentsFromPost(post.docId).then(comments => {
-      console.log("comments", comments)
+      // console.log("comments", comments)
       setCommentsCollection(comments)
     });
   }
 
   useEffect(() => {
-    getAllCommentsFromPost()
+    const unsubscribe = database.collection('posts')
+    .doc(post.docId)
+    .collection("comments")
+    .orderBy("timeStamp", "desc")
+    .onSnapshot((snap) => {
+      const data = snap.docs.map(doc => doc.data());
+      setCommentsCollection(data);
+    });
+    
+    return () => unsubscribe();
   }, [])
 
 
   function removePost (post){
-    console.log("radera post:", post.docId)
+    // console.log("radera post:", post.docId)
    removePostAdmin(post.docId)
   }
 
 
   async function handleComments(post){
-   console.log("kommentera denna post:", post.docId)
+  //  console.log("kommentera denna post:", post.docId)
     await addCommentToPost(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post.docId, comment, new Date())
  }
 
@@ -54,7 +64,7 @@ export default function PostAndComments({post}) {
         </BtnBox>
 
         {commentCollection && commentCollection.map((comment, index) => {
-        console.log("commentCollection", commentCollection)
+        // console.log("commentCollection", commentCollection)
         return(
           <div key={index}>
             <p>{comment.comment}</p>
@@ -143,7 +153,7 @@ export const Datestamp = styled.p`
 `
 
 export const Timestamp = styled.p`
-margin-left: 10px;
+margin-left: 5px;
 `
 
 export const RemovePostBtn = styled.button`
