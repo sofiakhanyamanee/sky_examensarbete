@@ -17,7 +17,7 @@ const useSession = (props) => {
         // console.log(dbData);
         if (dbData != null) {
           // console.log("user found")
-          console.log(dbData)
+          // console.log(dbData)
           dispatch({
             type: 'LOGGED_IN',
             dbData,

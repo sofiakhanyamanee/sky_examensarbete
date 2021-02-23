@@ -11,7 +11,6 @@ export default function LetterView() {
   const [adminPostCollection, setAdminPostsCollection] = useState([]);
 
 
-    // hämta alla posts
     useEffect(() => {
       getAllAdminPostsFromCurrentBrf(state.currentUser.brf)
       .then(posts => {
@@ -27,7 +26,6 @@ export default function LetterView() {
       .orderBy("timeStamp", "desc")
       .onSnapshot((snap) => {
         const data = snap.docs.map(doc => doc.data());
-        console.log("data", data)
         setAdminPostsCollection(data)
       });
     

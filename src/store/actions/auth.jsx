@@ -222,7 +222,7 @@ export default function useAuth() {
           snapshot.docs.forEach((doc) => {
             adminPostList.push(doc.data());
           });
-          console.log("adminpostlist", adminPostList)
+          // console.log("adminpostlist", adminPostList)
           return adminPostList;
         });
     };
@@ -278,7 +278,7 @@ export default function useAuth() {
             commentList.push(doc.data());
           });
 
-          console.log("commentlist fr auth", commentList)
+          // console.log("commentlist fr auth", commentList)
           return commentList;
         });
     };
@@ -288,7 +288,7 @@ export default function useAuth() {
   const removePostAdmin = async (docId) => {
     const db = await database;
     db.collection("posts").doc(docId).delete().then(() => {
-      console.log("postid from auth", docId.id)
+      // console.log("postid from auth", docId.id)
     })
   };
 

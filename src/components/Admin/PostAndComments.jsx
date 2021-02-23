@@ -7,7 +7,6 @@ import { Context } from '../../store/Store'
 export default function PostAndComments({post}) {
   const [state] = useContext(Context);
   const {removePostAdmin,  addCommentToPost, getAllCommentsFromPost } = useAuth();
-  // const [showCommentField, setShowCommentField] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
 
@@ -15,7 +14,6 @@ export default function PostAndComments({post}) {
 
   async function getComments(post){
     getAllCommentsFromPost(post.docId).then(comments => {
-      // console.log("comments", comments)
       setCommentsCollection(comments)
     });
   }
@@ -26,6 +24,7 @@ export default function PostAndComments({post}) {
     .collection("comments")
     .orderBy("timeStamp", "desc")
     .onSnapshot((snap) => {
+      
       const data = snap.docs.map(doc => doc.data());
       setCommentsCollection(data);
     });
@@ -35,13 +34,11 @@ export default function PostAndComments({post}) {
 
 
   function removePost (post){
-    // console.log("radera post:", post.docId)
    removePostAdmin(post.docId)
   }
 
 
   async function handleComments(post){
-  //  console.log("kommentera denna post:", post.docId)
     await addCommentToPost(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post.docId, comment, new Date())
  }
 
