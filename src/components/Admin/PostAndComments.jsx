@@ -3,14 +3,13 @@ import { database } from '../../firebase'
 import useAuth from '../../store/actions/auth';
 import styled from 'styled-components'
 import { Context } from '../../store/Store'
+import moment from 'moment';
 
 export default function PostAndComments({post}) {
   const [state] = useContext(Context);
   const {removePostAdmin,  addCommentToPost, getAllCommentsFromPost } = useAuth();
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
-
-
 
   async function getComments(post){
     getAllCommentsFromPost(post.docId).then(comments => {
@@ -47,27 +46,32 @@ export default function PostAndComments({post}) {
       <PostContainer>
         <PostedBy>{post.userName}</PostedBy>
         <PostedAt>
-        <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
-        <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
+        <Timestamp>{moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}</Timestamp>
+        {/* <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp> */}
         </PostedAt>
         <p>{post.post}</p>
 
-        <InputField name="comment" onChange={e => setComment(e.target.value)} placeholder="Kommentera inlägg"/>
+        <CommentInputField name="comment" onChange={e => setComment(e.target.value)} placeholder="Kommentera inlägg"/>
 
         <BtnBox>
           <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
           <CommentBtn onClick={() => handleComments(post)}>Kommentera</CommentBtn>
           <ShowCommentsBtn onClick={() => getComments(post)}>Visa kommentarer</ShowCommentsBtn>
         </BtnBox>
-
+      <CommentWrapper>
         {commentCollection && commentCollection.map((comment, index) => {
         // console.log("commentCollection", commentCollection)
         return(
-          <div key={index}>
-            <p>{comment.comment}</p>
-          </div> 
+          <CommentBox key={index}>
+            <Box>
+            <CommentBy>{comment.userName}</CommentBy>
+            <TimestampComment>{moment(comment.timeStamp.toDate()).startOf("minutes").fromNow()}</TimestampComment>
+            </Box>
+            <Comment>{comment.comment}</Comment>
+          </CommentBox> 
           )
         })}
+        </CommentWrapper>
     </PostContainer>
   ) 
 } 
@@ -78,22 +82,22 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
+// margin-left: 20vw;
 `
 
 export const InputBtnBox = styled.div`
 display: flex;
-width: 55%;
+width: 43%;
 justify-content: space-around;
 margin-bottom: 30px;
 `
 
 
-export const InputField = styled.input`
-width: 30vw;
+export const CommentInputField = styled.input`
+width: 95%;
 padding: 15px 12px;
 margin: 12px 0;
-border: 1px solid lightgrey;
+border: none;
 border-radius: 8pt;
 
 &:focus {
@@ -129,8 +133,9 @@ margin: 10px 0;
 width: 40vw;
 padding: 20px;
 text-align: left;
-border: 1px solid lightgrey;
-border-radius: 8pt;
+border: none;
+border-radius: 12pt;
+background: whitesmoke;
 `
 export const PostedAt = styled.div`
 display: flex;
@@ -150,7 +155,7 @@ export const Datestamp = styled.p`
 `
 
 export const Timestamp = styled.p`
-margin-left: 5px;
+// margin-left: 5px;
 `
 
 export const RemovePostBtn = styled.button`
@@ -199,8 +204,9 @@ export const ShowCommentsBtn = styled.button`
 border: none;
 background: transparent;
 cursor: pointer;
-font-size: 14px;
+font-size: 13px;
 color: grey;
+font-family: Poppins;
 
 &:hover{
   color: lightgrey;
@@ -213,4 +219,35 @@ width: 100%;
 justify-content: space-between;
 align-items: center; 
 margin-top: 20px;
+`
+
+export const CommentBox = styled.div`
+display: flex;
+flex-direction: column;
+margin: 15px 0;
+background: white;
+border-radius: 12pt;
+padding: 15px;
+`
+
+export const Box = styled.div`
+display: flex;
+justify-content: space-between;
+`
+
+export const CommentBy = styled.p`
+font-size: 14px;
+font-weight: 500;
+`
+export const TimestampComment = styled.p`
+font-size: 12px;
+`
+
+export const Comment = styled.p`
+padding: 5px 0;
+font-size: 14px;
+`
+export const CommentWrapper = styled.div`
+// background: lightpink;
+padding: 10px 0;
 `

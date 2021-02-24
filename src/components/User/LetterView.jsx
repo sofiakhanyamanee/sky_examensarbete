@@ -64,7 +64,7 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
+// margin-left: 20vw;
 `
 
 export const Heading = styled.h2`
@@ -73,7 +73,7 @@ margin-bottom: 50px;
 
 export const PostContainer = styled.div`
 background: whitesmoke;
-width: 70%;
+width: 45%;
 margin: 10px 0;
 padding: 15px;
 display: flex;

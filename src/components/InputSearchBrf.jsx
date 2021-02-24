@@ -29,29 +29,6 @@ export default function InputSearchBrf() {
     
   return (
     <>
-    {/* {console.log("BRF_LISTA: ", brfList)} */}
-    {/* {console.log("från return:" , brfList)}
-    {brfList && brfList.map((brf, index) => {
-      return (
-        <div key={index}>
-          <p>{brf.brf}</p>
-        </div>
-      )
-    })} */}
-
     </>
   );
 }
-
-// brfList.map((brf, index) => { return (<div key={index}> <p>{brf}</p> </div>
-      // {/* {brfList &&
-      //   brfList.map((brf, index) => {
-      //     // console.log("members", members)
-      //   console.log(brfList)
-      //     return (
-      //       <div key={index}>
-      //         <p>{brf}</p>
-      //       </div>
-      //     );
-      //   })} */}
-      // {/* <input /> */}

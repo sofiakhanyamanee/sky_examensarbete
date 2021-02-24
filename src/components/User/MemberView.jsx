@@ -16,5 +16,5 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
+// margin-left: 20vw;
 `

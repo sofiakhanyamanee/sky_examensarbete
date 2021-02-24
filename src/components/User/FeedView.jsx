@@ -65,12 +65,12 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
+// margin-left: 20vw;
 `
 
 export const InputBtnBox = styled.div`
 display: flex;
-width: 55%;
+width: 43%;
 justify-content: space-around;
 margin-bottom: 30px;
 `

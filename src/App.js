@@ -22,12 +22,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <PublicRoute path="/" restricted={false} component={StartPage} exact />
-        <PrivateRoute
-          isLoggedIn={state.isLoggedIn}
-          path="/dashboard"
-          component={Dashboard}
-          exact
-          />
+        <PrivateRoute isLoggedIn={state.isLoggedIn} path="/dashboard" component={Dashboard} exact/>
           {/* <PublicRoute path="/signup" component={SignUpPage} exact />
           <PublicRoute path="/login" component={LoginPage} exact /> */}
       </Switch>

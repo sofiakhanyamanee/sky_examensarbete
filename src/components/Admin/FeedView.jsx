@@ -40,6 +40,7 @@ export default function FeedView() {
 }
 
 
+
   return (
     <WrapperFeedview>
       <InputBtnBox>
@@ -62,12 +63,11 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
 `
 
 export const InputBtnBox = styled.div`
 display: flex;
-width: 55%;
+width: 43%;
 justify-content: space-around;
 margin-bottom: 30px;
 `
@@ -77,8 +77,9 @@ export const InputField = styled.input`
 width: 30vw;
 padding: 15px 12px;
 margin: 12px 0;
-border: 1px solid lightgrey;
-border-radius: 8pt;
+border-radius: 12pt;
+border: none;
+background: whitesmoke;
 
 &:focus {
   outline: none;
@@ -90,7 +91,7 @@ export const PostBtn = styled.button`
 color: black;
 background-color: #CDE4E2;
 border: none;
-border-radius: 8pt;
+border-radius: 12pt;
 width: 10vw;
 padding: 15px 12px;
 font-size: 16px;

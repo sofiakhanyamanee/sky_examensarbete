@@ -203,18 +203,18 @@ font-size: 12px;
 
 export const WrapperDashboard = styled.div`
 width: 100vw;
-padding-top: 50px;
 // margin: 0px auto;
+// margin-bottom: 100px;
 font-family: 'Poppins', sans-serif;
 // background: whitesmoke;
 `
 
 export const SignOutBtn = styled.button`
 position: absolute;
-top: 50px;
-right: 50px;
+top: 2rem;
+right: 2rem;
 color: white;
-background-color: #161616;
+background-color: #555b6e;
 border: none;
 border-radius: 8pt;
 padding: 10px 15px;
@@ -224,16 +224,14 @@ font-family: 'Poppins', sans-serif;
 &: hover {
   background: whitesmoke;
   color: #161616;
-  border: 1px solid #161616;
+  border: 1px solid #555b6e;
 }
 `
 
 export const UserInfo = styled.div`
-background: transparent;
-width: 20vw;
-height: 30vh;
 position: absolute;
-top: 0;
+top: 5rem;
+right: 2rem;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -263,9 +261,10 @@ export const Box = styled.div`
 
 export const AdminHeading = styled.h1`
 margin-bottom: 30px;
-margin-left: 20vw;
-width: 80vw;
+// margin-left: 20vw;
+// width: 80vw;
 text-align: center;
+color: #555b6e;
 `
 
 
@@ -276,7 +275,7 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
+// margin-left: 20vw;
 `
 
 export const NewMembersBox = styled.div`
@@ -364,7 +363,7 @@ font-size: 12px;
 
 export const UserHeading = styled.h1`
 margin-bottom: 30px;
-margin-left: 20vw;
+// margin-left: 20vw;
 width: 80vw;
 text-align: center;
 `

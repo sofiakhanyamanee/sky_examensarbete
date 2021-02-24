@@ -3,6 +3,7 @@ import useAuth from '../../store/actions/auth';
 import styled from 'styled-components'
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
+import moment from 'moment';
 
 export default function LetterView() {
   const [state] = useContext(Context);
@@ -56,8 +57,7 @@ export default function LetterView() {
          return (
            <PostContainer key={index}>
              <PostedAt>
-               <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
-               <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
+             <Timestamp>{moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}</Timestamp>
              </PostedAt>
              <Post>{post.adminpost}</Post>
              <RemovePostBtn onClick={() => removePost(post)}>Radera inlägg</RemovePostBtn>
@@ -73,13 +73,13 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-margin-left: 20vw;
+// margin-left: 20vw;
 `
 
 
 export const InputBtnBox = styled.div`
 display: flex;
-width: 55%;
+width: 46%;
 justify-content: space-around;
 margin-bottom: 30px;
 `
@@ -89,8 +89,9 @@ export const InputField = styled.input`
 width: 30vw;
 padding: 15px 12px;
 margin: 12px 0;
-border: 1px solid lightgrey;
-border-radius: 8pt;
+border: none;
+border-radius: 12pt;
+background: whitesmoke;
 
 &:focus {
   outline: none;
@@ -122,11 +123,12 @@ cursor: pointer;
 
 export const PostContainer = styled.div`
 background: whitesmoke;
-width: 70%;
+width: 43%;
 margin: 10px 0;
 padding: 15px;
 display: flex;
 flex-direction: column;
+border-radius: 12pt;
 `
 
 export const Post = styled.p`
@@ -146,6 +148,8 @@ font-size: 12px;
 font-family: 'Poppins', sans-serif;
 cursor: pointer;
 margin-top: 20px;
+// display: flex;
+align-self: flex-end;
 
 &: hover {
   background-color: #f3cfce;
@@ -170,5 +174,5 @@ export const Datestamp = styled.p`
 `
 
 export const Timestamp = styled.p`
-margin-left: 5px;
+// margin-left: 5px;
 `
