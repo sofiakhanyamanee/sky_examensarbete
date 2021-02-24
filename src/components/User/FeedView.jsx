@@ -3,6 +3,7 @@ import useAuth from '../../store/actions/auth';
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
 import styled from 'styled-components'
+import PostAndComments from './PostAndComments';
 
 export default function FeedView() {
   const [state] = useContext(Context);
@@ -43,7 +44,12 @@ export default function FeedView() {
       <PostBtn onClick={handlePost}>Posta</PostBtn>
       </InputBtnBox>
 
-      {postCollection && postCollection.reverse().map((post, index) => {
+      {postCollection && postCollection.map((post, index) => {
+         return (
+             <PostAndComments key={index} post={post}/>
+         )}
+      )}
+      {/* {postCollection && postCollection.reverse().map((post, index) => {
          return (
            <PostContainer key={index}>
              <h4>{post.userName}</h4>
@@ -54,7 +60,7 @@ export default function FeedView() {
              <p>{post.post}</p>
            </PostContainer>
         )}
-      )}
+      )} */}
     </WrapperFeedview>
   )
 }
@@ -80,8 +86,9 @@ export const InputField = styled.input`
 width: 30vw;
 padding: 15px 12px;
 margin: 12px 0;
-border: 1px solid lightgrey;
-border-radius: 8pt;
+border-radius: 12pt;
+border: none;
+background: whitesmoke;
 
 &:focus {
   outline: none;

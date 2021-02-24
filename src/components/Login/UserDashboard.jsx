@@ -18,26 +18,14 @@ import { Context } from '../../store/Store';
     signout();
   }
   return (
-    // <WrapperDashboard>
-    //    <UserHeading>Boende</UserHeading>
-    //    <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
-    //    <RenderComp/>
-    //    <UserInfo>
-    //     <ProfilePicture>{state.currentUser.name}</ProfilePicture>
-    //   </UserInfo>
-    // </WrapperDashboard>
     <BrowserRouter>
-       <Navbar/>
-     <WrapperDashboard>
-      <AdminHeading>Boende</AdminHeading>
-      <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
-      <UserInfo>
-      <p>{state.currentUser.name}</p>
-      </UserInfo>
-      {/* <RenderComp/>
-      <UserInfo>
-    </UserInfo> */}
-    </WrapperDashboard> 
+      <Navbar/>
+      <WrapperDashboard>
+        <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
+        <UserInfo>
+        <p>{state.currentUser.name}</p>
+        </UserInfo>
+      </WrapperDashboard> 
       <Switch>
         <Route path='/dashboard' exact component={FeedView} />
         <Route path='/members'  component={MemberView} />

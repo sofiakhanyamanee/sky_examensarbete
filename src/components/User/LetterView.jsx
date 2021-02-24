@@ -3,6 +3,7 @@ import useAuth from '../../store/actions/auth';
 import styled from 'styled-components'
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
+import moment from 'moment';
 
 export default function LetterView() {
   const [state] = useContext(Context);
@@ -48,8 +49,7 @@ return (
        return (
          <PostContainer key={index}>
            <PostedAt>
-             <Datestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleDateString()}</Datestamp>
-             <Timestamp>{new Date(post.timeStamp.seconds * 1000).toLocaleTimeString()}</Timestamp>
+           <Timestamp>{moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}</Timestamp>
            </PostedAt>
            <Post>{post.adminpost}</Post>
          </PostContainer>
@@ -78,6 +78,7 @@ margin: 10px 0;
 padding: 15px;
 display: flex;
 flex-direction: column;
+border-radius: 12pt;
 `
 
 export const Post = styled.p`
@@ -121,5 +122,5 @@ export const Datestamp = styled.p`
 `
 
 export const Timestamp = styled.p`
-margin-left: 5px;
+// margin-left: 5px;
 `
