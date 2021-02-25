@@ -38,7 +38,8 @@ export default function LetterView() {
 
   async function handleAdminPost(e) {
     e.preventDefault();
-   await addAdminPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
+    await addAdminPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
+    await setAdminPost("")
   }
 
   function removePost(post){
@@ -50,7 +51,7 @@ export default function LetterView() {
   return (
     <WrapperLetterView>
       <InputBtnBox>
-      <InputField onChange={e => setAdminPost(e.target.value)} placeholder="Skriv nytt styrelsebrev..."/>
+      <InputField value={adminPost} onChange={e => setAdminPost(e.target.value)} placeholder="Skriv nytt styrelsebrev..."/>
       <PostBtn onClick={handleAdminPost}><RiIcons.RiSendPlaneFill className="sendPostBtn"/></PostBtn>
       </InputBtnBox>
 

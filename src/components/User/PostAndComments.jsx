@@ -49,6 +49,8 @@ export default function PostAndComments({ post }) {
       comment,
       new Date()
     );
+    await setCommentbar(true);
+    await setComment("")
   }
 
   return (
@@ -70,6 +72,7 @@ export default function PostAndComments({ post }) {
       <InputBtnBox>
         <CommentInputField
           name="comment"
+          value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Kommentera inlägg"
         />

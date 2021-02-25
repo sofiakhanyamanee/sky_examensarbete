@@ -34,6 +34,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 20px;
   padding: 8px 0px 8px 16px;
   list-style: none;
   height: 60px;
@@ -42,13 +43,19 @@
 .nav-text a {
   text-decoration: none;
   color: #555b6e;
-  font-size: 18px;
+  font-size: 16px;
   width: 95%;
   height: 100%;
   display: flex;
   align-items: center;
   padding: 0 16px;
   border-radius: 4px;
+}
+
+.active-link {
+  /* background: whitesmoke; */
+
+  border-left: 4px solid #555b6e;
 }
 
 .nav-text a:hover {

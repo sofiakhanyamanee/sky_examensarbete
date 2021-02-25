@@ -35,13 +35,13 @@ export default function FeedView() {
    async function handlePost(e) {
      e.preventDefault();
     await addPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post, new Date(), state.currentUser.role);
+    await setPost("")
 }
-
 
   return (
     <FeedViewWrapper>
       <InputBtnBox>
-      <InputField name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv, dela, felanmäl..."/>
+      <InputField value={post} name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv, dela, felanmäl..."/>
       <PostBtn onClick={handlePost}><RiIcons.RiSendPlaneFill className="sendPostBtn"/></PostBtn>
       </InputBtnBox>
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import * as GoIcons from 'react-icons/go';
 import * as FiIcons from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './navbar.css';
 import { IconContext } from 'react-icons';
@@ -18,6 +18,10 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  // if(sidebar === false){
+  //   console.log("stänger")
+  // }
+
   function handleLogOut() {
     signout();
   }
@@ -31,8 +35,8 @@ function Navbar() {
           </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
-            <li className='navbar-toggle'>
+          <ul className='nav-menu-items'>
+            <li className='navbar-toggle' onClick={showSidebar}>
               <Link to='#' className='menu-bars'>
                 <FiIcons.FiArrowLeft />
               </Link>
@@ -40,16 +44,20 @@ function Navbar() {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <Link to={item.path}>
+                  <NavLink to={item.path} activeClassName="active-link">
                     {item.icon}
                     <span>{item.title}</span>
-                  </Link>
+                  </NavLink>
                 </li>
               );
             })}
           </ul>
           <SignOutBtn onClick={handleLogOut}><AiIcons.AiOutlineLogout/></SignOutBtn>
+          {state.currentUser.role === 'admin' ? 
+          <CurrentUser>{state.currentUser.name} ({state.currentUser.role})</CurrentUser>
+          :
           <CurrentUser>{state.currentUser.name}</CurrentUser>
+        }
         </nav>
       </IconContext.Provider>
     </>

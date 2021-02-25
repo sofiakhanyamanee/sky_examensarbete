@@ -5,19 +5,19 @@ import * as FiIcons from 'react-icons/fi';
 
 export const SidebarData = [
   {
-    title: 'Feed',
+    title: 'Flöde',
     path: '/dashboard',
     icon: <AiIcons.AiOutlineHome />,
     cName: 'nav-text'
   },
   {
-    title: 'Members',
+    title: 'Medlemmar',
     path: '/members',
     icon: <FiIcons.FiUsers />,
     cName: 'nav-text'
   },
   {
-    title: 'Letters',
+    title: 'Styrelsebrev',
     path: '/letters',
     icon: <IoIcons.IoNewspaperOutline />,
     cName: 'nav-text'

@@ -78,6 +78,7 @@ export const PostedBy = styled.h4`
   font-weight: 500;
   display: flex;
   align-items: center;
+  font-size: 14px;
 `;
 
 export const Post = styled.p`
