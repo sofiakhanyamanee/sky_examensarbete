@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext} from 'react'
 import useAuth from '../../store/actions/auth'
-import { WrapperMembersComp, NewMembersBox, AcceptBtn, RejectBtn } from "../StylingComponents";
+import { WrapperNewMembersComp, NewMembersBox, AcceptBtn, RejectBtn } from "../Styles/AdminMemberView";
 import { database } from '../../firebase'
 import { Context } from '../../store/Store';
 
@@ -40,15 +40,18 @@ export default function NewMembers() {
 
   
   return (
-    <WrapperMembersComp>
+    <WrapperNewMembersComp>
         {userList && userList.map((user, index) => {
          return (
           <NewMembersBox key={index}>
-            <p>{user.name}</p>        
-            <AcceptBtn onClick={() => handleAccept(user)}>Godkänn</AcceptBtn>
-            <RejectBtn onClick={() => handleReject(user)}>Neka</RejectBtn>
+            <p>{user.name}</p>    
+            <div>
+              <AcceptBtn onClick={() => handleAccept(user)}>Godkänn</AcceptBtn>
+              <RejectBtn onClick={() => handleReject(user)}>Neka</RejectBtn>
+            </div>    
+          
         </NewMembersBox>
         )})}
-    </WrapperMembersComp>
+    </WrapperNewMembersComp>
   )
 }

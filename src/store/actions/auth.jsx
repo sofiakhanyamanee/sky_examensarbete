@@ -271,7 +271,7 @@ export default function useAuth() {
         .collection("posts")
         .doc(postDocId)
         .collection("comments")
-        .orderBy("timeStamp", "desc")
+        .orderBy("timeStamp", "asc")
         .get()
         .then((snapshot) => {
           let commentList = [];
@@ -298,6 +298,14 @@ export default function useAuth() {
       const db = await database;
       db.collection("admin_posts").doc(brf).collection("posts").doc(docId).delete()
     };
+
+      // Radera comments från admin dashboard
+      const removeCommentsAdmin = async (docId) => {
+        const db = await database;
+        db.collection("posts").doc(docId).collection("comments").delete().then(() => {
+          // console.log("postid from auth", docId.id)
+        })
+      };
 
   
 
@@ -366,6 +374,7 @@ export default function useAuth() {
     getAllCommentsFromPost,
     addAdminPostToDb,
     getAllAdminPostsFromCurrentBrf,
-    removeAdminLetter
+    removeAdminLetter,
+    removeCommentsAdmin
   };
 }

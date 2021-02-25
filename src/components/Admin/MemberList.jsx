@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import useAuth from '../../store/actions/auth'
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
-import { WrapperMembersComp, Box, DeleteBtn, MemberListBox } from ".././StylingComponents";
+import { WrapperMembersComp, Box, DeleteBtn, MemberListBox } from "../Styles/AdminMemberView";
 
 export default function MemberList() {
   const { getAllUserFromDB_users, removeUser } = useAuth();
@@ -37,6 +37,7 @@ export default function MemberList() {
 
   return (
     <WrapperMembersComp>
+      <hr/>
     <Box>
       {members && members.map((member, index) => {
          return (

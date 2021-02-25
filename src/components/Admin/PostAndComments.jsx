@@ -39,6 +39,7 @@ export default function PostAndComments({ post }) {
     return () => unsubscribe();
   }, []);
 
+  
   function removePost(post) {
     removePostAdmin(post.docId);
   }
