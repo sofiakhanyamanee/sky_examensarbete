@@ -176,14 +176,15 @@ export default function useAuth() {
   };
 
   // Lägg till post i collection
-  const addPostToDb = async (id, userName, brf, post, timeStamp) => {
+  const addPostToDb = async (id, userName, brf, post, timeStamp, role) => {
     const db = await database;
      db.collection("posts").add({
       id,
       userName,
       brf, 
       post,
-      timeStamp
+      timeStamp,
+      role
     }).then((doc) => {
       db.collection("posts").doc(doc.id).update({
         docId: doc.id,

@@ -122,7 +122,7 @@ cursor: pointer;
 `
 
 export const PostContainer = styled.div`
-background: whitesmoke;
+background: #f8f9fa;
 width: 43%;
 margin: 10px 0;
 padding: 15px;

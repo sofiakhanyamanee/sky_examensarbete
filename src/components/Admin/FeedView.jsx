@@ -4,6 +4,7 @@ import { database } from '../../firebase'
 import { Context } from '../../store/Store'
 import styled from 'styled-components'
 import PostAndComments from './PostAndComments';
+import * as RiIcons from 'react-icons/ri'; 
 
 export default function FeedView() {
   const [state] = useContext(Context);
@@ -36,7 +37,7 @@ export default function FeedView() {
 
    async function handlePost(e) {
      e.preventDefault();
-    await addPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post, new Date());
+    await addPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post, new Date(), state.currentUser.role);
 }
 
 
@@ -44,8 +45,8 @@ export default function FeedView() {
   return (
     <WrapperFeedview>
       <InputBtnBox>
-      <InputField name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv ett inlägg"/>
-      <PostBtn onClick={handlePost}>Posta</PostBtn>
+      <InputField name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv, dela, felanmäl..."/>
+      <PostBtn onClick={handlePost}><RiIcons.RiSendPlaneFill className="sendPostBtn"/></PostBtn>
       </InputBtnBox>
 
       {postCollection && postCollection.map((post, index) => {
@@ -74,12 +75,13 @@ margin-bottom: 30px;
 
 
 export const InputField = styled.input`
-width: 30vw;
+width: 85%;
 padding: 15px 12px;
 margin: 12px 0;
 border-radius: 12pt;
 border: none;
 background: whitesmoke;
+font-family: Poppins;
 
 &:focus {
   outline: none;
@@ -91,13 +93,17 @@ export const PostBtn = styled.button`
 color: black;
 background-color: #CDE4E2;
 border: none;
-border-radius: 12pt;
-width: 10vw;
-padding: 15px 12px;
-font-size: 16px;
+border-radius: 50%;
+width: 45px;
+height: 45px;
+// padding: 0px 8px;
+font-size: 14px;
 font-family: 'Poppins', sans-serif;
 margin: 12px 0;
 cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
 
 &: hover {
   background-color: #2faaa6;

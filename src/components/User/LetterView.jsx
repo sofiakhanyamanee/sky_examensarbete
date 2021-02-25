@@ -7,8 +7,7 @@ import moment from 'moment';
 
 export default function LetterView() {
   const [state] = useContext(Context);
-  const { addAdminPostToDb, getAllAdminPostsFromCurrentBrf } = useAuth();
-  const [adminPost, setAdminPost] = useState("");
+  const { getAllAdminPostsFromCurrentBrf } = useAuth();
   const [adminPostCollection, setAdminPostsCollection] = useState([]);
 
 
@@ -36,10 +35,6 @@ export default function LetterView() {
 
 
 
-async function handleAdminPost(e) {
-  e.preventDefault();
- await addAdminPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
-}
 
 
 return (
@@ -72,7 +67,7 @@ margin-bottom: 50px;
 `
 
 export const PostContainer = styled.div`
-background: whitesmoke;
+background: #f8f9fa;
 width: 45%;
 margin: 10px 0;
 padding: 15px;

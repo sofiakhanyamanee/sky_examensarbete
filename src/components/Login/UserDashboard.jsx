@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import useAuth from "../../store/actions/auth";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { WrapperDashboard, SignOutBtn, AdminHeading, UserInfo } from "../StylingComponents";
+import { WrapperDashboard } from "../StylingComponents";
 import FeedView from "../User/FeedView";
 import MemberView from "../User/MemberView";
 import LetterView from "../User/LetterView";
 import Navbar from '../Styles/Navbar';
 import { Context } from '../../store/Store';
+// import * as AiIcons from 'react-icons/ai';
 // import RenderComp from "../User/RenderComp";
   
   export default function UserDashboard() {
@@ -14,17 +15,17 @@ import { Context } from '../../store/Store';
   const { signout } = useAuth();
 
   // console.log("state" , state)
-  function handleLogOut() {
-    signout();
-  }
+  // function handleLogOut() {
+  //   signout();
+  // }
   return (
     <BrowserRouter>
       <Navbar/>
       <WrapperDashboard>
-        <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
-        <UserInfo>
+        {/* <SignOutBtn onClick={handleLogOut}><AiIcons.AiOutlineLogout/></SignOutBtn> */}
+        {/* <UserInfo>
         <p>{state.currentUser.name}</p>
-        </UserInfo>
+        </UserInfo> */}
       </WrapperDashboard> 
       <Switch>
         <Route path='/dashboard' exact component={FeedView} />

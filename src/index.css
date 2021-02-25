@@ -18,3 +18,13 @@ a {
   color: teal;
   margin: 10px;
 }
+
+.sendPostBtn {
+  color: white;
+  width: 18px;
+  height: 18px;
+}
+
+.sendCommentBtn {
+  color: white;
+}

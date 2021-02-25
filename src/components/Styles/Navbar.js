@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import * as GoIcons from 'react-icons/go';
 import * as FiIcons from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './navbar.css';
 import { IconContext } from 'react-icons';
+import styled from 'styled-components'
+import { Context } from '../../store/Store'
+import useAuth from "../../store/actions/auth";
+import * as AiIcons from 'react-icons/ai';
+import { SignOutBtn } from "../StylingComponents";
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(true);
+  const [state] = useContext(Context);
+  const { signout } = useAuth();
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  function handleLogOut() {
+    signout();
+  }
 
   return (
     <>
@@ -37,10 +48,22 @@ function Navbar() {
               );
             })}
           </ul>
+          <SignOutBtn onClick={handleLogOut}><AiIcons.AiOutlineLogout/></SignOutBtn>
+          <CurrentUser>{state.currentUser.name}</CurrentUser>
         </nav>
       </IconContext.Provider>
     </>
   );
 }
+
+export const CurrentUser = styled.p`
+position: absolute;
+bottom: 2rem;
+left: 0;
+font-size: 12px;
+width: 250px;
+padding-left: 45px;
+text-align: left;
+`
 
 export default Navbar;
