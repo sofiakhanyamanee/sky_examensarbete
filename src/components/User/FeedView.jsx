@@ -12,12 +12,12 @@ export default function FeedView() {
   const [postCollection, setPostsCollection] = useState([]);
   const { addPostToDb, getAllPostsFromBrf } = useAuth();
 
-  useEffect(() => {
-    getAllPostsFromBrf(state.currentUser.brf)
-    .then(posts => {
-      setPostsCollection(posts);    
-    });
-  }, [])
+  // useEffect(() => {
+  //   getAllPostsFromBrf(state.currentUser.brf)
+  //   .then(posts => {
+  //     setPostsCollection(posts);    
+  //   });
+  // }, [])
   
   useEffect(() => {
     const unsubscribe = database.collection('posts')

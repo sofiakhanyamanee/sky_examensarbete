@@ -13,12 +13,12 @@ export default function FeedView() {
   const { addPostToDb, getAllPostsFromBrf } = useAuth();
 
   // hämta posts från current brf
-  useEffect(() => {
-    getAllPostsFromBrf(state.currentUser.brf)
-    .then(posts => {
-      setPostsCollection(posts);    
-    });
-  }, [])
+  // useEffect(() => {
+  //   getAllPostsFromBrf(state.currentUser.brf)
+  //   .then(posts => {
+  //     setPostsCollection(posts);    
+  //   });
+  // }, [])
 
 
   // hämta uppdaterad post

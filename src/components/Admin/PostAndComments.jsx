@@ -18,14 +18,15 @@ export default function PostAndComments({ post }) {
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
 
-  async function getComments(post) {
+   async function getComments(post) {
     setCommentbar(true);
-    getAllCommentsFromPost(post.docId).then((comments) => {
-      setCommentsCollection(comments);
-    });
+    // getAllCommentsFromPost(post.docId).then((comments) => {
+    //   setCommentsCollection(comments);
+    // });
   }
 
   useEffect(() => {
+    console.log("körs")
     const unsubscribe = database
       .collection("posts")
       .doc(post.docId)
@@ -39,7 +40,8 @@ export default function PostAndComments({ post }) {
     return () => unsubscribe();
   }, []);
 
-  
+
+
   function removePost(post) {
     removePostAdmin(post.docId);
   }

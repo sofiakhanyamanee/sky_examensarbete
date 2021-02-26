@@ -248,8 +248,8 @@ export default function useAuth() {
   };
 
 
-  // Lägg till kommentar på en post
-  const addCommentToPost = async (id, userName, brf, docId, comment, timeStamp) => {
+   // Lägg till kommentar på en post
+   const addCommentToPost = async (id, userName, brf, docId, comment, timeStamp) => {
     const db = await database;
      db.collection("posts").doc(docId).collection("comments").add({
       id,
@@ -265,24 +265,25 @@ export default function useAuth() {
   };
 
     // Hämta alla kommentarer från rätt post 
-    const getAllCommentsFromPost = async (postDocId) => {
-      const db = await database;
-      return db
-        .collection("posts")
-        .doc(postDocId)
-        .collection("comments")
-        .orderBy("timeStamp", "asc")
-        .get()
-        .then((snapshot) => {
-          let commentList = [];
-          snapshot.docs.forEach((doc) => {
-            commentList.push(doc.data());
-          });
+    // const getAllCommentsFromPost = async (postDocId) => {
+    //   const db = await database;
+    //   return db
+    //     .collection("posts")
+    //     .doc(postDocId)
+    //     .collection("comments")
+    //     .orderBy("timeStamp", "asc")
+    //     .get()
+    //     .then((snapshot) => {
+    //       let commentList = [];
+    //       snapshot.docs.forEach((doc) => {
+    //         commentList.push(doc.data());
+    //       });
 
-          // console.log("commentlist fr auth", commentList)
-          return commentList;
-        });
-    };
+    //       // console.log("commentlist fr auth", commentList)
+    //       return commentList;
+    //     });
+    // };
+
 
     
   // Radera posts från admin dashboard
@@ -368,10 +369,10 @@ export default function useAuth() {
     removeNewUser,
     removeUser,
     addPostToDb,
-    getAllPostsFromBrf,
+    // getAllPostsFromBrf,
     removePostAdmin,
     addCommentToPost,
-    getAllCommentsFromPost,
+    // getAllCommentsFromPost,
     addAdminPostToDb,
     getAllAdminPostsFromCurrentBrf,
     removeAdminLetter,

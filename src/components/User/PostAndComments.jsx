@@ -16,9 +16,9 @@ export default function PostAndComments({ post }) {
 
   async function getComments(post) {
     setCommentbar(true);
-    getAllCommentsFromPost(post.docId).then((comments) => {
-      setCommentsCollection(comments);
-    });
+    // getAllCommentsFromPost(post.docId).then((comments) => {
+    //   setCommentsCollection(comments);
+    // });
   }
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export default function PostAndComments({ post }) {
 
     return () => unsubscribe();
   }, []);
+
 
 
   function removePost(post) {
