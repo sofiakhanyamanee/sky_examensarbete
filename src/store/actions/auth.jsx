@@ -189,6 +189,7 @@ export default function useAuth() {
       db.collection("posts").doc(doc.id).update({
         docId: doc.id,
       });
+      return doc.id;
     })
   };
 
@@ -249,14 +250,15 @@ export default function useAuth() {
 
 
    // Lägg till kommentar på en post
-   const addCommentToPost = async (id, userName, brf, docId, comment, timeStamp) => {
+   const addCommentToPost = async (id, userName, brf, postID, comment, timeStamp) => {
     const db = await database;
-     db.collection("posts").doc(docId).collection("comments").add({
+     db.collection("posts").doc(postID).collection("comments").add({
       id,
       userName,
       brf, 
       comment,
-      timeStamp
+      timeStamp,
+      postID
     }).then((doc) => {
       // console.log("från auth:", doc)
       // db.collection("posts").doc(doc.id).update({
@@ -264,25 +266,25 @@ export default function useAuth() {
     })
   };
 
-    // Hämta alla kommentarer från rätt post 
-    // const getAllCommentsFromPost = async (postDocId) => {
-    //   const db = await database;
-    //   return db
-    //     .collection("posts")
-    //     .doc(postDocId)
-    //     .collection("comments")
-    //     .orderBy("timeStamp", "asc")
-    //     .get()
-    //     .then((snapshot) => {
-    //       let commentList = [];
-    //       snapshot.docs.forEach((doc) => {
-    //         commentList.push(doc.data());
-    //       });
+    //Hämta alla kommentarer från rätt post 
+    const getAllCommentsFromPost = async (postDocId) => {
+      const db = await database;
+      return db
+        .collection("posts")
+        .doc(postDocId)
+        .collection("comments")
+        .orderBy("timeStamp", "asc")
+        .get()
+        .then((snapshot) => {
+          let commentList = [];
+          snapshot.docs.forEach((doc) => {
+            commentList.push(doc.data());
+          });
 
-    //       // console.log("commentlist fr auth", commentList)
-    //       return commentList;
-    //     });
-    // };
+          // console.log("commentlist fr auth", commentList)
+          return commentList;
+        });
+    };
 
 
     
@@ -369,10 +371,10 @@ export default function useAuth() {
     removeNewUser,
     removeUser,
     addPostToDb,
-    // getAllPostsFromBrf,
+    getAllPostsFromBrf,
     removePostAdmin,
     addCommentToPost,
-    // getAllCommentsFromPost,
+    getAllCommentsFromPost,
     addAdminPostToDb,
     getAllAdminPostsFromCurrentBrf,
     removeAdminLetter,

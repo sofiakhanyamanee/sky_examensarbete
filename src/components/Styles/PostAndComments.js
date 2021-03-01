@@ -199,11 +199,11 @@ export const CommentWrapper = styled.div`
 `;
 
 export const AdminTag = styled.p`
-  background-color: #7f869d;
+  background-color: #8dc2bd;
   font-size: 10px;
-  padding: 2px 10px;
-  margin-right: 5px;
-  border-radius: 8pt;
+  padding: 1px 10px;
+  margin-right: 8px;
+  border-radius: 6pt;
   color: white;
 `;
 

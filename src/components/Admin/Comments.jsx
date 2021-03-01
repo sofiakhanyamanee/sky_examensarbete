@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { InputBtnBox, CommentInputField, PostBtn, PostContainer, PostedAt, PostedBy, Post, Timestamp, RemovePostBtn , BtnBox, CommentBtn, ShowCommentBox, ShowCommentsBtn, CommentBox, Box, CommentBy, TimestampComment, Comment, CommentWrapper, AdminTag, HideComments, HideBox } from '../Styles/PostAndComments'
+import { InputBtnBox, CommentInputField, PostBtn, RemovePostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box,CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox} from "../Styles/PostAndComments";
 import { database } from "../../firebase";
 import useAuth from "../../store/actions/auth";
 import { Context } from "../../store/Store";
@@ -7,39 +7,34 @@ import moment from "moment";
 import * as RiIcons from "react-icons/ri";
 import * as BsIcons from "react-icons/bs";
 
-export default function PostAndComments({ post }) {
+export default function Comments({ post }) {
   const [state] = useContext(Context);
-  const {
-    removePostAdmin,
-    addCommentToPost,
-    getAllCommentsFromPost,
-  } = useAuth();
+  const { removePostAdmin, addCommentToPost} = useAuth();
   const [commentbar, setCommentbar] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
-
-   async function getComments(post) {
+  
+  async function getComments() {
     setCommentbar(true);
-    // getAllCommentsFromPost(post.docId).then((comments) => {
-    //   setCommentsCollection(comments);
-    // });
   }
 
   useEffect(() => {
-    console.log("körs")
-    const unsubscribe = database
-      .collection("posts")
+    console.log("useffect ",post.docId);
+    const unsubscribe = database.collection('posts')
       .doc(post.docId)
       .collection("comments")
-      .orderBy("timeStamp", "desc")
-      .onSnapshot((snap) => {
-        const data = snap.docs.map((doc) => doc.data());
-        setCommentsCollection(data);
+      // .where("postID", "==", post.docId)
+      .orderBy("timeStamp", "asc")
+      .onSnapshot((snapshot) => {
+      let commentList = [];
+      snapshot.docs.forEach((doc) => {
+        commentList.push(doc.data());
       });
+      setCommentsCollection(commentList);
+    });
 
     return () => unsubscribe();
-  }, []);
-
+  }, [])
 
 
   function removePost(post) {
@@ -56,26 +51,11 @@ export default function PostAndComments({ post }) {
       new Date()
     );
     await setCommentbar(true);
-    await setComment("")
+    await setComment("");
   }
 
   return (
-    <PostContainer>
-      {post.role === "admin" ? (
-        <PostedBy>
-          <AdminTag>Admin</AdminTag> {post.userName}
-        </PostedBy>
-      ) : (
-        <PostedBy>{post.userName}</PostedBy>
-      )}
-
-      <PostedAt>
-        <Timestamp>
-          {moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}
-        </Timestamp>
-      </PostedAt>
-      <Post>{post.post}</Post>
-
+    <>
       <InputBtnBox>
         <CommentInputField
           name="comment"
@@ -99,7 +79,6 @@ export default function PostAndComments({ post }) {
           </ShowCommentsBtn>
         </ShowCommentBox>
       </BtnBox>
-
       {commentbar === true ? (
         <CommentWrapper>
           {commentCollection &&
@@ -118,7 +97,6 @@ export default function PostAndComments({ post }) {
                 </CommentBox>
               );
             })}
-
           <HideBox>
             <HideComments onClick={() => setCommentbar(false)}>
               Dölj kommentarer
@@ -128,6 +106,6 @@ export default function PostAndComments({ post }) {
       ) : (
         ""
       )}
-    </PostContainer>
+    </>
   );
 }

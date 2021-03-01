@@ -3,11 +3,19 @@ import styled from 'styled-components'
 // *********** FeedView *********** //
 
 
+
 export const FeedViewWrapper = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
+`
+
+export const Heading = styled.h1`
+color: #8dc2bd;
+text-align: left;
+width: 42%;
+margin-bottom: 30px;
 `
 
 export const InputBtnBox = styled.div`
