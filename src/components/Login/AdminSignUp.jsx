@@ -19,12 +19,6 @@ export default function SignUp() {
   
     return (
       <WrapperStartPage>
-      <LandingSection>
-          <LogoHeading>Startsida</LogoHeading>
-      </LandingSection>
-        
-        <FormSection>
-        <StartPageNavBar/>
         <Heading>Skapa styrelse konto</Heading>
         <form>
         <div className="input-group">
@@ -73,7 +67,6 @@ export default function SignUp() {
             Skapa konto
           </Btn>
         </form>
-        </FormSection>
       </WrapperStartPage>
     );
   }

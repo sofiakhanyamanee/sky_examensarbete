@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { NavLink as Link } from 'react-router-dom'
 
 
 // *********** StartPage *********** //
 
 export const WrapperStartPage = styled.div`
-display: flex;
+// display: flex;
 width: 100vw;
 height: 100vh;
 `
@@ -17,25 +18,36 @@ border-bottom-right-radius: 22pt;
 `
 
 export const NavigationBar = styled.div`
-// background: silver;
+//  background: lightcoral;
 width: 100%;
 display: flex;
-justify-content: center;
+justify-content: space-between;
 `
 
 export const FormSection = styled.div`
 justify-content:flex-end;
 width: 50%;
 `
+export const Logo = styled.div`
+// background: blue;
+width: 10vw;
+`
 
 export const FormUl = styled.div`
 display: flex;
-
+justify-content: center;
+justify-content: space-around;
+// background: lightcoral;
+ width: 40vw;
 `
 
 
 export const FormLi = styled.div`
-
+display: flex;
+justify-content: center;
+// background: orange;
+// width: 60%;
+padding: 0;
 `
 
 export const LogoHeading = styled.h1`

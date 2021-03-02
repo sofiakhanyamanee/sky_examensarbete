@@ -1,11 +1,18 @@
 import React from 'react'
 import { Pages } from '../pages/Pages';
 import { NavLink } from 'react-router-dom';
-import { FormUl, FormLi, NavigationBar } from "./StylingComponents";
+import { FormUl, FormLi, Logo,  NavigationBar } from "./StylingComponents";
+import * as MdIcons from 'react-icons/md';
 
+// SiDelicious
 export default function StartPageNavbar() {
   return (
     <NavigationBar>
+      <Logo className="startpage-nav-text-logo">
+        <NavLink to="/">
+          <span><MdIcons.MdPieChart/></span>
+        </NavLink>
+      </Logo>
     <FormUl>
       {Pages.map((item, index) => {
         return (
@@ -17,6 +24,7 @@ export default function StartPageNavbar() {
         );
       })}
     </FormUl>
+    <Logo/>
   </NavigationBar>
   )
 }

@@ -28,11 +28,6 @@ export default function SignUp() {
 
   return (
     <WrapperStartPage>
-      <LandingSection>
-          <LogoHeading>Startsida</LogoHeading>
-      </LandingSection>
-    <FormSection>
-    <StartPageNavBar/>
       <Heading>Skapa boende konto</Heading>
       <form>
         <div className="input-group">
@@ -91,7 +86,6 @@ export default function SignUp() {
             </div>
           );
         })}
-        </FormSection>
     </WrapperStartPage>
   );
 }

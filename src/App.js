@@ -11,6 +11,7 @@ import moment from "moment/locale/sv";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Login/SignUp";
 import AdminSignUp from "./components/Login/AdminSignUp";
+import StartPageNavbar from "./components/StartPageNavbar";
 
 function App() {
   const [state] = useContext(Context);
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      {!state.currentUser && !state.isLoggedIn ? <StartPageNavbar/> : ""} 
       <Switch>
         <PublicRoute path="/" restricted={false} component={StartPage} exact />
         <PublicRoute path='/signup-brf'  component={AdminSignUp} />
