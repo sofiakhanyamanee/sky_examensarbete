@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import FeedView from './FeedView'
-import MemberView from './MemberView';
-import LetterView from './LetterView';
+import FeedView from './Admin/FeedView'
+import MemberView from './Admin/MemberView';
+import LetterView from './Admin/LetterView';
 import FeedIcon from '../../images/feed.png'
 import MemberIcon from '../../images/member.png'
 import DocumentIcon from '../../images/document.png'

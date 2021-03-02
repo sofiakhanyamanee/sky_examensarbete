@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 // import { Context } from '../../store/Store';
 import useAuth from '../../store/actions/auth';
-import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
-
+import { WrapperStartPage, LogoHeading,LandingSection, FormSection, Heading, InputField, Btn, Form} from '../StylingComponents'
+import StartPageNavBar from '../StartPageNavbar'
 export default function Login() {
     // const [state] = useContext(Context);
     const [email, setEmail] = React.useState("");
@@ -18,11 +18,14 @@ export default function Login() {
 
 
   return (
-    <Wrapper>
-      {/* <h3>uid: {state.currentUser ? (state.currentUser.id ? state.currentUser.id : 0) : ''}</h3>
-        <h3>name: {state.currentUser ? (state.currentUser.name ? state.currentUser.name : '') : ''}</h3>
-        <h3>email: {state.currentUser ? (state.currentUser.email ? state.currentUser.email : '') : ''}</h3>
-         */}
+    <WrapperStartPage>
+
+      <LandingSection>
+        <LogoHeading>Startsida</LogoHeading>
+      </LandingSection>
+         <FormSection>
+         <StartPageNavBar/>
+
         <Heading>Logga in</Heading>
         <form>
           <div className="input-group">
@@ -49,6 +52,7 @@ export default function Login() {
             Logga in
           </Btn>
         </form>
-    </Wrapper>
+         </FormSection>
+    </WrapperStartPage>
   );
 }

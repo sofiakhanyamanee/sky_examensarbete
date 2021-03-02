@@ -13,6 +13,7 @@ export default function Comments({ post }) {
   const [commentbar, setCommentbar] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
+  // moment.locale('sv');
   
   async function getComments() {
     setCommentbar(true);

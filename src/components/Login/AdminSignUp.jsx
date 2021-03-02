@@ -1,7 +1,7 @@
 import React from 'react'
 import useAuth from '../../store/actions/auth';
-import { Wrapper, Heading, InputField, Btn} from '../StylingComponents'
- 
+import { WrapperStartPage,LogoHeading, LandingSection, FormSection, Heading, InputField, Btn} from '../StylingComponents'
+import StartPageNavBar from '../StartPageNavbar'
 
 export default function SignUp() {
     const [brf, setBrf] = React.useState("");
@@ -18,7 +18,13 @@ export default function SignUp() {
     }
   
     return (
-      <Wrapper>
+      <WrapperStartPage>
+      <LandingSection>
+          <LogoHeading>Startsida</LogoHeading>
+      </LandingSection>
+        
+        <FormSection>
+        <StartPageNavBar/>
         <Heading>Skapa styrelse konto</Heading>
         <form>
         <div className="input-group">
@@ -67,7 +73,8 @@ export default function SignUp() {
             Skapa konto
           </Btn>
         </form>
-      </Wrapper>
+        </FormSection>
+      </WrapperStartPage>
     );
   }
   

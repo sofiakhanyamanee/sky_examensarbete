@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import useAuth from "../../store/actions/auth";
-import { Wrapper, Heading, InputField, Btn, ErrorMsg } from "../StylingComponents";
+import { WrapperStartPage, LogoHeading, LandingSection, FormSection,  Heading, InputField, Btn, ErrorMsg } from "../StylingComponents";
 import { AppContext } from "../../contexts/AppContextProvider";
+import StartPageNavBar from '../StartPageNavbar'
 
 export default function SignUp() {
   const [brf, setBrf] = React.useState("");
@@ -26,7 +27,12 @@ export default function SignUp() {
   }
 
   return (
-    <Wrapper>
+    <WrapperStartPage>
+      <LandingSection>
+          <LogoHeading>Startsida</LogoHeading>
+      </LandingSection>
+    <FormSection>
+    <StartPageNavBar/>
       <Heading>Skapa boende konto</Heading>
       <form>
         <div className="input-group">
@@ -85,6 +91,7 @@ export default function SignUp() {
             </div>
           );
         })}
-    </Wrapper>
+        </FormSection>
+    </WrapperStartPage>
   );
 }

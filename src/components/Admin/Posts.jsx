@@ -4,7 +4,7 @@ import moment from "moment";
 import Comments from "./Comments";
 
 export default function Posts({ post }) {
-
+  // moment.locale('sv');
   return (
     <PostContainer>
       {post.role === "admin" ? (
@@ -17,7 +17,7 @@ export default function Posts({ post }) {
 
       <PostedAt>
         <Timestamp>
-          {moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}
+        {moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}
         </Timestamp>
       </PostedAt>
       <Post>{post.post}</Post>

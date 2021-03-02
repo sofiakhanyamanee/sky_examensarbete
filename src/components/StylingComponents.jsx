@@ -1,18 +1,47 @@
 import styled from 'styled-components'
 
+
 // *********** StartPage *********** //
 
 export const WrapperStartPage = styled.div`
 display: flex;
-align-items: center;
-justify-content:flex-end;
-// background-color: whitesmoke;
 width: 100vw;
+height: 100vh;
+`
+
+export const LandingSection = styled.div`
+background: whitesmoke;
+width: 50%;
+border-top-right-radius: 22pt;
+border-bottom-right-radius: 22pt;
+`
+
+export const NavigationBar = styled.div`
+// background: silver;
+width: 100%;
+display: flex;
+justify-content: center;
+`
+
+export const FormSection = styled.div`
+justify-content:flex-end;
+width: 50%;
+`
+
+export const FormUl = styled.div`
+display: flex;
+
+`
+
+
+export const FormLi = styled.div`
+
 `
 
 export const LogoHeading = styled.h1`
-padding: 0px 35px;
+padding: 35px 45px;
 font-size: 30px;
+text-align: left;
 `
 
 export const NavBar = styled.nav`

@@ -4,7 +4,7 @@ import moment from "moment";
 import Comments from "./Comments";
 
 export default function Posts({ post }) {
-
+  // moment.locale('sv');
   return (
     <PostContainer>
       {post.role === "admin" ? (
