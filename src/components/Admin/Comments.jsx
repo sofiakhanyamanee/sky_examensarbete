@@ -1,19 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
-import { InputBtnBox, CommentInputField, PostBtn, RemovePostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box,CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox} from "../Styles/PostAndComments";
+import { InputBtnBox, CommentInputField, PostBtn, RemovePostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box, CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox} from "../Styles/PostAndComments";
 import { database } from "../../firebase";
 import useAuth from "../../store/actions/auth";
 import { Context } from "../../store/Store";
 import moment from "moment";
+import RemoveComment from './RemoveComment'
 import * as RiIcons from "react-icons/ri";
 import * as BsIcons from "react-icons/bs";
 
 export default function Comments({ post }) {
   const [state] = useContext(Context);
-  const { removePostAdmin, addCommentToPost} = useAuth();
+  const { removePostAdmin, addCommentToPost } = useAuth();
   const [commentbar, setCommentbar] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
-  // moment.locale('sv');
   
   async function getComments() {
     setCommentbar(true);
@@ -24,7 +24,6 @@ export default function Comments({ post }) {
     const unsubscribe = database.collection('posts')
       .doc(post.docId)
       .collection("comments")
-      // .where("postID", "==", post.docId)
       .orderBy("timeStamp", "asc")
       .onSnapshot((snapshot) => {
       let commentList = [];
@@ -68,7 +67,6 @@ export default function Comments({ post }) {
           <RiIcons.RiSendPlaneFill className="sendCommentBtn" />
         </PostBtn>
       </InputBtnBox>
-
       <BtnBox>
         <RemovePostBtn onClick={() => removePost(post)}>
           Radera inlägg
@@ -87,13 +85,14 @@ export default function Comments({ post }) {
               return (
                 <CommentBox key={index}>
                   <Box>
-                    <CommentBy>{comment.userName}</CommentBy>
                     <TimestampComment>
                       {moment(comment.timeStamp.toDate())
                         .startOf("minutes")
                         .fromNow()}
                     </TimestampComment>
+                      <RemoveComment post={post} comment={comment}/>
                   </Box>
+                  <CommentBy>{comment.userName}</CommentBy>
                   <Comment>{comment.comment}</Comment>
                 </CommentBox>
               );

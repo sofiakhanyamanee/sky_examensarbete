@@ -107,6 +107,25 @@ export const RemovePostBtn = styled.button`
   }
 `;
 
+export const RemoveCommentBtn = styled.button`
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  color: grey;
+  font-family: Poppins;
+  padding-right: 10px;
+  position: relative;
+
+  &: hover {
+    color: #e38f8c;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const BtnBox = styled.div`
   display: flex;
   width: 100%;
@@ -175,6 +194,30 @@ export const CommentBox = styled.div`
   border-radius: 12pt;
   padding: 15px;
 `;
+
+export const CommentAltBox = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+// background: tomato;
+width: 30%;
+position: relative;
+right: 0;
+`
+
+export const CommentAltBoxBtn = styled.button`
+width: 20%;
+background: transparent;
+border: none;
+text-align: right;
+font-size: 18px;
+padding: 0;
+cursor: pointer;
+
+&:focus {
+  outline: none;
+}
+`
 
 export const Box = styled.div`
   display: flex;

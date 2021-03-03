@@ -9,6 +9,7 @@ display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
+padding-bottom: 100px;
 `
 
 export const Heading = styled.h1`

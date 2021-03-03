@@ -1,10 +1,9 @@
 import React from "react";
-import { WrapperStartPage } from "../components/StylingComponents";
+import { WrapperLandingPage } from "../components/StylingComponents";
 
 export default function StartPage() {
   return (
-    <WrapperStartPage>
-      <h1>Startsida</h1>
-    </WrapperStartPage>
+    <WrapperLandingPage>
+    </WrapperLandingPage>
   );
 }

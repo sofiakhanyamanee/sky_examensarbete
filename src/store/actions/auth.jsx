@@ -80,7 +80,6 @@ export default function useAuth() {
       });
   };
 
-  
   // Flytta/sätta en user från collection "new_users" till "users"
   // Samt lägga till usern till rätt BRF collection
   const moveNewUserToUser = async (user) => {
@@ -93,52 +92,59 @@ export default function useAuth() {
       role: user.role,
     });
 
-    db.collection('brf').doc(user.brf).collection('members').doc(user.id).set({
+    db.collection("brf").doc(user.brf).collection("members").doc(user.id).set({
       id: user.id,
       name: user.name,
       brf: user.brf,
       email: user.email,
       role: user.role,
-    })
-
+    });
   };
 
   // Neka specifik user från collection "new_users"
   const removeNewUser = async (user) => {
     const db = await database;
     // console.log(user)
-    db.collection("new_users").doc(user.id).delete().then(() => {
-      console.log("deleted user")
-    })
+    db.collection("new_users")
+      .doc(user.id)
+      .delete()
+      .then(() => {
+        console.log("deleted user");
+      });
   };
-  
 
   // Radera specifik user från collection "users"
   // samt från collection "brf"
   const removeUser = async (user) => {
     const db = await database;
-    db.collection("users").doc(user.id).delete().then(() => {
-      console.log("deleted user from users")
-      db.collection("brf").doc(user.brf).collection('members').doc(user.id).delete()
-      console.log("deleted user from brf members")
-    })
+    db.collection("users")
+      .doc(user.id)
+      .delete()
+      .then(() => {
+        console.log("deleted user from users");
+        db.collection("brf")
+          .doc(user.brf)
+          .collection("members")
+          .doc(user.id)
+          .delete();
+        console.log("deleted user from brf members");
+      });
   };
-  
+
   // Hämtar nya users
-  // Godkänna en ny user 
+  // Godkänna en ny user
   // Flytta den till collection users
-  // Neka samt radera ny user 
+  // Neka samt radera ny user
   const acceptUserToDB = async (userID) => {
     await getNewUserFromDB(userID).then(async (resp) => {
       await moveNewUserToUser(resp);
-      await removeNewUser(resp)
+      await removeNewUser(resp);
     });
 
     return await getAllUserFromDB().then((resp) => {
       return resp;
     });
   };
-
 
   // Spara en ny boende till collection "new_users"
   const saveUserToDB = async (user, name, brf) => {
@@ -161,156 +167,169 @@ export default function useAuth() {
       brf,
       email: user.email,
       role: "admin",
-    })
+    });
   };
 
-  // Lägg till boende till tillhörande brf 
+  // Lägg till boende till tillhörande brf
   const addToBrfCollection = async (email, userName, brf, role) => {
     const db = await database;
     return db.collection("brf").doc(brf).set({
       email,
       userName,
       brf,
-      role
-    })
+      role,
+    });
   };
 
   // Lägg till post i collection
   const addPostToDb = async (id, userName, brf, post, timeStamp, role) => {
     const db = await database;
-     db.collection("posts").add({
-      id,
-      userName,
-      brf, 
-      post,
-      timeStamp,
-      role
-    }).then((doc) => {
-      db.collection("posts").doc(doc.id).update({
-        docId: doc.id,
-      });
-      return doc.id;
-    })
-  };
-
-    // Lägg till adminpost i collection
-    const addAdminPostToDb = async (id, userName, brf, adminpost, timeStamp, role) => {
-      const db = await database;
-       db.collection("admin_posts").doc(brf).collection("posts").add({
+    db.collection("posts")
+      .add({
         id,
         userName,
-        brf, 
-        adminpost,
+        brf,
+        post,
         timeStamp,
-        role
-      }).then((doc) => {
-        db.collection("admin_posts").doc(brf).collection("posts").doc(doc.id).update({
+        role,
+      })
+      .then((doc) => {
+        db.collection("posts").doc(doc.id).update({
           docId: doc.id,
         });
+        return doc.id;
+      });
+  };
+
+  // Lägg till adminpost i collection
+  const addAdminPostToDb = async (
+    id,
+    userName,
+    brf,
+    adminpost,
+    timeStamp,
+    role
+  ) => {
+    const db = await database;
+    db.collection("admin_posts")
+      .doc(brf)
+      .collection("posts")
+      .add({
+        id,
+        userName,
+        brf,
+        adminpost,
+        timeStamp,
+        role,
       })
-    };
-
-      // Hämta alla admin posts från current brf 
-    const getAllAdminPostsFromCurrentBrf = async (currentBrf) => {
-      const db = await database;
-      return db
-        .collection("admin_posts")
-        .doc(currentBrf)
-        .collection("posts")
-        .orderBy("timeStamp", "desc")
-        .get()
-        .then((snapshot) => {
-          let adminPostList = [];
-          snapshot.docs.forEach((doc) => {
-            adminPostList.push(doc.data());
+      .then((doc) => {
+        db.collection("admin_posts")
+          .doc(brf)
+          .collection("posts")
+          .doc(doc.id)
+          .update({
+            docId: doc.id,
           });
-          // console.log("adminpostlist", adminPostList)
-          return adminPostList;
-        });
-    };
+      });
+  };
 
-
-
-  // Hämta alla posts från rätt brf 
-  const getAllPostsFromBrf = async (currentBrf) => {
+  // Hämta alla admin posts från current brf
+  const getAllAdminPostsFromCurrentBrf = async (currentBrf) => {
     const db = await database;
     return db
+      .collection("admin_posts")
+      .doc(currentBrf)
       .collection("posts")
-      .where("brf", "==", currentBrf)
       .orderBy("timeStamp", "desc")
       .get()
       .then((snapshot) => {
-        let postList = [];
+        let adminPostList = [];
         snapshot.docs.forEach((doc) => {
-          postList.push(doc.data());
+          adminPostList.push(doc.data());
         });
-        return postList;
+        // console.log("adminpostlist", adminPostList)
+        return adminPostList;
       });
   };
 
-
-   // Lägg till kommentar på en post
-   const addCommentToPost = async (id, userName, brf, postID, comment, timeStamp) => {
+  // Lägg till kommentar på en post
+  const addCommentToPost = async (
+    id,
+    userName,
+    brf,
+    postID,
+    comment,
+    timeStamp
+  ) => {
     const db = await database;
-     db.collection("posts").doc(postID).collection("comments").add({
-      id,
-      userName,
-      brf, 
-      comment,
-      timeStamp,
-      postID
-    }).then((doc) => {
-      // console.log("från auth:", doc)
-      // db.collection("posts").doc(doc.id).update({
-      //   docId: doc.id,
-    })
+    db.collection("posts")
+      .doc(postID)
+      .collection("comments")
+      .add({
+        id,
+        userName,
+        brf,
+        comment,
+        timeStamp,
+        postID,
+      })
+      .then((doc) => {
+        // console.log("från auth:", doc)
+        db.collection("posts")
+          .doc(postID)
+          .collection("comments")
+          .doc(doc.id)
+          .update({
+            docId: doc.id,
+          });
+      });
   };
 
-    //Hämta alla kommentarer från rätt post 
-    const getAllCommentsFromPost = async (postDocId) => {
-      const db = await database;
-      return db
-        .collection("posts")
-        .doc(postDocId)
-        .collection("comments")
-        .orderBy("timeStamp", "asc")
-        .get()
-        .then((snapshot) => {
-          let commentList = [];
-          snapshot.docs.forEach((doc) => {
-            commentList.push(doc.data());
-          });
-
-          // console.log("commentlist fr auth", commentList)
-          return commentList;
-        });
-    };
-
-
-    
   // Radera posts från admin dashboard
   const removePostAdmin = async (docId) => {
     const db = await database;
-    db.collection("posts").doc(docId).delete().then(() => {
-      // console.log("postid from auth", docId.id)
-    })
+    db.collection("posts")
+      .doc(docId)
+      .delete()
+      .then(() => {
+        // console.log("postid from auth", docId.id)
+      });
   };
 
-    // Radera styrelsebrev från admin dashboard
-    const removeAdminLetter = async (brf, docId) => {
-      const db = await database;
-      db.collection("admin_posts").doc(brf).collection("posts").doc(docId).delete()
-    };
+  // Radera posts från user dashboard
+  const removePostUser = async (docId) => {
+    const db = await database;
+    db.collection("posts")
+      .doc(docId)
+      .delete()
+      .then(() => {
+        // console.log("postid from auth", docId.id)
+      });
+  };
 
-      // Radera comments från admin dashboard
-      const removeCommentsAdmin = async (docId) => {
-        const db = await database;
-        db.collection("posts").doc(docId).collection("comments").delete().then(() => {
-          // console.log("postid from auth", docId.id)
-        })
-      };
+  // Radera styrelsebrev från admin dashboard
+  const removeAdminLetter = async (brf, docId) => {
+    const db = await database;
+    db.collection("admin_posts")
+      .doc(brf)
+      .collection("posts")
+      .doc(docId)
+      .delete();
+  };
 
-  
+  // Radera comments från posts
+  const removeComment = async (postDocId, commentDocId) => {
+    const db = await database;
+    db.collection("posts")
+      .doc(postDocId)
+      .collection("comments")
+      .doc(commentDocId)
+      .delete()
+      .then(() => {
+        console.log("PostId", postDocId);
+        console.log("CommentId", commentDocId);
+      });
+  };
 
   // Logga in funktion - dispatchar från reducer
   const signin = (email, password, role) => {
@@ -371,13 +390,12 @@ export default function useAuth() {
     removeNewUser,
     removeUser,
     addPostToDb,
-    getAllPostsFromBrf,
     removePostAdmin,
     addCommentToPost,
-    getAllCommentsFromPost,
     addAdminPostToDb,
     getAllAdminPostsFromCurrentBrf,
     removeAdminLetter,
-    removeCommentsAdmin
+    removePostUser,
+    removeComment,
   };
 }

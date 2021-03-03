@@ -1,8 +1,19 @@
 import styled from 'styled-components'
-import { NavLink as Link } from 'react-router-dom'
+// import { NavLink as Link } from 'react-router-dom'
+import img from '../images/startpage.png';
 
 
 // *********** StartPage *********** //
+
+export const WrapperLandingPage = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100vw;
+height: 100vh;
+margin-top: -150px;
+background-image: url(${img});
+`
 
 export const WrapperStartPage = styled.div`
 // display: flex;

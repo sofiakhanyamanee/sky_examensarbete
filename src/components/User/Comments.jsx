@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { InputBtnBox, CommentInputField, PostBtn, RemovePostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box,CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox} from "../Styles/PostAndComments";
+import { InputBtnBox, CommentInputField, PostBtn, RemovePostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box,CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox, RemoveCommentBtn} from "../Styles/PostAndComments";
 import { database } from "../../firebase";
 import useAuth from "../../store/actions/auth";
 import { Context } from "../../store/Store";
@@ -9,7 +9,7 @@ import * as BsIcons from "react-icons/bs";
 
 export default function Comments({ post }) {
   const [state] = useContext(Context);
-  const { removePostAdmin, addCommentToPost} = useAuth();
+  const { removePostUser, addCommentToPost, removeComment} = useAuth();
   const [commentbar, setCommentbar] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
@@ -39,8 +39,13 @@ export default function Comments({ post }) {
 
 
   function removePost(post) {
-    removePostAdmin(post.docId);
+    removePostUser(post.docId);
   }
+
+  function removeCommentFromPost(post, comment) {
+    removeComment(post.docId, comment.docId);
+  }
+
 
   async function handleComments(post) {
     await addCommentToPost(
@@ -70,9 +75,11 @@ export default function Comments({ post }) {
       </InputBtnBox>
 
       <BtnBox>
-        <RemovePostBtn onClick={() => removePost(post)}>
+        {post.id === state.currentUser.id ? 
+        (<RemovePostBtn onClick={() => removePost(post)}>
           Radera inlägg
-        </RemovePostBtn>
+        </RemovePostBtn>) : ""}
+
         <ShowCommentBox>
           <ShowCommentsBtn onClick={() => getComments(post)}>
             <BsIcons.BsChat />
@@ -94,7 +101,11 @@ export default function Comments({ post }) {
                         .fromNow()}
                     </TimestampComment>
                   </Box>
-                  <Comment>{comment.comment}</Comment>
+                  <Comment>{comment.comment}</Comment> 
+                  {comment.id === state.currentUser.id ? 
+                  (<RemoveCommentBtn onClick={() => removeCommentFromPost(post, comment)}>
+                  Radera kommentar
+                </RemoveCommentBtn>) : ""}
                 </CommentBox>
               );
             })}
