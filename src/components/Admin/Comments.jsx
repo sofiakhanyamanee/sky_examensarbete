@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { InputBtnBox, CommentInputField, PostBtn, RemovePostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box, CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox} from "../Styles/PostAndComments";
+import { InputBtnBox, CommentInputField, PostBtn,BtnBox,ShowCommentBox,ShowCommentsBtn,CommentBox,Box, CommentBy,TimestampComment,Comment,CommentWrapper,HideComments,HideBox} from "../Styles/PostAndComments";
 import { database } from "../../firebase";
 import useAuth from "../../store/actions/auth";
 import { Context } from "../../store/Store";
@@ -10,7 +10,7 @@ import * as BsIcons from "react-icons/bs";
 
 export default function Comments({ post }) {
   const [state] = useContext(Context);
-  const { removePostAdmin, addCommentToPost } = useAuth();
+  const { addCommentToPost } = useAuth();
   const [commentbar, setCommentbar] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
@@ -37,9 +37,9 @@ export default function Comments({ post }) {
   }, [])
 
 
-  function removePost(post) {
-    removePostAdmin(post.docId);
-  }
+  // function removePost(post) {
+  //   removePostAdmin(post.docId);
+  // }
 
   async function handleComments(post) {
     await addCommentToPost(
@@ -68,9 +68,6 @@ export default function Comments({ post }) {
         </PostBtn>
       </InputBtnBox>
       <BtnBox>
-        <RemovePostBtn onClick={() => removePost(post)}>
-          Radera inlägg
-        </RemovePostBtn>
         <ShowCommentBox>
           <ShowCommentsBtn onClick={() => getComments(post)}>
             <BsIcons.BsChat />

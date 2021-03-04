@@ -4,16 +4,17 @@ import { database } from "../../firebase";
 import useAuth from "../../store/actions/auth";
 import { Context } from "../../store/Store";
 import moment from "moment";
+import RemoveComment from './RemoveComment'
 import * as RiIcons from "react-icons/ri";
 import * as BsIcons from "react-icons/bs";
 
 export default function Comments({ post }) {
   const [state] = useContext(Context);
-  const { removePostUser, addCommentToPost, removeComment} = useAuth();
+  const { addCommentToPost } = useAuth();
   const [commentbar, setCommentbar] = useState(false);
   const [comment, setComment] = useState("");
   const [commentCollection, setCommentsCollection] = useState([]);
-  // moment.locale('sv');
+  
   
   async function getComments() {
     setCommentbar(true);
@@ -36,15 +37,6 @@ export default function Comments({ post }) {
 
     return () => unsubscribe();
   }, [])
-
-
-  function removePost(post) {
-    removePostUser(post.docId);
-  }
-
-  function removeCommentFromPost(post, comment) {
-    removeComment(post.docId, comment.docId);
-  }
 
 
   async function handleComments(post) {
@@ -75,11 +67,6 @@ export default function Comments({ post }) {
       </InputBtnBox>
 
       <BtnBox>
-        {post.id === state.currentUser.id ? 
-        (<RemovePostBtn onClick={() => removePost(post)}>
-          Radera inlägg
-        </RemovePostBtn>) : ""}
-
         <ShowCommentBox>
           <ShowCommentsBtn onClick={() => getComments(post)}>
             <BsIcons.BsChat />
@@ -89,32 +76,31 @@ export default function Comments({ post }) {
       </BtnBox>
       {commentbar === true ? (
         <CommentWrapper>
-          {commentCollection &&
-            commentCollection.map((comment, index) => {
-              return (
-                <CommentBox key={index}>
-                  <Box>
-                    <CommentBy>{comment.userName}</CommentBy>
-                    <TimestampComment>
-                      {moment(comment.timeStamp.toDate())
-                        .startOf("minutes")
-                        .fromNow()}
-                    </TimestampComment>
-                  </Box>
-                  <Comment>{comment.comment}</Comment> 
-                  {comment.id === state.currentUser.id ? 
-                  (<RemoveCommentBtn onClick={() => removeCommentFromPost(post, comment)}>
-                  Radera kommentar
-                </RemoveCommentBtn>) : ""}
-                </CommentBox>
-              );
-            })}
-          <HideBox>
-            <HideComments onClick={() => setCommentbar(false)}>
-              Dölj kommentarer
-            </HideComments>
-          </HideBox>
-        </CommentWrapper>
+        {commentCollection &&
+          commentCollection.map((comment, index) => {
+            return (
+              <CommentBox key={index}>
+                <Box>
+                  <TimestampComment>
+                    {moment(comment.timeStamp.toDate())
+                      .startOf("minutes")
+                      .fromNow()}
+                  </TimestampComment>
+                      {comment.id === state.currentUser.id ? <RemoveComment post={post} comment={comment}/> : ""}
+                </Box>
+                <CommentBy>{comment.userName}</CommentBy>
+                <Comment>{comment.comment}</Comment>
+              </CommentBox>
+            );
+          })}
+        <HideBox>
+          {commentCollection.length > 0 ? 
+          (<HideComments onClick={() => setCommentbar(false)}>
+            Dölj kommentarer
+          </HideComments>) : ('')}
+
+        </HideBox>
+      </CommentWrapper>
       ) : (
         ""
       )}

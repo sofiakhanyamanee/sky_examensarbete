@@ -1,7 +1,29 @@
 import styled from 'styled-components'
 
-// *********** Post and Comments *********** //
 
+// *********** General *********** //
+
+export const AdminTag = styled.p`
+  background-color: #8dc2bd;
+  font-size: 10px;
+  padding: 2px 10px;
+  margin-right: 8px;
+  border-radius: 6pt;
+  color: white;
+`;
+
+
+export const FlexBoxRow = styled.div`
+display: flex;
+justify-content: space-between;
+`
+
+export const FlexBoxColumn = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 50%;
+`
 
 export const InputBtnBox = styled.div`
   display: flex;
@@ -11,20 +33,6 @@ export const InputBtnBox = styled.div`
   align-items: center;
   margin-top: 20px;
 `;
-
-export const CommentInputField = styled.input`
-  width: 86%;
-  padding: 15px 70px 15px 12px;
-  margin-top: 12px;
-  margin-left: -15px;
-  border: none;
-  border-radius: 12pt;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 
 
 export const PostBtn = styled.button`
@@ -54,6 +62,30 @@ export const PostBtn = styled.button`
   }
 `;
 
+
+export const Box = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+
+export const Timestamp = styled.p`
+  // margin-left: 5px;
+`;
+
+
+export const BtnBox = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+
+// *********** Post *********** //
+
+
 export const PostContainer = styled.div`
   margin: 10px 0;
   width: 40vw;
@@ -68,8 +100,8 @@ export const PostedAt = styled.div`
   display: flex;
   font-size: 12px;
   color: grey;
+  margin-top: 5px;
   margin-bottom: 30px;
-  margin-top: -20px;
   justify-content: flex-end;
 `;
 
@@ -77,26 +109,24 @@ export const PostedBy = styled.h4`
   color: #555b6e;
   font-weight: 500;
   display: flex;
-  align-items: center;
+  // align-items: center;
   font-size: 14px;
+  // background: lightgrey;
 `;
 
 export const Post = styled.p`
   font-size: 14px;
 `;
 
-export const Timestamp = styled.p`
-  // margin-left: 5px;
-`;
-
 export const RemovePostBtn = styled.button`
   border: none;
-  background: transparent;
+  background: white;
   cursor: pointer;
   font-size: 12px;
   color: grey;
   font-family: Poppins;
-  padding-right: 10px;
+  padding: 10px 16px;
+  border-radius: 4pt;
 
   &: hover {
     color: #e38f8c;
@@ -106,6 +136,47 @@ export const RemovePostBtn = styled.button`
     outline: none;
   }
 `;
+
+export const PostAltBox = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+// background: tomato;
+width: 30%;
+// position: relative;
+`
+
+export const PostAltBoxBtn = styled.button`
+width: 20%;
+background: transparent;
+border: none;
+text-align: right;
+font-size: 18px;
+padding: 0;
+cursor: pointer;
+
+&:focus {
+  outline: none;
+}
+`
+
+// *********** Comments *********** //
+
+
+export const CommentInputField = styled.input`
+  width: 86%;
+  padding: 15px 70px 15px 12px;
+  margin-top: 12px;
+  margin-left: -15px;
+  border: none;
+  border-radius: 12pt;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+
 
 export const RemoveCommentBtn = styled.button`
   border: none;
@@ -126,13 +197,6 @@ export const RemoveCommentBtn = styled.button`
   }
 `;
 
-export const BtnBox = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 20px;
-`;
 
 export const CommentBtn = styled.button`
   color: black;
@@ -219,10 +283,6 @@ cursor: pointer;
 }
 `
 
-export const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 export const CommentBy = styled.p`
   font-size: 14px;
@@ -239,15 +299,6 @@ export const Comment = styled.p`
 export const CommentWrapper = styled.div`
   // background: lightpink;
   padding: 10px 0;
-`;
-
-export const AdminTag = styled.p`
-  background-color: #8dc2bd;
-  font-size: 10px;
-  padding: 1px 10px;
-  margin-right: 8px;
-  border-radius: 6pt;
-  color: white;
 `;
 
 export const HideComments = styled.button`
