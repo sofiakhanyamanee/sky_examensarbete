@@ -38,16 +38,16 @@ export default function MemberList() {
   return (
     <WrapperMembersComp>
       <hr/>
-    <Box>
-      {members && members.map((member, index) => {
-         return (
-           <MemberListBox key={index}>
-             <p>{member.name}</p>
-             <DeleteBtn onClick={() => handleRemove(member)}>Ta bort</DeleteBtn>
-           </MemberListBox>
+      <Box>
+        {members && members.map((member, index) => {
+          return (
+            <MemberListBox key={index}>
+              <p>{member.name}</p>
+              <DeleteBtn onClick={() => handleRemove(member)}>Ta bort</DeleteBtn>
+            </MemberListBox>
+          )}
         )}
-      )}
-    </Box>
+      </Box>
     </WrapperMembersComp>
   )
 }

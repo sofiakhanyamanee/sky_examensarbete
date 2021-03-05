@@ -359,6 +359,8 @@ export default function useAuth() {
         } else {
           console.log("No role was set");
         }
+        console.log("response");
+        console.log(response.id);
         dispatch({
           type: "SIGNED_UP_SUCCESS",
           email,

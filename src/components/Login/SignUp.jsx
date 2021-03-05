@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useAuth from "../../store/actions/auth";
-import { WrapperStartPage, LogoHeading, LandingSection, FormSection,  Heading, InputField, Btn, ErrorMsg } from "../StylingComponents";
+import { WrapperStartPage, Heading, InputField, Btn, ErrorMsg } from "../StylingComponents";
 import { AppContext } from "../../contexts/AppContextProvider";
 import StartPageNavBar from '../StartPageNavbar'
 
@@ -13,18 +13,20 @@ export default function SignUp() {
   const { signup } = useAuth();
   const { brfList } = useContext(AppContext);
   const role = "user";
+  // console.log("brflist", brfList)
 
   function handleSignUp(e, email, password, username, brf, role) {
     e.preventDefault();
-
-    const isInArray = brfList.includes(brf.toLowerCase());
-
-    if (isInArray === true) {
       signup(email, password, username, brf, role);
-    } else {
-      setErrorMsg("Brf:en du angav är tyvärr inte registrerad");
-    }
+    // const isInArray = brfList.includes(brf.toLowerCase());
+
+    // if (isInArray === true) {
+
+    // } else {
+    //   setErrorMsg("Brf:en du angav är tyvärr inte registrerad");
+    // }
   }
+
 
   return (
     <WrapperStartPage>
@@ -78,14 +80,14 @@ export default function SignUp() {
         </Btn>
       </form>
 
-      {brfList &&
+      {/* {brfList &&
         brfList.map((brf, index) => {
           return (
             <div key={index}>
               <p>{brf}</p>
             </div>
           );
-        })}
+        })} */}
     </WrapperStartPage>
   );
 }

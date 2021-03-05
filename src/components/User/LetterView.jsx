@@ -33,9 +33,6 @@ export default function LetterView() {
   }, [])
 
 
-
-
-
 return (
   <WrapperLetterView>
     <Heading>Styrelsebrev</Heading>

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { FormUl, FormLi, Logo,  NavigationBar } from "./StylingComponents";
 import * as MdIcons from 'react-icons/md';
 
-// SiDelicious
+
 export default function StartPageNavbar() {
   return (
     <NavigationBar>

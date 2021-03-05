@@ -1,7 +1,7 @@
 import React from 'react'
 import useAuth from '../../store/actions/auth';
 import { WrapperStartPage,LogoHeading, LandingSection, FormSection, Heading, InputField, Btn} from '../StylingComponents'
-import StartPageNavBar from '../StartPageNavbar'
+// import StartPageNavBar from '../StartPageNavbar'
 
 export default function SignUp() {
     const [brf, setBrf] = React.useState("");

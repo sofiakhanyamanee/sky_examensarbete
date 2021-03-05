@@ -40,6 +40,7 @@ const useSession = (props) => {
           } else {
             dispatch({
               type: 'LOGGED_IN',
+              userId: user.uid,
               isLoggedIn: true,
               isLoading: false,
             })

@@ -14,7 +14,6 @@ export default function MemberList() {
   useEffect(() => {
     getAllUserFromDB_users(currentBrf)
     .then(users => {
-      // console.log("users", users)
       setMemberList(users);    
     });
   }, [])
@@ -26,7 +25,6 @@ export default function MemberList() {
     .where("brf", "==", currentBrf)
     .onSnapshot((snap) => {
       const data = snap.docs.map(doc => doc.data());
-      // console.log("snapshot", data)
       setMemberList(data);
     });
 
@@ -37,7 +35,6 @@ export default function MemberList() {
     <Box>
       <h4>Medlemmar</h4>
       {members && members.map((member, index) => {
-        // console.log("members", members)
          return (
            <div key={index}>
              <p>{member.name}</p>

@@ -10,6 +10,8 @@ const Reducer = (state, action) => {
 
     case "SIGNED_UP_SUCCESS": {
       let user;
+      // console.log("signed_up_success");
+      // console.log(state.currentUser);
       if (state.currentUser != null) {
         user = state.currentUser;
         user.email = action.email;
@@ -33,6 +35,8 @@ const Reducer = (state, action) => {
 
     case "LOGGED_IN": {
       if (action.dbData != null) {
+        // console.log("logged123");
+        // console.log(state.currentUser);
         return {
           ...state,
           isLoggedIn: action.isLoggedIn,
@@ -40,10 +44,22 @@ const Reducer = (state, action) => {
           isLoading: action.isLoading,
         };
       } else {
+        let user;
+        // console.log("loggedin");
+        // console.log(state.currentUser);
+        if (state.currentUser != null) {
+          user = state.currentUser;
+          user.id = action.userId;
+        } else {
+          user = {
+            id: action.userId
+          };
+        }
         return {
           ...state,
           isLoggedIn: action.isLoggedIn,
           isLoading: action.isLoading,
+          currentUser: user,
         };
       }
     }

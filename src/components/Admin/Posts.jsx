@@ -5,7 +5,7 @@ import Comments from "./Comments";
 import RemovePost from "./RemovePost";
 
 export default function Posts({ post }) {
-  // moment.locale('sv');
+
   return (
     <PostContainer>
       <FlexBoxRow>
