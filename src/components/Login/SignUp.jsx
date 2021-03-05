@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { database } from '../../firebase'
 import useAuth from "../../store/actions/auth";
 import { WrapperStartPage, Heading, InputField, Btn, ErrorMsg } from "../StylingComponents";
 import { AppContext } from "../../contexts/AppContextProvider";
@@ -10,21 +11,33 @@ export default function SignUp() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [brfList, setBrfList] = React.useState([])
   const { signup } = useAuth();
-  const { brfList } = useContext(AppContext);
   const role = "user";
-  // console.log("brflist", brfList)
+
+
+
+  useEffect(() => {
+    database.collection("brf").get().then((querySnapshot) => {
+      let brfArr = []
+      querySnapshot.forEach((doc) => {
+        brfArr.push(doc.id)
+      });
+      setBrfList(brfArr);
+  });
+  }, [])
+
 
   function handleSignUp(e, email, password, username, brf, role) {
     e.preventDefault();
+    
+    const isInArray = brfList.includes(brf.toLowerCase());
+    if (isInArray) {
       signup(email, password, username, brf, role);
-    // const isInArray = brfList.includes(brf.toLowerCase());
 
-    // if (isInArray === true) {
-
-    // } else {
-    //   setErrorMsg("Brf:en du angav är tyvärr inte registrerad");
-    // }
+    } else {
+      setErrorMsg("Brf:en du angav är tyvärr inte registrerad");
+    }
   }
 
 
@@ -80,14 +93,13 @@ export default function SignUp() {
         </Btn>
       </form>
 
-      {/* {brfList &&
-        brfList.map((brf, index) => {
-          return (
-            <div key={index}>
-              <p>{brf}</p>
-            </div>
-          );
-        })} */}
+      {brfList && brfList.map((brf, index) => {
+           return (
+               <div key={index}>
+                 <p>{brf}</p>
+               </div>
+           )}
+      )}
     </WrapperStartPage>
   );
 }

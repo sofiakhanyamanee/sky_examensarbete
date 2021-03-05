@@ -5,6 +5,7 @@ import { Context } from "../Store";
 export default function useAuth() {
   const [state, dispatch] = useContext(Context);
 
+
   // Hämta en specifik user från collection "users"
   const getUserFromDB = async (userID) => {
     const db = await database;
@@ -34,7 +35,7 @@ export default function useAuth() {
       });
   };
 
-  // Hämta alla users från collection "users"
+  // Hämta alla users från collection "users" med specifik brf
   const getAllUserFromDB_users = async (currentBrf) => {
     const db = await database;
     return db

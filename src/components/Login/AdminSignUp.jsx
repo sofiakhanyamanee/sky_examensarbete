@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useEffect } from "react";
+import { database } from '../../firebase'
 import useAuth from '../../store/actions/auth';
 import { WrapperStartPage,LogoHeading, LandingSection, FormSection, Heading, InputField, Btn} from '../StylingComponents'
 // import StartPageNavBar from '../StartPageNavbar'
@@ -8,8 +9,19 @@ export default function SignUp() {
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [brfList, setBrfList] = React.useState([])
     const { signup, addToBrfCollection } = useAuth();
     const role = 'admin'
+  
+    useEffect(() => {
+      database.collection("brf").get().then((querySnapshot) => {
+        let brfArr = []
+        querySnapshot.forEach((doc) => {
+          brfArr.push(doc.id)
+        });
+        setBrfList(brfArr);
+    });
+    }, [])
   
     async function handleSignUp(e, email, password, username, brf, role) {
         e.preventDefault();
@@ -17,6 +29,8 @@ export default function SignUp() {
         await addToBrfCollection(email, username, brf, role)
     }
   
+    console.log(brfList);
+
     return (
       <WrapperStartPage>
         <Heading>Skapa styrelse konto</Heading>
@@ -67,6 +81,14 @@ export default function SignUp() {
             Skapa konto
           </Btn>
         </form>
+
+        {brfList && brfList.map((brf, index) => {
+           return (
+               <div key={index}>
+                 <p>{brf}</p>
+               </div>
+           )}
+      )}
       </WrapperStartPage>
     );
   }
