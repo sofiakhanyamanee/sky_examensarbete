@@ -32,7 +32,7 @@ export default function FeedView() {
 
     async function handlePost(e) {
      e.preventDefault();
-     await addPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, post, new Date(), state.currentUser.role);
+     await addPostToDb(state.currentUser.id, state.currentUser.firstname, state.currentUser.lastname, state.currentUser.brf, post, new Date(), state.currentUser.role);
      setPost("")
   }
 

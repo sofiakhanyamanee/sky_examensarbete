@@ -42,7 +42,7 @@ export default function MemberList() {
         {members && members.map((member, index) => {
           return (
             <MemberListBox key={index}>
-              <p>{member.name}</p>
+              <p>{member.firstname} {member.lastname}</p>
               <DeleteBtn onClick={() => handleRemove(member)}>Ta bort</DeleteBtn>
             </MemberListBox>
           )}

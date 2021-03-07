@@ -87,7 +87,8 @@ export default function useAuth() {
     const db = await database;
     db.collection("users").doc(user.id).set({
       id: user.id,
-      name: user.name,
+      firstname: user.firstname,
+      lastname: user.lastname,
       brf: user.brf,
       email: user.email,
       role: user.role,
@@ -96,7 +97,8 @@ export default function useAuth() {
 
     db.collection("brf").doc(user.brf).collection("members").doc(user.id).set({
       id: user.id,
-      name: user.name,
+      firstname: user.firstname,
+      lastname: user.lastname,
       brf: user.brf,
       email: user.email,
       role: user.role,
@@ -150,11 +152,12 @@ export default function useAuth() {
   };
 
   // Spara en ny boende till collection "new_users"
-  const saveUserToDB = async (user, name, brf, avatarColor) => {
+  const saveUserToDB = async (user, firstname, lastname, brf, avatarColor) => {
     const db = await database;
     return db.collection("new_users").doc(user.uid.toString()).set({
       id: user.uid.toString(),
-      name,
+      firstname,
+      lastname,
       brf,
       email: user.email,
       role: "user",
@@ -163,11 +166,12 @@ export default function useAuth() {
   };
 
   // Spara en ny admin till collection "users"
-  const saveAdminToDB = async (user, name, brf, avatarColor) => {
+  const saveAdminToDB = async (user, firstname, lastname, brf, avatarColor) => {
     const db = await database;
     return db.collection("users").doc(user.uid.toString()).set({
       id: user.uid.toString(),
-      name,
+      firstname,
+      lastname,
       brf,
       email: user.email,
       role: "admin",
@@ -176,23 +180,25 @@ export default function useAuth() {
   };
 
   // Lägg till boende till tillhörande brf
-  const addToBrfCollection = async (email, userName, brf, role) => {
+  const addToBrfCollection = async (email, firstname, lastname , brf, role) => {
     const db = await database;
     return db.collection("brf").doc(brf).set({
       email,
-      userName,
+      firstname,
+      lastname,
       brf,
       role,
     });
   };
 
   // Lägg till post i collection
-  const addPostToDb = async (id, userName, brf, post, timeStamp, role) => {
+  const addPostToDb = async (id, firstname, lastname, brf, post, timeStamp, role) => {
     const db = await database;
     db.collection("posts")
       .add({
         id,
-        userName,
+        firstname,
+        lastname,
         brf,
         post,
         timeStamp,
@@ -209,7 +215,8 @@ export default function useAuth() {
   // Lägg till adminpost i collection
   const addAdminPostToDb = async (
     id,
-    userName,
+    firstname,
+    lastname,
     brf,
     adminpost,
     timeStamp,
@@ -221,7 +228,8 @@ export default function useAuth() {
       .collection("posts")
       .add({
         id,
-        userName,
+        firstname,
+        lastname,
         brf,
         adminpost,
         timeStamp,
@@ -260,7 +268,8 @@ export default function useAuth() {
   // Lägg till kommentar på en post
   const addCommentToPost = async (
     id,
-    userName,
+    firstname,
+    lastname,
     brf,
     postID,
     comment,
@@ -272,7 +281,8 @@ export default function useAuth() {
       .collection("comments")
       .add({
         id,
-        userName,
+        firstname,
+        lastname,
         brf,
         comment,
         timeStamp,
@@ -353,14 +363,14 @@ export default function useAuth() {
 
   // Registrera admin/boende funktion - dispatchar från reducer
   // Kollar om användaren har role = admin/boende
-  const signup = (email, password, userName, brf, role, avatarColor) => {
+  const signup = (email, password, firstname, lastname, brf, role, avatarColor) => {
     return auth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         if (role === "user") {
-          saveUserToDB(response.user, userName, brf, avatarColor);
+          saveUserToDB(response.user, firstname, lastname, brf, avatarColor);
         } else if (role === "admin") {
-          saveAdminToDB(response.user, userName, brf, avatarColor);
+          saveAdminToDB(response.user, firstname, lastname, brf, avatarColor);
         } else {
           console.log("No role was set");
         }
@@ -369,7 +379,8 @@ export default function useAuth() {
         dispatch({
           type: "SIGNED_UP_SUCCESS",
           email,
-          userName,
+          firstname, 
+          lastname,
           brf,
           role,
           avatarColor

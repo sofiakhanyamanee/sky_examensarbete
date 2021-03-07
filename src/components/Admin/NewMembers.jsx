@@ -44,7 +44,7 @@ export default function NewMembers() {
         {userList && userList.map((user, index) => {
          return (
           <NewMembersBox key={index}>
-            <p>{user.name}</p>    
+            <p>{user.firstname} {user.lastname}</p>    
             <div>
               <AcceptBtn onClick={() => handleAccept(user)}>Godkänn</AcceptBtn>
               <RejectBtn onClick={() => handleReject(user)}>Neka</RejectBtn>

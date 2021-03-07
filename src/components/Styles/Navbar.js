@@ -16,6 +16,7 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(true);
   const [state] = useContext(Context);
   const { signout } = useAuth();
+  const username = state.currentUser.firstname + state.currentUser.firstname
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -53,14 +54,13 @@ function Navbar() {
               );
             })}
           </ul>
-          <p>{state.currentUser.avatarColor}</p>
           <SignOutBtn onClick={handleLogOut}><AiIcons.AiOutlineLogout/></SignOutBtn>
           {state.currentUser.role === 'admin' ? 
-          <CurrentUser>{state.currentUser.name} ({state.currentUser.role})</CurrentUser>
+          <CurrentUser>{state.currentUser.firstname} {state.currentUser.lastname} ({state.currentUser.role})</CurrentUser>
           :
-          <CurrentUser>{state.currentUser.name}</CurrentUser>
+          <CurrentUser>{state.currentUser.firstname} {state.currentUser.lastname}</CurrentUser>
         }
-        <UserAvatar className="avatar-initials" size="48" name={state.currentUser.name} color={state.currentUser.avatarColor}/>
+        <UserAvatar className="avatar-initials" size="48" name={state.currentUser.firstname+" "+state.currentUser.lastname} maxInitials={2} color={state.currentUser.avatarColor}/>
         </nav>
       </IconContext.Provider>
     </>

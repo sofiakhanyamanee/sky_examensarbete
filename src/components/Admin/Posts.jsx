@@ -12,10 +12,10 @@ export default function Posts({ post }) {
       <FlexBoxColumn>
       {post.role === "admin" ? (
         <PostedBy>
-          <AdminTag>Admin</AdminTag> {post.userName}
+          <AdminTag>Admin</AdminTag> {post.firstname} {post.lastname}
         </PostedBy>
       ) : (
-        <PostedBy>{post.userName}</PostedBy>
+        <PostedBy>{post.firstname} {post.lastname}</PostedBy>
         )}
 
         <PostedAt>

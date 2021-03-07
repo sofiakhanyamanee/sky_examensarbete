@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { database } from '../../firebase'
 import useAuth from "../../store/actions/auth";
 import { WrapperStartPage, Heading, InputField, Btn, ErrorMsg } from "../StylingComponents";
-import { AppContext } from "../../contexts/AppContextProvider";
-import StartPageNavBar from '../StartPageNavbar'
+// import { AppContext } from "../../contexts/AppContextProvider";
+// import StartPageNavBar from '../StartPageNavbar'
 
 export default function SignUp() {
   const [brf, setBrf] = useState("");
-  const [name, setName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -18,7 +19,7 @@ export default function SignUp() {
 
   async function RandomAvatarColor() {
     const AvatarColors = [
-   "ccaabb",
+   "#ccaabb",
    "#ffb6b9",
    "#fae3d9",
    "#bbded6",
@@ -50,13 +51,16 @@ export default function SignUp() {
   RandomAvatarColor()
   }, [])
 
+  function capitalize (string) {
+    return string[0].toUpperCase() + string.slice(1)
+  }
 
-  function handleSignUp(e, email, password, username, brf, role, avatarColor) {
+  function handleSignUp(e, email, password, firstname, lastname, brf, role, avatarColor) {
     e.preventDefault();
 
     const isInArray = brfList.includes(brf.toLowerCase());
     if (isInArray) {
-      signup(email, password, username, brf, role, avatarColor);
+      signup(email, password, firstname, lastname, brf, role, avatarColor);
 
     } else {
       setErrorMsg("Brf:en du angav är tyvärr inte registrerad");
@@ -80,13 +84,23 @@ export default function SignUp() {
           <ErrorMsg>{errorMsg}</ErrorMsg>
         </div>
         <div className="input-group">
-          <label>Namn</label>
+          <label>Förnamn</label>
           <br />
           <InputField
             type="text"
-            name="name"
+            name="firstname"
             autoComplete="first-name"
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label>Efternamn</label>
+          <br />
+          <InputField
+            type="text"
+            name="lastname"
+            autoComplete="last-name"
+            onChange={(event) => setLastName(event.target.value)}
           />
         </div>
         <div className="input-group">
@@ -110,7 +124,7 @@ export default function SignUp() {
         </div>
         <Btn
           type="submit"
-          onClick={(e) => handleSignUp(e, email, password, name, brf, role, avatarColor)}
+          onClick={(e) => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), brf, role, avatarColor)}
         >
           Skapa konto
         </Btn>

@@ -37,7 +37,7 @@ export default function MemberList() {
       {members && members.map((member, index) => {
          return (
            <div key={index}>
-             <p>{member.name}</p>
+             <p>{member.firstname} {member.lastname}</p>
            </div>
         )}
       )}

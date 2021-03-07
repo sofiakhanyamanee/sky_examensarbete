@@ -38,7 +38,7 @@ export default function LetterView() {
 
   async function handleAdminPost(e) {
     e.preventDefault();
-    await addAdminPostToDb(state.currentUser.id, state.currentUser.name, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
+    await addAdminPostToDb(state.currentUser.id, state.currentUser.firstname,state.currentUser.lastname, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
     await setAdminPost("")
   }
 

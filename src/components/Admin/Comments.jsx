@@ -56,7 +56,8 @@ export default function Comments({ post }) {
   async function handleComments(post) {
     await addCommentToPost(
       state.currentUser.id,
-      state.currentUser.name,
+      state.currentUser.firstname,
+      state.currentUser.lastname,
       state.currentUser.brf,
       post.docId,
       comment,
@@ -101,7 +102,7 @@ export default function Comments({ post }) {
                     </TimestampComment>
                     <RemoveComment post={post} comment={comment} />
                   </Box>
-                  <CommentBy>{comment.userName}</CommentBy>
+                  <CommentBy>{comment.firstname} {comment.lastname}</CommentBy>
                   <Comment>{comment.comment}</Comment>
                 </CommentBox>
               );

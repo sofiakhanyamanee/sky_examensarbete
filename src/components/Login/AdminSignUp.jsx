@@ -6,7 +6,8 @@ import { WrapperStartPage, Heading, InputField, Btn} from '../StylingComponents'
 
 export default function SignUp() {
     const [brf, setBrf] = useState("");
-    const [name, setName] = useState("");
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [brfList, setBrfList] = useState([])
@@ -35,8 +36,6 @@ export default function SignUp() {
 
       return avatarColor
     }
-
-
   
     useEffect(() => {
       database.collection("brf").get().then((querySnapshot) => {
@@ -48,11 +47,17 @@ export default function SignUp() {
       });
       RandomAvatarColor()
     }, [])
+
+    function capitalize (string) {
+      return string[0].toUpperCase() + string.slice(1)
+    }
+
+    // console.log(capitalize('hi'))
   
-    async function handleSignUp(e, email, password, username, brf, role, avatarColor) {
+    async function handleSignUp(e, email, password, firstname, lastname, brf, role, avatarColor) {
         e.preventDefault();
-        await signup(email, password, username, brf, role, avatarColor);
-        await addToBrfCollection(email, username, brf, role)
+        await signup(email, password, firstname, lastname, brf, role, avatarColor);
+        await addToBrfCollection(email, firstname, lastname, brf, role)
     }
   
 
@@ -71,13 +76,23 @@ export default function SignUp() {
             />
           </div>
           <div className="input-group">
-            <label>Namn</label>
+            <label>Förnamn</label>
             <br />
             <InputField
               type="text"
-              name="name"
+              name="firstname"
               autoComplete="first-name"
-              onChange={event => setName(event.target.value)}
+              onChange={event => setFirstName(event.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Efternamn</label>
+            <br />
+            <InputField
+              type="text"
+              name="lastname"
+              autoComplete="last-name"
+              onChange={event => setLastName(event.target.value)}
             />
           </div>
           <div className="input-group">
@@ -101,7 +116,7 @@ export default function SignUp() {
           </div>
           <Btn
             type="submit"
-            onClick={e => handleSignUp(e, email, password, name, brf, role, avatarColor)}
+            onClick={e => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), brf, role, avatarColor)}
           >
             Skapa konto
           </Btn>
