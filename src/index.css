@@ -78,3 +78,13 @@ body {
   color: white;
   font-weight: 500;
 }
+
+.avatar-initials-post {
+  color: white;
+  font-size: 0.7rem;
+}
+
+.avatar-initials-comment {
+  color: white;
+  font-size: 0.6rem;
+}

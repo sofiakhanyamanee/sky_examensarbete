@@ -54,27 +54,43 @@ function Navbar() {
               );
             })}
           </ul>
-          <SignOutBtn onClick={handleLogOut}><AiIcons.AiOutlineLogout/></SignOutBtn>
           {state.currentUser.role === 'admin' ? 
-          <CurrentUser>{state.currentUser.firstname} {state.currentUser.lastname} ({state.currentUser.role})</CurrentUser>
+          <CurrentUser>
+            <UserAvatar className="avatar-initials" size="48" name={state.currentUser.firstname+" "+state.currentUser.lastname} maxInitials={2} color={state.currentUser.avatarColor}/>
+           <FlexBoxColumn>
+             {state.currentUser.firstname} {state.currentUser.lastname} ({state.currentUser.role})
+             <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
+             </FlexBoxColumn> 
+            </CurrentUser>
           :
-          <CurrentUser>{state.currentUser.firstname} {state.currentUser.lastname}</CurrentUser>
+          <CurrentUser>
+            <UserAvatar className="avatar-initials" size="48" name={state.currentUser.firstname+" "+state.currentUser.lastname} maxInitials={2} color={state.currentUser.avatarColor}/>
+            <FlexBoxColumn>
+             {state.currentUser.firstname} {state.currentUser.lastname}
+             <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
+             </FlexBoxColumn> 
+            </CurrentUser>
         }
-        <UserAvatar className="avatar-initials" size="48" name={state.currentUser.firstname+" "+state.currentUser.lastname} maxInitials={2} color={state.currentUser.avatarColor}/>
         </nav>
       </IconContext.Provider>
     </>
   );
 }
 
-export const CurrentUser = styled.p`
+export const CurrentUser = styled.div`
 position: absolute;
 bottom: 2rem;
 left: 0;
 font-size: 12px;
-width: 250px;
-padding-left: 45px;
+width: 180px;
+padding-left: 25px;
 text-align: left;
+display: flex;
+align-items: center;
+justify-content: space-between;
+`
+export const FlexBoxColumn = styled.div`
+padding-left: 15px;
 `
 
 export default Navbar;

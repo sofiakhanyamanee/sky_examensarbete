@@ -55,10 +55,16 @@ export default function SignUp() {
     return string[0].toUpperCase() + string.slice(1)
   }
 
+  function toLower (string) {
+    return string.toLowerCase()
+  }
+
+  
   function handleSignUp(e, email, password, firstname, lastname, brf, role, avatarColor) {
     e.preventDefault();
 
-    const isInArray = brfList.includes(brf.toLowerCase());
+    const isInArray = brfList.includes(brf);
+    
     if (isInArray) {
       signup(email, password, firstname, lastname, brf, role, avatarColor);
 
@@ -124,7 +130,7 @@ export default function SignUp() {
         </div>
         <Btn
           type="submit"
-          onClick={(e) => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), brf, role, avatarColor)}
+          onClick={(e) => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), toLower(brf), role, avatarColor)}
         >
           Skapa konto
         </Btn>

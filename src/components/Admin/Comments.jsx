@@ -14,6 +14,9 @@ import {
   CommentWrapper,
   HideComments,
   HideBox,
+  FlexBoxRow, 
+  FlexBoxColumn,
+  AdminTagComment
 } from "../Styles/PostAndComments";
 import { database } from "../../firebase";
 import useAuth from "../../store/actions/auth";
@@ -36,7 +39,6 @@ export default function Comments({ post }) {
   }
 
   useEffect(() => {
-    console.log("useffect ", post.docId);
     const unsubscribe = database
       .collection("posts")
       .doc(post.docId)
@@ -60,6 +62,7 @@ export default function Comments({ post }) {
       state.currentUser.firstname,
       state.currentUser.lastname,
       state.currentUser.brf,
+      state.currentUser.role,
       post.docId,
       comment,
       new Date(),
@@ -96,16 +99,27 @@ export default function Comments({ post }) {
             commentCollection.map((comment, index) => {
               return (
                 <CommentBox key={index}>
-                  <Box>
-                    <TimestampComment>
+                  <Box>                  
+                    <FlexBoxRow>
+                      <UserAvatar className="avatar-initials-comment" size="30" name={comment.firstname+" "+comment.lastname} maxInitials={2} color={comment.avatarColor}/>
+                       <FlexBoxColumn>
+                       <CommentBy>
+                        <FlexBoxRow>{comment.firstname} {comment.lastname} 
+                       {comment.role == 'admin' && <AdminTagComment>Admin</AdminTagComment>}
+                       </FlexBoxRow>
+                       </CommentBy>
+                        <TimestampComment>
                       {moment(comment.timeStamp.toDate())
                         .startOf("minutes")
                         .fromNow()}
-                    </TimestampComment>
+                    </TimestampComment>   
+                    </FlexBoxColumn>
+       
+                    </FlexBoxRow>
                     <RemoveComment post={post} comment={comment} />
                   </Box>
-                  <UserAvatar className="avatar-initials" size="48" name={comment.firstname+" "+comment.lastname} maxInitials={2} color={comment.avatarColor}/>
-                  <CommentBy>{comment.firstname} {comment.lastname}</CommentBy>
+
+
                   <Comment>{comment.comment}</Comment>
                 </CommentBox>
               );

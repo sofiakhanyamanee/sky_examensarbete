@@ -3,26 +3,53 @@ import styled from 'styled-components'
 
 // *********** General *********** //
 
-export const AdminTag = styled.p`
-  background-color: #8dc2bd;
-  font-size: 10px;
+// export const AdminTag = styled.p`
+//   background-color: #8dc2bd;
+//   font-size: 10px;
+//   padding: 2px 10px;
+//   margin-right: 8px;
+//   border-radius: 6pt;
+//   color: white;
+// `;
+
+export const AdminTagPost = styled.p`
+  background-color: #9FC4C6;
+  font-size: 0.6rem;
   padding: 2px 10px;
-  margin-right: 8px;
+  margin-left: 5px;
   border-radius: 6pt;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+`;
+
+
+export const AdminTagComment = styled.p`
+  background-color: #9FC4C6;
+  font-size: 0.6rem;
+  padding: 2px 10px;
+  margin-left: 5px;
+  border-radius: 6pt;
+  color: white;
+  letter-spacing: 0.5px;
 `;
 
 
 export const FlexBoxRow = styled.div`
 display: flex;
 justify-content: space-between;
+width: 100%;
 `
 
 export const FlexBoxColumn = styled.div`
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-width: 50%;
+padding-left: 10px;
+width: 100%;
+// background: whitesmoke;
 `
 
 export const InputBtnBox = styled.div`
@@ -66,11 +93,14 @@ export const PostBtn = styled.button`
 export const Box = styled.div`
   display: flex;
   justify-content: space-between;
+  // background: whitesmoke;
 `;
 
 
 export const Timestamp = styled.p`
   // margin-left: 5px;
+  font-size: 0.8rem;
+  font-weight: 400;
 `;
 
 
@@ -94,6 +124,7 @@ export const PostContainer = styled.div`
   border: none;
   border-radius: 12pt;
   background: #f8f9fa;
+  font-family: 'Poppins';
 `;
 
 export const PostedAt = styled.div`
@@ -105,7 +136,7 @@ export const PostedAt = styled.div`
   justify-content: flex-end;
 `;
 
-export const PostedBy = styled.h4`
+export const PostedBy = styled.div`
   color: #555b6e;
   font-weight: 500;
   display: flex;
@@ -115,6 +146,7 @@ export const PostedBy = styled.h4`
 `;
 
 export const Post = styled.p`
+  margin-top: 1rem;
   font-size: 14px;
 `;
 
@@ -284,12 +316,12 @@ cursor: pointer;
 `
 
 
-export const CommentBy = styled.p`
-  font-size: 14px;
+export const CommentBy = styled.div`
+  font-size: 0.8rem;
   font-weight: 500;
 `;
 export const TimestampComment = styled.p`
-  font-size: 12px;
+font-size: 0.7rem;
 `;
 
 export const Comment = styled.p`

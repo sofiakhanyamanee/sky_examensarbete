@@ -52,7 +52,9 @@ export default function SignUp() {
       return string[0].toUpperCase() + string.slice(1)
     }
 
-    // console.log(capitalize('hi'))
+    function toLower (string) {
+      return string.toLowerCase()
+    }
   
     async function handleSignUp(e, email, password, firstname, lastname, brf, role, avatarColor) {
         e.preventDefault();
@@ -116,7 +118,7 @@ export default function SignUp() {
           </div>
           <Btn
             type="submit"
-            onClick={e => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), brf, role, avatarColor)}
+            onClick={e => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), toLower(brf), role, avatarColor)}
           >
             Skapa konto
           </Btn>

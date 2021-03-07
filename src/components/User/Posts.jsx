@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { PostContainer, PostedAt, PostedBy, Post, Timestamp, AdminTag, FlexBoxRow, FlexBoxColumn } from "../Styles/PostAndComments";
+import { PostContainer, PostedAt, PostedBy, Post, Timestamp, AdminTagPost, FlexBoxRow, FlexBoxColumn } from "../Styles/PostAndComments";
 import moment from "moment";
 import Comments from "./Comments";
 import RemovePost from "./RemovePost";
@@ -12,25 +12,30 @@ export default function Posts({ post }) {
   return (
     <PostContainer>
      <FlexBoxRow>
-      <FlexBoxColumn>
-      {post.role === "admin" ? (
-        <PostedBy>
-                     <UserAvatar className="avatar-initials" size="28" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>
-          <AdminTag>Admin</AdminTag> {post.firstname} {post.lastname}
-        </PostedBy>
-      ) : (
-        <PostedBy>
-          <UserAvatar className="avatar-initials" size="28" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>
-          {post.firstname} {post.lastname}
-          </PostedBy>
-        )}
 
-        <PostedAt>
-          <Timestamp>
-          {moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}
-          </Timestamp>
-        </PostedAt>
-      </FlexBoxColumn>      
+     {post.role === "admin" ? (
+        <PostedBy>
+            <UserAvatar className="avatar-initials-post" size="35" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>
+          <FlexBoxColumn>
+             <FlexBoxRow>{post.firstname} {post.lastname} <AdminTagPost>Admin</AdminTagPost></FlexBoxRow>
+            <Timestamp>
+            {moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}
+            </Timestamp>
+          </FlexBoxColumn>
+        </PostedBy>
+
+      ) : (
+        
+        <PostedBy>
+          <UserAvatar className="avatar-initials-post" size="35" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>
+          <FlexBoxColumn>
+            {post.firstname} {post.lastname}  
+            <Timestamp>
+            {moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}
+            </Timestamp>
+          </FlexBoxColumn>
+        </PostedBy>
+        )}
 
       {state.currentUser.id === post.id ? <RemovePost post={post}/> : ""}
       </FlexBoxRow>

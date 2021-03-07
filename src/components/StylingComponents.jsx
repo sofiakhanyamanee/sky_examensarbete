@@ -262,19 +262,19 @@ font-family: 'Poppins', sans-serif;
 `
 
 export const SignOutBtn = styled.button`
-position: absolute;
-bottom: 4rem;
-left: 0;
-color: #555b6e;
+// position: absolute;
+// bottom: 4rem;
+// left: 0;
+color: slategrey;
 background-color: transparent;
 border: none;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
-font-size: 30px;
-font-weight: 500;
-width: 250px;
-padding-left: 45px;
-text-align: left;
+// font-size: 14px;
+// font-weight: 500;
+// width: 250px;
+// padding-left: 25px;
+// text-align: left;
 
 &: hover {
   color: black;
