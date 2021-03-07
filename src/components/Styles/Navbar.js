@@ -10,6 +10,7 @@ import { Context } from '../../store/Store'
 import useAuth from "../../store/actions/auth";
 import * as AiIcons from 'react-icons/ai';
 import { SignOutBtn } from "../StylingComponents";
+import UserAvatar from 'react-user-avatar'
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(true);
@@ -52,12 +53,14 @@ function Navbar() {
               );
             })}
           </ul>
+          <p>{state.currentUser.avatarColor}</p>
           <SignOutBtn onClick={handleLogOut}><AiIcons.AiOutlineLogout/></SignOutBtn>
           {state.currentUser.role === 'admin' ? 
           <CurrentUser>{state.currentUser.name} ({state.currentUser.role})</CurrentUser>
           :
           <CurrentUser>{state.currentUser.name}</CurrentUser>
         }
+        <UserAvatar className="avatar-initials" size="48" name={state.currentUser.name} color={state.currentUser.avatarColor}/>
         </nav>
       </IconContext.Provider>
     </>

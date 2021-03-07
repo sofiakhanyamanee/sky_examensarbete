@@ -73,3 +73,8 @@ body {
 .startpage-active-link {
   border-bottom: 1px solid #555b6e;
 }
+
+.avatar-initials {
+  color: white;
+  font-weight: 500;
+}

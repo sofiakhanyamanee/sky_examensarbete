@@ -18,12 +18,14 @@ const Reducer = (state, action) => {
         user.name = action.userName;
         user.brf = action.brf;
         user.role = action.role;
+        user.avatarColor = action.avatarColor;
       } else {
         user = {
           email: action.email,
           name: action.userName,
           brf: action.brf,
           role: action.role,
+          avatarColor: action.avatarColor
         };
       }
 

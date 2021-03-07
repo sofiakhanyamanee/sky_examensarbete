@@ -21,12 +21,12 @@ width: 100vw;
 height: 100vh;
 `
 
-export const LandingSection = styled.div`
-background: whitesmoke;
-width: 50%;
-border-top-right-radius: 22pt;
-border-bottom-right-radius: 22pt;
-`
+// export const LandingSection = styled.div`
+// background: whitesmoke;
+// width: 50%;
+// border-top-right-radius: 22pt;
+// border-bottom-right-radius: 22pt;
+// `
 
 export const NavigationBar = styled.div`
 //  background: lightcoral;
@@ -35,10 +35,10 @@ display: flex;
 justify-content: space-between;
 `
 
-export const FormSection = styled.div`
-justify-content:flex-end;
-width: 50%;
-`
+// export const FormSection = styled.div`
+// justify-content:flex-end;
+// width: 50%;
+// `
 export const Logo = styled.div`
 // background: blue;
 width: 10vw;
