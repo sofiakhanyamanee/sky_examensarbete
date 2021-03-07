@@ -34,7 +34,7 @@ export default function FeedView() {
      e.preventDefault();
      console.log(state)
      if (post){
-       await addPostToDb(state.currentUser.id, state.currentUser.firstname, state.currentUser.lastname, state.currentUser.brf, post, new Date(), state.currentUser.role);
+       await addPostToDb(state.currentUser.id, state.currentUser.firstname, state.currentUser.lastname, state.currentUser.brf, post, new Date(), state.currentUser.role, state.currentUser.avatarColor);
        console.log(post)
        setPost("")
      }

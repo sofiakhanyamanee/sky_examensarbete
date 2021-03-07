@@ -22,6 +22,7 @@ import moment from "moment";
 import RemoveComment from "./RemoveComment";
 import * as RiIcons from "react-icons/ri";
 import * as BsIcons from "react-icons/bs";
+import UserAvatar from 'react-user-avatar'
 
 export default function Comments({ post }) {
   const [state] = useContext(Context);
@@ -61,7 +62,8 @@ export default function Comments({ post }) {
       state.currentUser.brf,
       post.docId,
       comment,
-      new Date()
+      new Date(),
+      state.currentUser.avatarColor,
     );
     await setCommentbar(true);
     await setComment("");
@@ -102,6 +104,7 @@ export default function Comments({ post }) {
                     </TimestampComment>
                     <RemoveComment post={post} comment={comment} />
                   </Box>
+                  <UserAvatar className="avatar-initials" size="48" name={comment.firstname+" "+comment.lastname} maxInitials={2} color={comment.avatarColor}/>
                   <CommentBy>{comment.firstname} {comment.lastname}</CommentBy>
                   <Comment>{comment.comment}</Comment>
                 </CommentBox>

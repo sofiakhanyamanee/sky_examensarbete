@@ -192,7 +192,7 @@ export default function useAuth() {
   };
 
   // Lägg till post i collection
-  const addPostToDb = async (id, firstname, lastname, brf, post, timeStamp, role) => {
+  const addPostToDb = async (id, firstname, lastname, brf, post, timeStamp, role, avatarColor) => {
     const db = await database;
     db.collection("posts")
       .add({
@@ -203,6 +203,7 @@ export default function useAuth() {
         post,
         timeStamp,
         role,
+        avatarColor
       })
       .then((doc) => {
         db.collection("posts").doc(doc.id).update({
@@ -220,7 +221,8 @@ export default function useAuth() {
     brf,
     adminpost,
     timeStamp,
-    role
+    role,
+    avatarColor
   ) => {
     const db = await database;
     db.collection("admin_posts")
@@ -234,6 +236,7 @@ export default function useAuth() {
         adminpost,
         timeStamp,
         role,
+        avatarColor
       })
       .then((doc) => {
         db.collection("admin_posts")
@@ -273,7 +276,8 @@ export default function useAuth() {
     brf,
     postID,
     comment,
-    timeStamp
+    timeStamp,
+    avatarColor
   ) => {
     const db = await database;
     db.collection("posts")
@@ -287,6 +291,7 @@ export default function useAuth() {
         comment,
         timeStamp,
         postID,
+        avatarColor
       })
       .then((doc) => {
         // console.log("från auth:", doc)

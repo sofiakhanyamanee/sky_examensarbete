@@ -4,6 +4,7 @@ import moment from "moment";
 import Comments from "./Comments";
 import RemovePost from "./RemovePost";
 import { Context } from '../../store/Store'
+import UserAvatar from 'react-user-avatar'
 
 export default function Posts({ post }) {
   const [state] = useContext(Context);
@@ -14,10 +15,14 @@ export default function Posts({ post }) {
       <FlexBoxColumn>
       {post.role === "admin" ? (
         <PostedBy>
+                     <UserAvatar className="avatar-initials" size="28" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>
           <AdminTag>Admin</AdminTag> {post.firstname} {post.lastname}
         </PostedBy>
       ) : (
-        <PostedBy>{post.firstname} {post.lastname}</PostedBy>
+        <PostedBy>
+          <UserAvatar className="avatar-initials" size="28" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>
+          {post.firstname} {post.lastname}
+          </PostedBy>
         )}
 
         <PostedAt>
