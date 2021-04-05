@@ -6,46 +6,58 @@ color: #555b6e;
 
 export const WrapperMembersComp = styled.div`
 display: flex;
-justify-content: center;
+justify-content: space-between;
 flex-direction: column;
-align-items: flex-start;
-width: 43%;
+width: 80%;
 margin: 0px auto;
-// background: beige;
-font-size: 16px;
 
-& hr {
-  width: 80%;
-  border: 0.2px solid whitesmoke;
+@media (min-width: 500px) {
+  width: 65%;
+}
+
+@media (min-width: 830px) {
+  width: 40%;
 }
 `
 
 export const WrapperNewMembersComp = styled.div`
 display: flex;
-justify-content: center;
+justify-content: space-between;
 flex-direction: column;
-align-items: flex-start;
-width: 43%;
+width: 80%;
 margin: 0px auto;
-// background: whitesmoke;
 padding: 60px 0;
+
+@media (min-width: 500px) {
+  width: 65%;
+}
+
+@media (min-width: 830px) {
+  width: 40%;
+}
+`
+
+export const Heading = styled.h4`
+color: darkslategrey;
+text-align: left;
+margin-bottom: 30px;
+font-weight: 600;
 `
 
 export const NewMembersBox = styled.div`
 display: flex;
-align-items: center;
 justify-content: space-between;
+align-items: center;
 margin: 10px 0 ;
-width: 80%;
+width: 100%;
 `
 
 export const MemberListBox = styled.div`
 display: flex;
-align-items: center;
 justify-content: space-between;
-margin: 10px 0 ;
-width: 80%;
-// background: pink;
+align-items: center;
+margin: 10px 0;
+width: 100%;
 `
 
 
@@ -55,7 +67,6 @@ background-color: #CDE4E2;
 border: none;
 border-radius: 8pt;
 padding: 6px 16px;
-width: 6vw;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
 font-size: 12px;
@@ -77,7 +88,6 @@ background-color: whitesmoke;
 border: none;
 border-radius: 8pt;
 padding: 6px 16px;
-width: 6vw;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
 margin-left: 20px;
@@ -99,7 +109,6 @@ background-color: whitesmoke;
 border: none;
 border-radius: 8pt;
 padding: 6px 16px;
-width: 6vw;
 cursor: pointer;
 font-family: 'Poppins', sans-serif;
 margin-left: 50px;
@@ -116,10 +125,14 @@ font-size: 12px;
 `
 
 export const Box = styled.div`
-// background:whitesmoke;
  display: flex;
  flex-direction: column;
  justify-content: center;
- padding: 60px 0;
  width: 100%;
+`
+
+export const FlexRow = styled.div`
+display: flex;
+align-items: center;
+font-size: 14px;
 `

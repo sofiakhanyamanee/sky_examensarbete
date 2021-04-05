@@ -25,6 +25,12 @@
   transition: 850ms;
 }
 
+@media (max-width: 375px) {
+  .nav-menu {
+    width: 100vw;
+  }
+}
+
 .nav-menu.active {
   left: 0;
   transition: 350ms;
@@ -55,7 +61,7 @@
 .active-link {
   /* background: whitesmoke; */
 
-  border-left: 4px solid #555b6e;
+  border-left: 4px solid #9fc4c6;
 }
 
 .nav-text a:hover {
@@ -77,4 +83,23 @@
 
 span {
   margin-left: 16px;
+}
+
+.nav-text-brf {
+  /* background: beige; */
+  padding-left: 36px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.currentBrf {
+  /* background-color: beige; */
+  text-align: left;
+  color: #9fc4c6;
+  font-size: 16px;
+  /* padding-left: 20px; */
+}
+
+.currentBrf-icon {
+  margin-right: 10px;
 }

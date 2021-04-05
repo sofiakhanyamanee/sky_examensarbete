@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import useAuth from '../../store/actions/auth'
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
-import { WrapperMembersComp, Box, DeleteBtn, MemberListBox } from "../Styles/AdminMemberView";
+import { WrapperMembersComp, Heading, Box, DeleteBtn, MemberListBox, FlexRow } from "../Styles/AdminMemberView";
+import UserAvatar from 'react-user-avatar'
 
 export default function MemberList() {
   const { getAllUserFromDB_users, removeUser } = useAuth();
@@ -37,12 +38,15 @@ export default function MemberList() {
 
   return (
     <WrapperMembersComp>
-      <hr/>
+        {members && <Heading>Medlemmar</Heading>}
       <Box>
         {members && members.map((member, index) => {
           return (
             <MemberListBox key={index}>
+              <FlexRow>
+             <UserAvatar className="avatar-initials-memberlist" size="35" name={member.firstname+" "+member.lastname} maxInitials={2} color={member.avatarColor}/>
               <p>{member.firstname} {member.lastname}</p>
+              </FlexRow>
               <DeleteBtn onClick={() => handleRemove(member)}>Ta bort</DeleteBtn>
             </MemberListBox>
           )}

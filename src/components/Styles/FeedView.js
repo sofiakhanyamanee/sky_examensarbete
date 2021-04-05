@@ -10,31 +10,41 @@ justify-content: center;
 flex-direction: column;
 align-items: center;
 padding-bottom: 100px;
+width: 80%;
+margin: 0 auto;
+margin-top: 40px;
+
+@media (min-width: 1024px) {
+  width: 45%;
+  margin-top: 0px;
+}
 `
 
 export const Heading = styled.h1`
-color: #8dc2bd;
+color: darkslategrey;
 text-align: left;
-width: 42%;
+width: 100%;
 margin-bottom: 30px;
 `
 
 export const InputBtnBox = styled.div`
 display: flex;
-width: 43%;
-justify-content: space-around;
+width: 100%;
+justify-content: space-between;
 margin-bottom: 30px;
 `
 
 
 export const InputField = styled.input`
-width: 85%;
+width: 90%;
 padding: 15px 12px;
-margin: 12px 0;
+margin-top: 12px;
+margin-bottom: 12px;
+margin-right: 2%;
 border-radius: 12pt;
 border: none;
 background: whitesmoke;
-font-family: Poppins;
+font-family: 'Poppins', sans-serif;
 
 &:focus {
   outline: none;
@@ -49,7 +59,6 @@ border: none;
 border-radius: 50%;
 width: 45px;
 height: 45px;
-// padding: 0px 8px;
 font-size: 14px;
 font-family: 'Poppins', sans-serif;
 margin: 12px 0;

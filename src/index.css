@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -64,6 +65,8 @@ body {
 
 .startpage-nav-text span {
   margin: 0 auto;
+  color: black;
+  font-weight: 500;
 }
 
 .startpage-nav-text a:hover {
@@ -75,16 +78,23 @@ body {
 }
 
 .avatar-initials {
-  color: white;
+  color: whitesmoke;
   font-weight: 500;
 }
 
 .avatar-initials-post {
-  color: white;
+  color: whitesmoke;
   font-size: 0.7rem;
 }
 
 .avatar-initials-comment {
-  color: white;
+  color: whitesmoke;
   font-size: 0.6rem;
+}
+
+.avatar-initials-memberlist {
+  color: whitesmoke;
+  font-weight: 500;
+  font-size: 0.7rem;
+  margin-right: 15px;
 }

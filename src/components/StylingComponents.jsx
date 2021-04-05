@@ -12,7 +12,8 @@ justify-content: center;
 width: 100vw;
 height: 100vh;
 margin-top: -150px;
-background-image: url(${img});
+// background-image: url(${img});
+// background-size: cover;
 `
 
 export const WrapperStartPage = styled.div`
@@ -21,13 +22,6 @@ width: 100vw;
 height: 100vh;
 `
 
-// export const LandingSection = styled.div`
-// background: whitesmoke;
-// width: 50%;
-// border-top-right-radius: 22pt;
-// border-bottom-right-radius: 22pt;
-// `
-
 export const NavigationBar = styled.div`
 //  background: lightcoral;
 width: 100%;
@@ -35,10 +29,7 @@ display: flex;
 justify-content: space-between;
 `
 
-// export const FormSection = styled.div`
-// justify-content:flex-end;
-// width: 50%;
-// `
+
 export const Logo = styled.div`
 // background: blue;
 width: 10vw;
@@ -67,108 +58,109 @@ font-size: 30px;
 text-align: left;
 `
 
-export const NavBar = styled.nav`
-position: absolute;
-top: 0;
-display: flex;
-flex-direction: row;
-margin: 0px auto;
-align-items: center;
-justify-content: space-between;
-height: 15vh;
-width: 100vw;
+// export const NavBar = styled.nav`
+// position: absolute;
+// top: 0;
+// display: flex;
+// flex-direction: row;
+// margin: 0px auto;
+// align-items: center;
+// justify-content: space-between;
+// height: 15vh;
+// width: 100vw;
+// // background-color: #CDE4E2;
+// // padding: 0px 50px;
+// `
+
+// export const ShowLoginBtn = styled.button`
+// color: white;
+// background-color: #33b5aa;
+// border-radius: 8pt;
+// border: none;
+// padding: 10px 15px;
+// margin: 0px 35px;
+// cursor: pointer;
+// font-family: 'Poppins', sans-serif;
+
+// &: hover {
+//   background: black;
+//   color: white;
+// }
+
+// &:focus {
+//   outline: none;
+// }
+// `
+
+// export const ShowSignUpBtn = styled.button`
+// color: black;
 // background-color: #CDE4E2;
-// padding: 0px 50px;
-`
+// border: none;
+// border-radius: 8pt;
+// padding: 10px 15px;
+// cursor: pointer;
+// font-family: 'Poppins', sans-serif;
 
-export const ShowLoginBtn = styled.button`
-color: white;
-background-color: #33b5aa;
-border-radius: 8pt;
-border: none;
-padding: 10px 15px;
-margin: 0px 35px;
-cursor: pointer;
-font-family: 'Poppins', sans-serif;
+// &: hover {
+//   background: black;
+//   color: #CDE4E2;
+// }
 
-&: hover {
-  background: black;
-  color: white;
-}
+// &:focus {
+//   outline: none;
+// }
+// `
 
-&:focus {
-  outline: none;
-}
-`
+// export const ShowAdminSignUpBtn = styled.button`
+// color: black;
+// border: none;
+// // border: 1px solid #CDE4E2;
+// border-radius: 8pt;
+// padding: 10px 15px;
+// margin: 0px 35px;
+// cursor: pointer;
+// font-family: 'Poppins', sans-serif;
 
-export const ShowSignUpBtn = styled.button`
-color: black;
-background-color: #CDE4E2;
-border: none;
-border-radius: 8pt;
-padding: 10px 15px;
-cursor: pointer;
-font-family: 'Poppins', sans-serif;
+// &: hover {
+//   background: black;
+//   color: #CDE4E2;
+// }
 
-&: hover {
-  background: black;
-  color: #CDE4E2;
-}
-
-&:focus {
-  outline: none;
-}
-`
-
-export const ShowAdminSignUpBtn = styled.button`
-color: black;
-border: none;
-// border: 1px solid #CDE4E2;
-border-radius: 8pt;
-padding: 10px 15px;
-margin: 0px 35px;
-cursor: pointer;
-font-family: 'Poppins', sans-serif;
-
-&: hover {
-  background: black;
-  color: #CDE4E2;
-}
-
-&:focus {
-  outline: none;
-}
-`
+// &:focus {
+//   outline: none;
+// }
+// `
 
 
 // *********** Generell styling SIGNUP/LOGIN *********** //
 
 
 
-export const Wrapper = styled.div`
-width: 40vw;
-height: 80vh;
-margin-right: 100px;
-margin-top: 100px;
-display: flex; 
-flex-direction: column;
-align-items: center;
-justify-content: center;
-font-family: 'Poppins', sans-serif;
-background: white;
-border-radius: 24pt;
-`
+// export const Wrapper = styled.div`
+// width: 40vw;
+// height: 80vh;
+// margin-right: 100px;
+// margin-top: 100px;
+// display: flex; 
+// flex-direction: column;
+// align-items: center;
+// justify-content: center;
+// font-family: 'Poppins', sans-serif;
+// background: white;
+// border-radius: 24pt;
+// `
 
 export const Heading = styled.h2`
-margin: 25px 0;
+margin-bottom: 25px;
+// background: whitesmoke;
 `
 
-export const Container = styled.div`
-display: flex; 
-flex-direction: column;
-align-items: center;
-width: 40vw;
-`
+// export const Container = styled.div`
+// display: flex; 
+// flex-direction: column;
+// align-items: center;
+// width: 40vw;
+// `
 
 export const BackBtn = styled.button`
 position: absolute;
@@ -194,11 +186,11 @@ font-family: 'Poppins', sans-serif;
 `
 
 export const InputField = styled.input`
-width: 25vw;
+width: 20vw;
 padding: 15px 12px;
 margin: 12px 0;
 border: 1px solid lightgrey;
-border-radius: 8pt;
+border-radius: 14pt;
 
 &:focus {
   outline: none;
@@ -208,8 +200,8 @@ export const Btn = styled.button`
 color: black;
 background-color: #CDE4E2;
 border: none;
-border-radius: 8pt;
-width: 27vw;
+border-radius: 14pt;
+width: 22vw;
 padding: 12px 12px;
 font-size: 16px;
 margin: 18px 0;
@@ -226,13 +218,13 @@ cursor: pointer;
 }
 `
 
-export const Label = styled.label`
-color: gray;
-`
+// export const Label = styled.label`
+// color: gray;
+// `
 
-export const Form = styled.form`
-width: 100%;
-`
+// export const Form = styled.form`
+// width: 100%;
+// `
 
 export const FlexRow = styled.div`
 display: flex;
@@ -255,10 +247,7 @@ font-size: 12px;
 
 export const WrapperDashboard = styled.div`
 width: 100vw;
-// margin: 0px auto;
-// margin-bottom: 100px;
 font-family: 'Poppins', sans-serif;
-// background: whitesmoke;
 `
 
 export const SignOutBtn = styled.button`
@@ -274,7 +263,7 @@ font-family: 'Poppins', sans-serif;
 // font-weight: 500;
 // width: 250px;
 // padding-left: 25px;
-// text-align: left;
+text-align: left;
 
 &: hover {
   color: black;
@@ -304,7 +293,7 @@ color: whitesmoke;
 `
 
 export const Box = styled.div`
-//  background:whitesmoke;
+ background:whitesmoke;
  display: flex;
  flex-direction: column;
  justify-content: center;

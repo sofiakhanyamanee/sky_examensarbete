@@ -42,8 +42,8 @@ export default function FeedView() {
     <FeedViewWrapper>
       <Heading>Flöde</Heading>
       <InputBtnBox>
-      <InputField value={post} name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv, dela, felanmäl..."/>
-      <PostBtn onClick={handlePost}><RiIcons.RiSendPlaneFill className="sendPostBtn"/></PostBtn>
+        <InputField value={post} name="post" onChange={e => setPost(e.target.value)} placeholder="Skriv, dela, felanmäl..."/>
+        <PostBtn onClick={handlePost}><RiIcons.RiSendPlaneFill className="sendPostBtn"/></PostBtn>
       </InputBtnBox>
 
       {postCollection && postCollection.map((post, index) => {

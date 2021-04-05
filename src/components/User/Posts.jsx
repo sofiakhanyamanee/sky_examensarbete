@@ -12,7 +12,6 @@ export default function Posts({ post }) {
   return (
     <PostContainer>
      <FlexBoxRow>
-
      {post.role === "admin" ? (
         <PostedBy>
             <UserAvatar className="avatar-initials-post" size="35" name={post.firstname+" "+post.lastname} maxInitials={2} color={post.avatarColor}/>

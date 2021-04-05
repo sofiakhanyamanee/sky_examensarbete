@@ -99,8 +99,9 @@ export const Box = styled.div`
 
 export const Timestamp = styled.p`
   // margin-left: 5px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 400;
+  color: #555b6e;
 `;
 
 
@@ -118,10 +119,9 @@ export const BtnBox = styled.div`
 
 export const PostContainer = styled.div`
   margin: 10px 0;
-  width: 40vw;
+  width: 100%;
   padding: 20px;
   text-align: left;
-  border: none;
   border-radius: 12pt;
   background: #f8f9fa;
   font-family: 'Poppins';
@@ -141,7 +141,7 @@ export const PostedBy = styled.div`
   font-weight: 500;
   display: flex;
   // align-items: center;
-  font-size: 14px;
+  font-size: 0.8rem;
   // background: lightgrey;
 `;
 
@@ -196,7 +196,7 @@ cursor: pointer;
 
 
 export const CommentInputField = styled.input`
-  width: 86%;
+  width: 100%;
   padding: 15px 70px 15px 12px;
   margin-top: 12px;
   margin-left: -15px;
@@ -317,16 +317,19 @@ cursor: pointer;
 
 
 export const CommentBy = styled.div`
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
+  color: #555b6e;
 `;
 export const TimestampComment = styled.p`
-font-size: 0.7rem;
+font-size: 0.6rem;
+color: #555b6e;
 `;
 
 export const Comment = styled.p`
+  margin-top: 10px;
   padding: 5px 0;
-  font-size: 14px;
+  font-size: 0.8rem;
 `;
 export const CommentWrapper = styled.div`
   // background: lightpink;

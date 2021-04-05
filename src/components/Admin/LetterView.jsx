@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import { WrapperLetterView, InputBtnBox, InputField, PostBtn, PostContainer, Post, RemovePostBtn, PostedAt, Timestamp } from "../Styles/LetterView";
+import { WrapperLetterView, InputBtnBox, InputField, PostBtn, PostContainer, Post, RemovePostBtn, PostedAt, Timestamp, FromAdminTag } from "../Styles/LetterView";
 import useAuth from '../../store/actions/auth';
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
@@ -38,7 +38,7 @@ export default function LetterView() {
 
   async function handleAdminPost(e) {
     e.preventDefault();
-    await addAdminPostToDb(state.currentUser.id, state.currentUser.firstname,state.currentUser.lastname, state.currentUser.brf, adminPost, new Date(), state.currentUser.role);
+    await addAdminPostToDb(state.currentUser.id, state.currentUser.firstname,state.currentUser.lastname, state.currentUser.brf, adminPost, new Date(), state.currentUser.role,state.currentUser.avatarColor);
     await setAdminPost("")
   }
 
@@ -54,10 +54,10 @@ export default function LetterView() {
       <InputField value={adminPost} onChange={e => setAdminPost(e.target.value)} placeholder="Skriv nytt styrelsebrev..."/>
       <PostBtn onClick={handleAdminPost}><RiIcons.RiSendPlaneFill className="sendPostBtn"/></PostBtn>
       </InputBtnBox>
-
       {adminPostCollection && adminPostCollection.map((post, index) => {
          return (
            <PostContainer key={index}>
+             <FromAdminTag>Admin</FromAdminTag>
              <PostedAt>
              <Timestamp>{moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}</Timestamp>
              </PostedAt>

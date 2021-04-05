@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import { WrapperLetterView, Heading, PostContainer, Post, PostedAt, Timestamp } from "../Styles/LetterView";
+import { WrapperLetterView, Heading, PostContainer, Post, PostedAt, Timestamp, FromAdminTag, FlexRow } from "../Styles/LetterView";
 import useAuth from '../../store/actions/auth';
 import { database } from '../../firebase'
 import { Context } from '../../store/Store'
@@ -39,6 +39,7 @@ return (
     {adminPostCollection && adminPostCollection.map((post, index) => {
        return (
          <PostContainer key={index}>
+           <FromAdminTag>Admin</FromAdminTag>
            <PostedAt>
            <Timestamp>{moment(post.timeStamp.toDate()).startOf("minutes").fromNow()}</Timestamp>
            </PostedAt>
@@ -49,3 +50,4 @@ return (
   </WrapperLetterView>
 )
 }
+

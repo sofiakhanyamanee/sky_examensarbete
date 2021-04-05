@@ -6,16 +6,32 @@ export const WrapperLetterView = styled.div`
 display: flex;
 justify-content: center;
 flex-direction: column;
-align-items: center;
 padding-bottom: 100px;
+width: 80%;
+margin: 0 auto;
+
+@media (min-width: 375px) {
+  width: 70%;
+}
+
+@media (min-width: 1024px) {
+  width: 45%;
+}
 `
 export const Heading = styled.h2`
-margin-bottom: 50px;
+margin-bottom: 30px;
+color: darkslategrey;
+text-align: left;
+margin-top: 40px;
+
+@media (min-width: 1024px) {
+  margin-top: 0px;
+}
 `
 
 export const PostContainer = styled.div`
 background: #f8f9fa;
-width: 40%;
+width: 100%;
 margin: 10px 0;
 padding: 15px;
 display: flex;
@@ -38,6 +54,7 @@ color: grey;
 font-family: Poppins;
 padding-right: 10px;
 align-self: flex-end;
+margin-top: 10px;
 
 &: hover {
   color: #e38f8c;
@@ -46,6 +63,13 @@ align-self: flex-end;
 &:focus {
   outline: none;
 }
+`
+
+export const FromAdminTag = styled.p`
+// background: teal;
+font-size: 13px;
+text-align: left;
+font-weight: 500;
 `
 
 export const PostedAt = styled.div`
@@ -62,20 +86,27 @@ export const Timestamp = styled.p`
 `
 export const InputBtnBox = styled.div`
 display: flex;
-width: 43%;
-justify-content: space-around;
+width: 100%;
+justify-content: space-between;
 margin-bottom: 30px;
+margin-top: 40px;
+
+@media (min-width: 375px) {
+  margin-top: 0px;
+}
 `
 
 
 export const InputField = styled.input`
-width: 85%;
+width: 90%;
 padding: 15px 12px;
-margin: 12px 0;
+margin-top: 12px;
+margin-bottom: 12px;
+margin-right: 2%;
 border-radius: 12pt;
 border: none;
 background: whitesmoke;
-font-family: Poppins;
+font-family: 'Poppins', sans-serif;
 
 &:focus {
   outline: none;
@@ -90,7 +121,6 @@ border: none;
 border-radius: 50%;
 width: 45px;
 height: 45px;
-// padding: 0px 8px;
 font-size: 14px;
 font-family: 'Poppins', sans-serif;
 margin: 12px 0;
@@ -107,4 +137,10 @@ align-items: center;
 &:focus {
   outline: none;
 }
+`
+
+
+export const FlexRow = styled.div`
+display: flex;
+justify-content: space-between;
 `
