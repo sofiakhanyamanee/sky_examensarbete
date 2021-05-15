@@ -1,58 +1,52 @@
-import React, { useContext } from "react";
-// import { Context } from '../../store/Store';
+import React from "react";
 import useAuth from "../../store/actions/auth";
 import {
   WrapperStartPage,
-  LogoHeading,
-  LandingSection,
-  FormSection,
+  Form,
   Heading,
+  LabelInputBox,
   InputField,
   Btn
 } from "../StylingComponents";
-import StartPageNavBar from "../StartPageNavbar";
+
 
 
 export default function Login() {
-  // const [state] = useContext(Context);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { signin } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("submit");
     await signin(email, password);
   };
 
   return (
     <WrapperStartPage>
         <Heading>Logga in</Heading>
-        <form>
-          <div className="input-group">
-            <label>Email</label>
-            <br />
+        <Form>
+          <LabelInputBox>
             <InputField
               type="text"
               name="email"
+              placeholder="Email"
               autoComplete="email"
               onChange={(event) => setEmail(event.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <label>Lösenord</label>
-            <br />
+          </LabelInputBox>
+          <LabelInputBox>
             <InputField
               type="password"
               name="password"
+              placeholder="Lösenord"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
             />
-          </div>
+          </LabelInputBox>
           <Btn type="submit" onClick={handleSubmit}>
             Logga in
           </Btn>
-        </form>
+        </Form>
     </WrapperStartPage>
   );
 }

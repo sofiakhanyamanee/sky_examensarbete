@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { database } from '../../firebase'
 import useAuth from '../../store/actions/auth';
-import { WrapperStartPage, Heading, InputField, Btn} from '../StylingComponents'
+import { WrapperStartPage, Heading, Form, LabelInputBox, InputField, Btn} from '../StylingComponents'
 
 
 export default function SignUp() {
@@ -66,71 +66,57 @@ export default function SignUp() {
     return (
       <WrapperStartPage>
         <Heading>Skapa styrelse konto</Heading>
-        <form>
-        <div className="input-group">
-            <label>Brf</label>
-            <br />
+        <Form>
+        <LabelInputBox>
             <InputField
               type="text"
               name="brf"
+              placeholder="Bostadsrättsförening"
               autoComplete="brf"
               onChange={event => setBrf(event.target.value.toLowerCase())}
             />
-          </div>
-          <div className="input-group">
-            <label>Förnamn</label>
-            <br />
+          </LabelInputBox>
+          <LabelInputBox>
             <InputField
               type="text"
               name="firstname"
+              placeholder="Förnamn"
               autoComplete="first-name"
               onChange={event => setFirstName(event.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <label>Efternamn</label>
-            <br />
+          </LabelInputBox>
+          <LabelInputBox>
             <InputField
               type="text"
               name="lastname"
+              placeholder="Efternamn"
               autoComplete="last-name"
               onChange={event => setLastName(event.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <label>Email</label>
-            <br />
+          </LabelInputBox>
+          <LabelInputBox>
             <InputField
               type="text"
               name="email"
+              placeholder="Email"
               autoComplete="email"
               onChange={event => setEmail(event.target.value)}
             />
-          </div>
-          <div className="input-group">
-            <label>Lösenord</label>
-            <br />
+          </LabelInputBox>
+          <LabelInputBox>
             <InputField
               type="password"
               name="password"
+              placeholder="Lösenord"
               onChange={event => setPassword(event.target.value)}
             />
-          </div>
+          </LabelInputBox>
           <Btn
             type="submit"
-            onClick={e => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), toLower(brf), role, avatarColor)}
-          >
+            onClick={e => handleSignUp(e, email, password, capitalize(firstname),capitalize(lastname), toLower(brf), role, avatarColor)}>
             Skapa konto
           </Btn>
-        </form>
-
-        {brfList && brfList.map((brf, index) => {
-           return (
-               <div key={index}>
-                 <p>{brf}</p>
-               </div>
-           )}
-      )}
+        </Form>
       </WrapperStartPage>
     );
   }

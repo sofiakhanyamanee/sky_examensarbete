@@ -7,18 +7,24 @@ import useSession from "./store/Session";
 import { useContext } from "react";
 import { Context } from "./store/Store";
 import PublicRoute from "./components/Routes/PublicRoute";
-import moment from "moment/locale/sv";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Login/SignUp";
 import AdminSignUp from "./components/Login/AdminSignUp";
 import StartPageNavbar from "./components/StartPageNavbar";
+import { Container, Wrapper } from './components/Styles/Loader'
+import { DotLoader } from 'react-spinners'
+// import moment from "moment/locale/sv";
 
 function App() {
   const [state] = useContext(Context);
   useSession();
 
   if (state.isLoading) {
-    return <p> Loading website...</p>;
+    return (<Container> 
+              <Wrapper>
+                <DotLoader color="#CDE4E2"/>
+              </Wrapper>
+            </Container>)
   }
 
 

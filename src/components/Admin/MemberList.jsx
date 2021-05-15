@@ -38,7 +38,7 @@ export default function MemberList() {
 
   return (
     <WrapperMembersComp>
-        {members && <Heading>Medlemmar</Heading>}
+        {members && members.length > 0 && <Heading>Medlemmar</Heading>}
       <Box>
         {members && members.map((member, index) => {
           return (

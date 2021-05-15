@@ -43,7 +43,7 @@ export default function NewMembers() {
   return (
     <WrapperNewMembersComp>
       {/* {console.log(userList)} */}
-      {userList && <Heading>Nya medlemmar</Heading>}
+      {userList && userList.length > 0 && <Heading>Nya medlemmar</Heading>}
         {userList && userList.map((user, index) => {
          return (
           <NewMembersBox key={index}>

@@ -1,26 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import { WrapperDashboard, SignOutBtn } from "../StylingComponents";
+import { WrapperDashboard } from "../StylingComponents";
+import { Container, Wrapper, Message, GoBackBtn } from '.././Styles/Loader';
 import useAuth from "../../store/actions/auth";
 import { Context } from '../../store/Store';
 import AdminDashboard from './AdminDashboard'
 import UserDashboard from "./UserDashboard";
+import { DotLoader } from 'react-spinners'
+
+
 export default function Dashboard() {
   const { signout, getUserFromDB } = useAuth();
   const [state] = useContext(Context);
   const [isVerified, setIsVerfied] = useState(false);
 
-  // console.log("state" , state)
-  // console.log("role:" , state.currentUser.role)
   function handleLogOut() {
     signout();
   }
 
   useEffect(() => {
     getUserFromDB(state.currentUser.id).then((user) => {
-      // console.log("user")
-      // console.log(user)
       if (user != null) {
-        // console.log("isverfired")
         setIsVerfied(true)
       } else {
         console.log("notverfired")
@@ -34,9 +33,11 @@ export default function Dashboard() {
       {state.currentUser.role === 'admin' ? <AdminDashboard/> : 
         (state.currentUser.role === 'user' && isVerified) ? <UserDashboard/> 
         : 
-        <div>User not validated yet
-          <SignOutBtn onClick={handleLogOut}>Logga ut</SignOutBtn>
-        </div>}
+        <Wrapper>
+           <DotLoader color="#CDE4E2"/>
+           <Message>Innan du kan logga in behöver du vänta på att bli verifierad av admin</Message>
+          <GoBackBtn onClick={handleLogOut}>Tillbaka till startsidan</GoBackBtn>
+        </Wrapper>}
     </WrapperDashboard>
   );
 }

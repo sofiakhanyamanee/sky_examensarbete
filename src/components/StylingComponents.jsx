@@ -10,16 +10,14 @@ display: flex;
 align-items: center;
 justify-content: center;
 width: 100vw;
-height: 100vh;
+min-height: 100vh;
 margin-top: -150px;
-// background-image: url(${img});
-// background-size: cover;
 `
 
 export const WrapperStartPage = styled.div`
-// display: flex;
-width: 100vw;
+width: 50%;
 height: 100vh;
+margin: 0 auto;
 `
 
 export const NavigationBar = styled.div`
@@ -58,109 +56,17 @@ font-size: 30px;
 text-align: left;
 `
 
-// export const NavBar = styled.nav`
-// position: absolute;
-// top: 0;
-// display: flex;
-// flex-direction: row;
-// margin: 0px auto;
-// align-items: center;
-// justify-content: space-between;
-// height: 15vh;
-// width: 100vw;
-// // background-color: #CDE4E2;
-// // padding: 0px 50px;
-// `
-
-// export const ShowLoginBtn = styled.button`
-// color: white;
-// background-color: #33b5aa;
-// border-radius: 8pt;
-// border: none;
-// padding: 10px 15px;
-// margin: 0px 35px;
-// cursor: pointer;
-// font-family: 'Poppins', sans-serif;
-
-// &: hover {
-//   background: black;
-//   color: white;
-// }
-
-// &:focus {
-//   outline: none;
-// }
-// `
-
-// export const ShowSignUpBtn = styled.button`
-// color: black;
-// background-color: #CDE4E2;
-// border: none;
-// border-radius: 8pt;
-// padding: 10px 15px;
-// cursor: pointer;
-// font-family: 'Poppins', sans-serif;
-
-// &: hover {
-//   background: black;
-//   color: #CDE4E2;
-// }
-
-// &:focus {
-//   outline: none;
-// }
-// `
-
-// export const ShowAdminSignUpBtn = styled.button`
-// color: black;
-// border: none;
-// // border: 1px solid #CDE4E2;
-// border-radius: 8pt;
-// padding: 10px 15px;
-// margin: 0px 35px;
-// cursor: pointer;
-// font-family: 'Poppins', sans-serif;
-
-// &: hover {
-//   background: black;
-//   color: #CDE4E2;
-// }
-
-// &:focus {
-//   outline: none;
-// }
-// `
-
 
 // *********** Generell styling SIGNUP/LOGIN *********** //
 
 
 
-// export const Wrapper = styled.div`
-// width: 40vw;
-// height: 80vh;
-// margin-right: 100px;
-// margin-top: 100px;
-// display: flex; 
-// flex-direction: column;
-// align-items: center;
-// justify-content: center;
-// font-family: 'Poppins', sans-serif;
-// background: white;
-// border-radius: 24pt;
-// `
-
 export const Heading = styled.h2`
-margin-bottom: 25px;
 // background: whitesmoke;
+width: 50%;
+text-align: left;
+margin: 20px auto;
 `
-
-// export const Container = styled.div`
-// display: flex; 
-// flex-direction: column;
-// align-items: center;
-// width: 40vw;
-// `
 
 export const BackBtn = styled.button`
 position: absolute;
@@ -185,23 +91,40 @@ font-family: 'Poppins', sans-serif;
 }
 `
 
+
+export const Form = styled.div`
+display: flex;
+flex-direction: column;
+width: 50%;
+margin: 0 auto;
+`
+
+export const LabelInputBox = styled.div`
+display: flex;
+width: 100%;
+justify-content: space-between;
+margin: 10px 0;
+`
+
+
 export const InputField = styled.input`
-width: 20vw;
-padding: 15px 12px;
-margin: 12px 0;
-border: 1px solid lightgrey;
-border-radius: 14pt;
+width: 100%;
+padding: 15px 0px;
+margin-bottom: 20px;
+border: none;
+border-bottom: 1px solid lightgrey;
 
 &:focus {
   outline: none;
 }
 `
+
 export const Btn = styled.button`
 color: black;
 background-color: #CDE4E2;
 border: none;
 border-radius: 14pt;
-width: 22vw;
+width: 100%;
 padding: 12px 12px;
 font-size: 16px;
 margin: 18px 0;
@@ -217,14 +140,6 @@ cursor: pointer;
   outline: none;
 }
 `
-
-// export const Label = styled.label`
-// color: gray;
-// `
-
-// export const Form = styled.form`
-// width: 100%;
-// `
 
 export const FlexRow = styled.div`
 display: flex;
